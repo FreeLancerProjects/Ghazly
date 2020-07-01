@@ -5,7 +5,7 @@ import android.content.Context;
 
 import androidx.multidex.MultiDexApplication;
 
-import com.anaqaphone.language.Language;
+import com.ghazly.language.Language;
 
 
 public class App extends MultiDexApplication {

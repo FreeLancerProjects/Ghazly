@@ -3,8 +3,8 @@ package com.ghazly.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.anaqaphone.models.UserModel;
-import com.anaqaphone.tags.Tags;
+import com.ghazly.models.UserModel;
+import com.ghazly.tags.Tags;
 import com.google.gson.Gson;
 
 public class Preferences {

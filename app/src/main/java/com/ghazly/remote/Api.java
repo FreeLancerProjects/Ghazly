@@ -1,6 +1,6 @@
 package com.ghazly.remote;
 
-import com.anaqaphone.services.Service;
+import com.ghazly.services.Service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
