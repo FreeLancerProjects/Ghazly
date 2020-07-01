@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.databinding.BindingAdapter;
 
 import com.ghazly.R;
-import com.ghazly.share.Time_Ago;
 import com.ghazly.tags.Tags;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -103,12 +102,7 @@ public class UI_General_Method {
     }
 
 
-    @BindingAdapter("timeAgo")
-    public static void displayTimeAgo(TextView textView,long time)
-    {
-        String timeAgo = Time_Ago.getTimeAgo(time*1000,textView.getContext());
-        textView.setText(timeAgo);
-    }
+
 
     @BindingAdapter({"time","date"})
     public static void displayDateTime(TextView textView,long times,long dates)
