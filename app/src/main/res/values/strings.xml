@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Ghazly</string>
+    <string name="phone">Phone</string>
+    <string name="login">Login</string>
+    <string name="skip">Skip</string>
+    <string name="name">Name</string>
+    <string name="register">Register</string>
+    <string name="complete_register">Complete Register</string>
+    <string name="verfication_code">Verfication Code</string>
+    <string name="confirm">Confirm</string>
+    <string name="field_required">Fiels Required</string>
+    <string name="country_code">Country Code</string>
+</resources>

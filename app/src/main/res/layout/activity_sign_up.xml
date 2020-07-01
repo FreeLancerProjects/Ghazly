@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="listener"
+            type="com.ghazly.interfaces.Listeners.SignUpListener" />
+        <variable
+            name="model"
+            type="com.ghazly.models.SignUpModel" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        android:scrollbars="none"
+        tools:context=".activities_fragments.activity_login.LoginActivity"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            >
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="@color/colorPrimary"
+                >
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center"
+                    />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/studiem"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:textSize="18sp"
+                        android:text="@string/complete_register"
+                        />
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="40dp"
+                        android:background="@drawable/small_rounded_stroke_primarydark"
+
+                        >
+
+                            <EditText
+                                android:id="@+id/edtName"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:background="@color/transparent"
+                                android:singleLine="true"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                android:textColorHint="@color/gray0"
+                                android:textColor="@color/white"
+                                android:hint="@string/name"
+                                android:textSize="15sp"
+                                android:text="@={model.name}"
+                                error="@{model.error_name}"
+
+                                />
+
+
+                    </FrameLayout>
+
+
+                    <Button
+                        android:id="@+id/btnConfirm"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="90dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginEnd="90dp"
+                        android:background="@drawable/small_rounded_btn_primary"
+                        android:text="@string/register"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        />
+
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>
