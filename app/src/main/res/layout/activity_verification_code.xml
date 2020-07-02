@@ -36,21 +36,30 @@
                         android:layout_width="90dp"
                         android:layout_height="90dp"
                         android:layout_gravity="center"
-                        android:scaleType="fitXY" />
+                        android:scaleType="fitXY"
+                        android:src="@drawable/logo" />
                 </FrameLayout>
 
-                <FrameLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/studiem"></FrameLayout>
+
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/back" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="140dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="100dp"
                 app:cardBackgroundColor="@color/white"
@@ -76,6 +85,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
                         android:id="@+id/sms1"
                         android:layout_width="0dp"
@@ -89,8 +99,7 @@
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toBottomOf="@+id/sms"
-/>
+                        app:layout_constraintTop_toBottomOf="@+id/sms" />
 
                     <FrameLayout
                         android:id="@+id/frsms"
@@ -99,8 +108,8 @@ app:layout_constraintTop_toBottomOf="@+id/sms"
                         android:layout_marginLeft="40dp"
                         android:layout_marginTop="25dp"
                         android:layout_marginRight="40dp"
-                        android:padding="8dp"
                         android:background="@drawable/small_rounded_btn_gray"
+                        android:padding="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/sms1">
@@ -150,10 +159,12 @@ app:layout_constraintTop_toBottomOf="@+id/sms"
                             />
 
                     </LinearLayout>
+
                     <Button
                         android:id="@+id/btnSkip"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="30dp"
                         android:layout_marginEnd="20dp"
@@ -163,10 +174,8 @@ app:layout_constraintTop_toBottomOf="@+id/sms"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:layout_gravity="center"
-                        app:layout_constraintTop_toBottomOf="@+id/ll"
-                       app:layout_constraintEnd_toEndOf="parent"
-                        />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ll" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

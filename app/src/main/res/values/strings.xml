@@ -10,4 +10,17 @@
     <string name="confirm">Confirm</string>
     <string name="field_required">Fiels Required</string>
     <string name="country_code">Country Code</string>
+    <string name="profile">Profile</string>
+    <string name="my_orders">My Orders</string>
+    <string name="about_us">About Us</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="terms_and_conditions">Terms And Conditions</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="about_app">Apout App</string>
+    <string name="my_orders">My Orders</string>
+    <string name="no_data_to_show">No Data To Show</string>
+    <string name="whats_app">whats App</string>
+    <string name="email">Email</string>
+    <string name="twitter">Twitter</string>
 </resources>
