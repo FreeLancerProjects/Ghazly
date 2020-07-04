@@ -51,12 +51,16 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:fillViewport="true"
-                    android:fitsSystemWindows="true">
+                    android:fitsSystemWindows="true"
+
+                    >
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+
+                        >
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
@@ -115,7 +119,7 @@
                             android:layout_weight="1"
                             app:cardBackgroundColor="@color/white"
                             app:cardCornerRadius="5dp"
-                            app:cardElevation="3dp"
+                            app:cardElevation="8dp"
                             app:contentPadding="10dp">
 
                             <LinearLayout
@@ -316,14 +320,12 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+
                             app:cardBackgroundColor="@color/white"
                             app:cardCornerRadius="5dp"
-                            app:cardElevation="3dp"
-                            app:contentPadding="10dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginBottom="8dp"
-
-                            >
+                            app:cardElevation="8dp"
+                            app:contentPadding="10dp">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
@@ -336,8 +338,8 @@
                                     android:layout_margin="5dp"
                                     android:gravity="center"
                                     android:orientation="horizontal"
-app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent">
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
 
 
                                     <ImageView
@@ -394,9 +396,9 @@ app:layout_constraintTop_toTopOf="parent"
                                     <View
                                         android:layout_width="1dp"
                                         android:layout_height="match_parent"
-                                        android:layout_weight=".01"
-                                        android:layout_marginBottom="3dp"
                                         android:layout_marginTop="3dp"
+                                        android:layout_marginBottom="3dp"
+                                        android:layout_weight=".01"
                                         android:background="@color/white" />
 
                                     <TextView
