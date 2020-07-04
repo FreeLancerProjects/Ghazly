@@ -16,44 +16,17 @@ public interface Listeners {
 
     }
 
-    interface SettingActions
+    interface HomeActions
     {
         void order();
-        void charge();
-        void returns();
         void terms();
         void aboutApp();
-        void logout();
-        void favorite();
-        void bankAccount();
-        void share();
-        void rateApp();
-        void arLang();
-        void enLang();
         void profile();
-
+        void contactus();
     }
 
 
-    interface PaymentTypeAction
-    {
-        void onCredit();
-        void onPaypal();
-        void onCash();
-        void onNext();
-        void onPrevious();
-    }
 
-
-    interface NextPreviousAction
-    {
-        void onNext();
-        void onPrevious();
-    }
-    interface UpdateProfileListener
-    {
-        void updateProfile();
-    }
 
 
 

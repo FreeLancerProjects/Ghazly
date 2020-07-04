@@ -37,6 +37,7 @@ import com.squareup.picasso.Picasso;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
 import io.paperdb.Paper;
 import okhttp3.MultipartBody;
@@ -55,7 +56,7 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
+        super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
     }
 
     @Override

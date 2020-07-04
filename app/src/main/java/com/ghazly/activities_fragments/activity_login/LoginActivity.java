@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ghazly.R;
+import com.ghazly.activities_fragments.activity_home.HomeActivity;
 import com.ghazly.activities_fragments.activity_verification_code.VerificationCodeActivity;
 import com.ghazly.adapters.CountriesAdapter;
 import com.ghazly.databinding.ActivityLoginBinding;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import io.paperdb.Paper;
 
@@ -44,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements Listeners.LoginL
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
+        super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
     }
 
     @Override
@@ -87,8 +89,8 @@ public class LoginActivity extends AppCompatActivity implements Listeners.LoginL
         binding.btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent =new Intent(LoginActivity.this, HomeActivity.class);
-//                startActivity(intent);
+              Intent intent =new Intent(LoginActivity.this, HomeActivity.class);
+              startActivity(intent);
             }
         });
     }

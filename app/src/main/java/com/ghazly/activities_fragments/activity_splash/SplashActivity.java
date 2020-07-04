@@ -17,6 +17,8 @@ import com.ghazly.language.Language;
 import com.ghazly.preferences.Preferences;
 import com.ghazly.tags.Tags;
 
+import java.util.Locale;
+
 import io.paperdb.Paper;
 
 public class SplashActivity extends AppCompatActivity {
@@ -26,7 +28,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang","ar")));
+        super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

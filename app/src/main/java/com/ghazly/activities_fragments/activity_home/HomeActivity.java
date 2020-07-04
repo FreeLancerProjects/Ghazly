@@ -18,8 +18,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.ghazly.activities_fragments.activity_about_app.AboutAppActivity;
+import com.ghazly.activities_fragments.activity_contactus.ContactusActivity;
 import com.ghazly.activities_fragments.activity_login.LoginActivity;
+import com.ghazly.activities_fragments.activity_my_orders.MyOrderActivity;
+import com.ghazly.activities_fragments.activity_profile.ProfileActivity;
 import com.ghazly.databinding.ActivityHomeBinding;
+import com.ghazly.interfaces.Listeners;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.ghazly.R;
 import com.ghazly.language.Language;
@@ -36,6 +41,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import io.paperdb.Paper;
 import okhttp3.ResponseBody;
@@ -43,7 +49,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements Listeners.HomeActions {
     private ActivityHomeBinding binding;
     private Preferences preferences;
     private FragmentManager fragmentManager;
@@ -53,7 +59,7 @@ public class HomeActivity extends AppCompatActivity {
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
+        super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
     }
 
 
@@ -77,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
         Paper.init(this);
         lang = Paper.book().read("lang", "ar");
         binding.setLang(lang);
-
+binding.setHomelistner(this);
         toggle = new ActionBarDrawerToggle(this, binding.drawer, binding.toolbar, R.string.open, R.string.close);
         toggle.syncState();
 
@@ -254,4 +260,35 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void order() {
+        Intent intent = new Intent(this, MyOrderActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void terms() {
+        Intent intent = new Intent(this, AboutAppActivity.class);
+        intent.putExtra("type", 1);
+        startActivity(intent);
+    }
+
+    @Override
+    public void aboutApp() {
+        Intent intent = new Intent(this, AboutAppActivity.class);
+        intent.putExtra("type", 2);
+        startActivity(intent);
+    }
+
+    @Override
+    public void profile() {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void contactus() {
+        Intent intent = new Intent(this, ContactusActivity.class);
+        startActivity(intent);
+    }
 }
