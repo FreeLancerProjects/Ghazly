@@ -31,4 +31,7 @@
     <string name="choose">Choose</string>
     <string name="choose_from_drinks">Choose From Drinks</string>
     <string name="add">Add</string>
+    <string name="cities">Cities</string>
+    <string name="neighbourhood">Neighbourhood</string>
+    <string name="done">Done</string>
 </resources>
