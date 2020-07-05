@@ -64,4 +64,6 @@
     <string name="order_price">Order Price</string>
     <string name="tax">Tax</string>
     <string name="total_price">Total Price</string>
+    <string name="complete_order">Complete Order</string>
+    <string name="restuarant_detials">Restuarant Detials</string>
 </resources>

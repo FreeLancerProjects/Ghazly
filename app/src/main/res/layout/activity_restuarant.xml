@@ -72,7 +72,7 @@
                     android:layout_marginEnd="5dp"
                     android:clickable="false"
                     android:longClickable="false"
-                    android:text="@{title}"
+                    android:text="@string/restuarant_detials"
                     android:textColor="@color/white"
                     android:textSize="15sp"
 

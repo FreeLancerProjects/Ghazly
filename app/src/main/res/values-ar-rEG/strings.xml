@@ -64,4 +64,6 @@
     <string name="order_price">سعر الطلب</string>
     <string name="tax">الضريبه</string>
     <string name="total_price">السعر الاجمالى</string>
+    <string name="complete_order">Complete Order</string>
+    <string name="restuarant_detials">Restuarant Detials</string>
 </resources>
