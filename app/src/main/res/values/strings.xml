@@ -1,4 +1,5 @@
 <resources>
+    <string name="map_api_key">AIzaSyC4l5QxL27z4w0uuD_5X3g0IRhaUdvb0Q4</string>
     <string name="app_name">Ghazly</string>
     <string name="phone">Phone</string>
     <string name="login">Login</string>
@@ -34,4 +35,33 @@
     <string name="cities">Cities</string>
     <string name="neighbourhood">Neighbourhood</string>
     <string name="done">Done</string>
+    <string name="please_choose_the_required_branch">Please choose the required branch</string>
+    <string name="choose_day">Choose Day</string>
+    <string name="choose_time">Choose Time</string>
+    <string name="number_of_pepole">Number Of Pepole</string>
+    <string name="number_of_children">Number Of Children</string>
+    <string name="menu">Menu</string>
+    <string name="reservation_confirmation">reservation confirmation</string>
+    <string name="reviews">Reviews</string>
+    <string name="review">Review</string>
+    <string name="show_all_reviews">Show All Reviews</string>
+    <string name="menu_images">Restaurant Menu Images</string>
+    <string name="rstuarant_images">Rstuarant Images</string>
+    <string name="price">Price</string>
+    <string name="time_for_children_to_enter">Time for children to enter</string>
+    <string name="work_hours">Work Hours</string>
+    <string name="payment_type">Payment Type</string>
+    <string name="location">Location</string>
+    <string name="clothes_system">Clothes system</string>
+    <string name="garage">Garage</string>
+    <string name="discreption">Discreption</string>
+    <string name="book">Book</string>
+    <string name="convenience">Convenience</string>
+    <string name="order_detials">Order Detials</string>
+    <string name="electronic">Electronic</string>
+    <string name="cash">Cash</string>
+    <string name="copoun">Copoun</string>
+    <string name="order_price">Order Price</string>
+    <string name="tax">Tax</string>
+    <string name="total_price">Total Price</string>
 </resources>
