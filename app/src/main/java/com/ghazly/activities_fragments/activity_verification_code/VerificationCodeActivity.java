@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.ghazly.R;
+import com.ghazly.activities_fragments.activity_home.HomeActivity;
 import com.ghazly.activities_fragments.activity_signup.SignUpActivity;
 import com.ghazly.databinding.ActivityVerificationCodeBinding;
 import com.ghazly.language.Language;
@@ -195,65 +196,65 @@ public class VerificationCodeActivity extends AppCompatActivity {
 
 //        navigateToSignUpActivity();
 //      /*  Log.e("3","3");
-//        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
-//        dialog.setCancelable(false);
-//        dialog.show();
-//        Api.getService(Tags.base_url)
-//                .login(phone_code,phone)
-//                .enqueue(new Callback<UserModel>() {
-//                    @Override
-//                    public void onResponse(Call<UserModel> call, Response<UserModel> response) {
-//                        dialog.dismiss();
-//                        if (response.isSuccessful()&&response.body()!=null)
-//                        {
-//                            Log.e("eeeeee",response.body().getUser().getName());
-//                            preferences.create_update_userdata(VerificationCodeActivity.this,response.body());
-//                            navigateToHomeActivity();
-//                        }else
-//                        {
-//                            Log.e("mmmmmmmmmm",phone_code+phone);
-//
-//
-//                            if (response.code()==500)
-//                            {
-//                                Toast.makeText(VerificationCodeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
-//                            }else if (response.code()==404)
-//                            {
-//                                navigateToSignUpActivity();
-//                            }else
-//                            {
-//                               // Toast.makeText(VerificationCodeActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<UserModel> call, Throwable t) {
-//                        try {
-//                            dialog.dismiss();
-//                            if (t.getMessage() != null) {
-//                                Log.e("msg_category_error", t.getMessage() + "__");
-//
-//                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-//                                    //Toast.makeText(VerificationCodeActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
-//                                } else {
-//                                   // Toast.makeText(VerificationCodeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//                        }catch (Exception e)
-//                        {
-//                            Log.e("Error",e.getMessage()+"__");
-//                        }
-//                    }
-//                });
+        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .login(phone_code,phone)
+                .enqueue(new Callback<UserModel>() {
+                    @Override
+                    public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()&&response.body()!=null)
+                        {
+                            Log.e("eeeeee",response.body().getUser().getName());
+                            preferences.create_update_userdata(VerificationCodeActivity.this,response.body());
+                            navigateToHomeActivity();
+                        }else
+                        {
+                            Log.e("mmmmmmmmmm",phone_code+phone);
+
+
+                            if (response.code()==500)
+                            {
+                                Toast.makeText(VerificationCodeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                            }else if (response.code()==404)
+                            {
+                                navigateToSignUpActivity();
+                            }else
+                            {
+                               // Toast.makeText(VerificationCodeActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserModel> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            if (t.getMessage() != null) {
+                                Log.e("msg_category_error", t.getMessage() + "__");
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    //Toast.makeText(VerificationCodeActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                } else {
+                                   // Toast.makeText(VerificationCodeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }catch (Exception e)
+                        {
+                            Log.e("Error",e.getMessage()+"__");
+                        }
+                    }
+                });
 
     }
 
 
     private void navigateToHomeActivity() {
-//        Intent intent = new Intent(this, HomeActivity.class);
-//        startActivity(intent);
-//        finish();
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void navigateToSignUpActivity() {

@@ -23,6 +23,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.ghazly.R;
 
+import com.ghazly.activities_fragments.activity_home.HomeActivity;
 import com.ghazly.databinding.ActivitySignUpBinding;
 import com.ghazly.interfaces.Listeners;
 import com.ghazly.language.Language;
@@ -117,82 +118,82 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
     }
 
     private void signUpWithoutImage() {
-//        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
-//        dialog.setCancelable(false);
-//        dialog.show();
-//        Api.getService(Tags.base_url)
-//                .signUpWithoutImage(signUpModel.getName(),signUpModel.getPhone_code(),signUpModel.getPhone(),signUpModel.getEmail())
-//                .enqueue(new Callback<UserModel>() {
-//                    @Override
-//                    public void onResponse(Call<UserModel> call, Response<UserModel> response) {
-//                        dialog.dismiss();
-//                        if (response.isSuccessful()&&response.body()!=null)
-//                        {
-//                            preferences.create_update_userdata(SignUpActivity.this,response.body());
-//                            navigateToHomeActivity();
-//                        }else
-//                        {
-//                            Log.e("nnnnnnnnnnnn",response.code()+"");
-//                            Log.e("555555",response.message());
-//                            if (response.code()==500)
-//                            {
-//                                Toast.makeText(SignUpActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
-//                            }else if (response.code()==422)
-//                            {
-//                                Log.e("2222222",response.errorBody()+"");
-//
-//                                Toast.makeText(SignUpActivity.this, response.errorBody()+"", Toast.LENGTH_SHORT).show();
-//                            }else if (response.code()==409)
-//                            {
-//
-//                                Log.e("99999999",response.message()+"");
-//
-//                                Toast.makeText(SignUpActivity.this, response.errorBody()+"", Toast.LENGTH_SHORT).show();
-//                            }else if (response.code()==406)
-//                            {
-//
-//                                Log.e("6666666",response.message()+"");
-//
-//                                Toast.makeText(SignUpActivity.this, response.errorBody()+"", Toast.LENGTH_SHORT).show();
-//                            }
-//                            else
-//                            {
-//                                Toast.makeText(SignUpActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
-//                            }
-//
-//                            try {
-//                                Log.e("error",response.errorBody().string());
-//                            } catch (IOException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<UserModel> call, Throwable t) {
-//                        try {
-//                            dialog.dismiss();
-//                            if (t.getMessage() != null) {
-//                                Log.e("msg_category_error", t.getMessage() + "__");
-//
-//                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-//                                    Toast.makeText(SignUpActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
-//                                } else {
-//                                    Toast.makeText(SignUpActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//                        }catch (Exception e)
-//                        {
-//                            Log.e("Error",e.getMessage()+"__");
-//                        }
-//                    }
-//                });
+        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .signup(signUpModel.getName(),phone,phone_code)
+                .enqueue(new Callback<UserModel>() {
+                    @Override
+                    public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()&&response.body()!=null)
+                        {
+                            preferences.create_update_userdata(SignUpActivity.this,response.body());
+                            navigateToHomeActivity();
+                        }else
+                        {
+                            Log.e("nnnnnnnnnnnn",response.code()+"");
+                            Log.e("555555",response.message());
+                            if (response.code()==500)
+                            {
+                                Toast.makeText(SignUpActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                            }else if (response.code()==422)
+                            {
+                                Log.e("2222222",response.errorBody()+"");
+
+                                Toast.makeText(SignUpActivity.this, response.errorBody()+"", Toast.LENGTH_SHORT).show();
+                            }else if (response.code()==409)
+                            {
+
+                                Log.e("99999999",response.message()+"");
+
+                                Toast.makeText(SignUpActivity.this, response.errorBody()+"", Toast.LENGTH_SHORT).show();
+                            }else if (response.code()==406)
+                            {
+
+                                Log.e("6666666",response.message()+"");
+
+                                Toast.makeText(SignUpActivity.this, response.errorBody()+"", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                Toast.makeText(SignUpActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
+
+                            try {
+                                Log.e("error",response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserModel> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            if (t.getMessage() != null) {
+                                Log.e("msg_category_error", t.getMessage() + "__");
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(SignUpActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(SignUpActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }catch (Exception e)
+                        {
+                            Log.e("Error",e.getMessage()+"__");
+                        }
+                    }
+                });
     }
 
 
     private void navigateToHomeActivity() {
-//        Intent intent = new Intent(this, HomeActivity.class);
-//        startActivity(intent);
-//        finish();
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

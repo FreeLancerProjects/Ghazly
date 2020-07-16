@@ -16,6 +16,7 @@ import com.ghazly.R;
 import com.ghazly.databinding.ActivityAboutAppBinding;
 import com.ghazly.interfaces.Listeners;
 import com.ghazly.language.Language;
+import com.ghazly.models.SettingModel;
 import com.ghazly.remote.Api;
 import com.ghazly.tags.Tags;
 
@@ -77,60 +78,60 @@ public class AboutAppActivity extends AppCompatActivity implements Listeners.Bac
 
     private void getAppData() {
 
-//        Api.getService(Tags.base_url)
-//                .getSetting()
-//                .enqueue(new Callback<SettingModel>() {
-//                    @Override
-//                    public void onResponse(Call<SettingModel> call, Response<SettingModel> response) {
-//                        binding.progBar.setVisibility(View.GONE);
-//                        if (response.isSuccessful() && response.body() != null) {
-//
-//                            if (type==1)
-//                            {
-//
-//                                binding.setContent(response.body().getData().getTerm_conditions());
-//                            }else
-//                            {
-//                                binding.setContent(response.body().getData().getAbout_app());
-//
-//                            }
-//
-//                        } else {
-//                            try {
-//
-//                                Log.e("error", response.code() + "_" + response.errorBody().string());
-//                            } catch (IOException e) {
-//                                e.printStackTrace();
-//                            }
-//                            if (response.code() == 500) {
-//                                Toast.makeText(AboutAppActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
-//
-//                            } else {
-//                                Toast.makeText(AboutAppActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-//
-//
-//                            }
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<SettingModel> call, Throwable t) {
-//                        try {
-//                            binding.progBar.setVisibility(View.GONE);
-//
-//                            if (t.getMessage() != null) {
-//                                Log.e("error", t.getMessage());
-//                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-//                                    Toast.makeText(AboutAppActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
-//                                } else {
-//                                    Toast.makeText(AboutAppActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//
-//                        } catch (Exception e) {
-//                        }
-//                    }
-//                });
+        Api.getService(Tags.base_url)
+                .getSetting()
+                .enqueue(new Callback<SettingModel>() {
+                    @Override
+                    public void onResponse(Call<SettingModel> call, Response<SettingModel> response) {
+                        binding.progBar.setVisibility(View.GONE);
+                        if (response.isSuccessful() && response.body() != null) {
+
+                            if (type==1)
+                            {
+
+                                binding.setContent(response.body().getSettings().getTermis_condition());
+                            }else
+                            {
+                                binding.setContent(response.body().getSettings().getAbout_app());
+
+                            }
+
+                        } else {
+                            try {
+
+                                Log.e("error", response.code() + "_" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            if (response.code() == 500) {
+                                Toast.makeText(AboutAppActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                Toast.makeText(AboutAppActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SettingModel> call, Throwable t) {
+                        try {
+                            binding.progBar.setVisibility(View.GONE);
+
+                            if (t.getMessage() != null) {
+                                Log.e("error", t.getMessage());
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(AboutAppActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(AboutAppActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                        } catch (Exception e) {
+                        }
+                    }
+                });
 
     }
 

@@ -66,4 +66,8 @@
     <string name="total_price">Total Price</string>
     <string name="complete_order">Complete Order</string>
     <string name="restuarant_detials">Restuarant Detials</string>
+    <string name="failed">Failed</string>
+    <string name="something">Check internet connection</string>
+    <string name="wait">Wait...</string>
+
 </resources>

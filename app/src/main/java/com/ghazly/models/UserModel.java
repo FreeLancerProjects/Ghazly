@@ -10,19 +10,26 @@ public class UserModel implements Serializable {
     }
 
     public static class User implements Serializable {
-        private int id;
-        private String name;
+      private int id;
+              private String name;
         private String email;
         private String user_type;
         private String phone_code;
         private String phone;
         private String logo;
-        private String block;
-        private String login;
         private String latitude;
         private String longitude;
         private String address;
-        private long logout_time;
+        private String block;
+        private String login;
+        private String logout_time;
+        private String is_confirmed;
+        private String confirmed_code;
+        private String forget_password_code;
+        private String software_type;
+        private String email_verified_at;
+        private String created_at;
+        private String updated_at;
         private String token;
 
         public int getId() {
@@ -53,14 +60,6 @@ public class UserModel implements Serializable {
             return logo;
         }
 
-        public String getBlock() {
-            return block;
-        }
-
-        public String getLogin() {
-            return login;
-        }
-
         public String getLatitude() {
             return latitude;
         }
@@ -73,8 +72,44 @@ public class UserModel implements Serializable {
             return address;
         }
 
-        public long getLogout_time() {
+        public String getBlock() {
+            return block;
+        }
+
+        public String getLogin() {
+            return login;
+        }
+
+        public String getLogout_time() {
             return logout_time;
+        }
+
+        public String getIs_confirmed() {
+            return is_confirmed;
+        }
+
+        public String getConfirmed_code() {
+            return confirmed_code;
+        }
+
+        public String getForget_password_code() {
+            return forget_password_code;
+        }
+
+        public String getSoftware_type() {
+            return software_type;
+        }
+
+        public String getEmail_verified_at() {
+            return email_verified_at;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
         }
 
         public String getToken() {
