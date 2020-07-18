@@ -69,5 +69,6 @@
     <string name="failed">Failed</string>
     <string name="something">Check internet connection</string>
     <string name="wait">Wait...</string>
+    <string name="no_department_found">No Department Found</string>
 
 </resources>

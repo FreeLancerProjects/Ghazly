@@ -1,6 +1,7 @@
 package com.ghazly.ui_general_method;
 
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -50,7 +51,7 @@ public class UI_General_Method {
 
             if (endPoint!=null)
             {
-
+Log.e("lllll",Tags.IMAGE_URL+endPoint);
                 Picasso.get().load(Uri.parse(Tags.IMAGE_URL+endPoint)).into(imageView);
             }
         }else if (view instanceof RoundedImageView)

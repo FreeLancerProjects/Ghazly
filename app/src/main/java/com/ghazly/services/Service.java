@@ -1,6 +1,7 @@
 package com.ghazly.services;
 
 
+import com.ghazly.models.CategoryDataModel;
 import com.ghazly.models.SettingModel;
 import com.ghazly.models.UserModel;
 
@@ -57,4 +58,6 @@ public interface Service {
 
 
     );
+    @GET("api/category")
+    Call<CategoryDataModel> getMainCategory(@Query("pagination")String pagination);
 }

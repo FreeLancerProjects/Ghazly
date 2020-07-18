@@ -488,7 +488,7 @@
                             android:textSize="18sp" />
 
                         <Button
-                            android:id="@+id/btnConfirm"
+                            android:id="@+id/btnlogout"
                             android:layout_width="0dp"
                             android:layout_height="45dp"
                             android:layout_marginStart="10dp"

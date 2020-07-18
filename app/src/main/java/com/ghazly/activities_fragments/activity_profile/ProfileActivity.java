@@ -47,7 +47,15 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
         binding.setLang(lang);
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
-
+binding.btnlogout.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Intent intent=getIntent();
+        intent.putExtra("logout","logout");
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+});
 
     }
 
