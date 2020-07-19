@@ -114,19 +114,33 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/sms1">
 
-                        <com.jkb.vcedittext.VerificationCodeEditText
+                        <!--                        <com.jkb.vcedittext.VerificationCodeEditText-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="45dp"-->
+                        <!--                            android:inputType="number"-->
+                        <!--                            android:textColor="@color/colorPrimary"-->
+                        <!--                            android:textSize="40sp"-->
+                        <!--                            app:bottomLineHeight="2dp"-->
+
+                        <!--                            app:bottomLineNormalColor="@color/colorPrimary"-->
+                        <!--                            app:bottomLineSelectedColor="@color/colorAccent"-->
+                        <!--                            app:figures="6"-->
+                        <!--                            app:selectedBackgroundColor="@color/white"-->
+                        <!--                            app:verCodeMargin="10dp" />-->
+                        <com.alimuzaffar.lib.pin.PinEntryEditText
                             android:id="@+id/edt_code"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
+                            android:cursorVisible="false"
                             android:inputType="number"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="40sp"
-                            app:bottomLineHeight="2dp"
-                            app:bottomLineNormalColor="@color/colorPrimary"
-                            app:bottomLineSelectedColor="@color/colorAccent"
-                            app:figures="6"
-                            app:selectedBackgroundColor="@color/white"
-                            app:verCodeMargin="10dp" />
+                            android:maxLength="6"
+                            android:textIsSelectable="false"
+                            android:textSize="20sp"
+                            app:pinBackgroundDrawable="@drawable/edit_shape"
+                            app:pinLineColors="@color/black"
+                            app:pinLineStroke="2dp"
+                            app:pinBackgroundIsSquare="false"
+                            app:pinLineStrokeSelected="4dp" />
                     </FrameLayout>
 
                     <LinearLayout

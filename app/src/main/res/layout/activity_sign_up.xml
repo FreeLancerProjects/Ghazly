@@ -119,7 +119,10 @@
                             android:text="@string/register"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:onClick="@{()->listener.checkDataValid()}"
+
+                            />
 
                     </LinearLayout>
                 </FrameLayout>

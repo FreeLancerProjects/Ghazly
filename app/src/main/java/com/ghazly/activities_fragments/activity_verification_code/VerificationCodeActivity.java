@@ -121,10 +121,10 @@ public class VerificationCodeActivity extends AppCompatActivity {
 
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
-
+Log.e("gllgll",e.getMessage());
                 if (e.getMessage()!=null)
                 {
-                  //  Common.CreateDialogAlert(VerificationCodeActivity.this,e.getMessage());
+                    //Common.CreateDialogAlert(VerificationCodeActivity.this,e.getMessage());
                 }else
                     {
                      //   Common.CreateDialogAlert(VerificationCodeActivity.this,getString(R.string.failed));
