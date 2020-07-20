@@ -111,21 +111,25 @@
                     >
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recViewdepart"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 
 
                     <ProgressBar
+                        android:id="@+id/progBardepart"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_gravity="center" />
 
                     <TextView
+                        android:id="@+id/tvNoDatadepart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:textColor="@color/black"
                         android:textSize="18sp"
+                        android:text="@string/no_department_found"
                         android:visibility="gone" />
                 </FrameLayout>
             </LinearLayout>

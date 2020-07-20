@@ -79,7 +79,13 @@ public class Fragment_Book extends Fragment {
     }
 
     private void initView() {
-
+activity=(RestuarnantActivity)getActivity();
+binding.btmenu.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        activity.showDepartmentlist();
+    }
+});
 
 
 

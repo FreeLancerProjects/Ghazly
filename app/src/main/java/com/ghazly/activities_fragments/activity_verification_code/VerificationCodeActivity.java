@@ -157,7 +157,7 @@ Log.e("gllgll",e.getMessage());
 
             @Override
             public void onFinish() {
-                binding.btnSkip.setText("00:00");
+                binding.btnSkip.setText(getResources().getString(R.string.resend));
                 binding.btnSkip.setEnabled(true);
             }
         };

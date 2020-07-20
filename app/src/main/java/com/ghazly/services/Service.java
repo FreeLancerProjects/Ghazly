@@ -2,6 +2,8 @@ package com.ghazly.services;
 
 
 import com.ghazly.models.CategoryDataModel;
+import com.ghazly.models.RestuarantDepartmentModel;
+import com.ghazly.models.RestuarantModel;
 import com.ghazly.models.SettingModel;
 import com.ghazly.models.UserModel;
 
@@ -39,6 +41,7 @@ public interface Service {
 
 
     );
+
     @FormUrlEncoded
     @POST("api/update-firebase")
     Call<ResponseBody> updatePhoneToken(@Header("Authorization") String user_token,
@@ -47,7 +50,7 @@ public interface Service {
                                         @Field("soft_type") String soft_type,
                                         @Field("user_type") String user_type
 
-                                        );
+    );
 
     @FormUrlEncoded
     @POST("api/logout-client")
@@ -58,6 +61,26 @@ public interface Service {
 
 
     );
+
     @GET("api/category")
-    Call<CategoryDataModel> getMainCategory(@Query("pagination")String pagination);
+    Call<CategoryDataModel> getMainCategory(@Query("pagination") String pagination);
+    @GET("api/restaurant-departments")
+    Call<RestuarantDepartmentModel> getrestaurantdepartments(@Query("pagination") String pagination,
+                                                             @Query("restaurant_id") String restaurant_id
+
+
+    );
+
+    @GET("api/restaurant-by-cat")
+    Call<RestuarantModel> getRestaurant(
+            @Query("pagination") String pagination,
+            @Query("category_id") String category_id,
+            @Query("user_id") String user_id,
+            @Query("limit_per_page") String limit_per_page,
+            @Query("page") int page
+
+
+
+
+    );
 }

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,12 +28,15 @@ import com.ghazly.activities_fragments.activity_contactus.ContactusActivity;
 import com.ghazly.activities_fragments.activity_login.LoginActivity;
 import com.ghazly.activities_fragments.activity_my_orders.MyOrderActivity;
 import com.ghazly.activities_fragments.activity_profile.ProfileActivity;
+import com.ghazly.activities_fragments.activity_restuarnt.RestuarnantActivity;
 import com.ghazly.adapters.CountriesAdapter;
 import com.ghazly.adapters.DepartmentAdapter;
+import com.ghazly.adapters.RestaurantAdapter;
 import com.ghazly.databinding.ActivityHomeBinding;
 import com.ghazly.databinding.DialogCountriesBinding;
 import com.ghazly.interfaces.Listeners;
 import com.ghazly.models.CategoryDataModel;
+import com.ghazly.models.RestuarantModel;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.ghazly.R;
 import com.ghazly.language.Language;
@@ -66,6 +70,12 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     private ActionBarDrawerToggle toggle;
     private DepartmentAdapter departmentAdapter;
     private List<CategoryDataModel.Data> categoryDataModelDataList;
+    private RestaurantAdapter restaurantAdapter;
+    private List<RestuarantModel.Data> reDataList;
+    private LinearLayoutManager manager;
+    private String category_id = "all";
+    private int current_page = 1;
+    private boolean isLoading = false;
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -84,8 +94,10 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
 
     private void initView() {
         categoryDataModelDataList = new ArrayList<>();
+        reDataList = new ArrayList<>();
         fragmentManager = getSupportFragmentManager();
         preferences = Preferences.getInstance();
+        manager = new LinearLayoutManager(this);
         userModel = preferences.getUserData(this);
         if (userModel != null) {
             binding.setUsermodel(userModel);
@@ -105,10 +117,33 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
 
         }
         departmentAdapter = new DepartmentAdapter(categoryDataModelDataList, this);
-
+        restaurantAdapter = new RestaurantAdapter(reDataList, this);
         binding.recViewdepart.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, true));
         binding.recViewdepart.setAdapter(departmentAdapter);
+        binding.recView.setLayoutManager(manager);
+        binding.recView.setAdapter(restaurantAdapter);
         getMainCategory();
+        getRestaurant();
+        binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    int total_item = binding.recView.getAdapter().getItemCount();
+                    int last_visible_item = ((LinearLayoutManager) binding.recView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+
+                    if (total_item >= 20 && (total_item - last_visible_item) == 5 && !isLoading) {
+
+                        isLoading = true;
+                        int page = current_page + 1;
+                        reDataList.add(null);
+                        restaurantAdapter.notifyItemInserted(reDataList.size() - 1);
+
+                        loadMore(page);
+                    }
+                }
+            }
+        });
     }
 
     private void Logout() {
@@ -243,6 +278,157 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
                 });
     }
 
+    private void getRestaurant() {
+        reDataList.clear();
+        restaurantAdapter.notifyDataSetChanged();
+        binding.tvNoData.setVisibility(View.GONE);
+        binding.progBar.setVisibility(View.VISIBLE);
+        try {
+            int uid;
+
+            if (userModel != null) {
+                uid = userModel.getUser().getId();
+            } else {
+                uid = 0;
+            }
+            Api.getService(Tags.base_url)
+                    .getRestaurant("on", category_id, uid + "", "20", current_page)
+                    .enqueue(new Callback<RestuarantModel>() {
+                        @Override
+                        public void onResponse(Call<RestuarantModel> call, Response<RestuarantModel> response) {
+                            binding.progBar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
+                                reDataList.clear();
+                                reDataList.addAll(response.body().getData());
+                                if (reDataList.size() > 0) {
+
+                                    restaurantAdapter.notifyDataSetChanged();
+
+                                    binding.tvNoData.setVisibility(View.GONE);
+                                } else {
+                                    binding.tvNoData.setVisibility(View.VISIBLE);
+
+                                }
+                            } else {
+                                if (response.code() == 500) {
+                                    Toast.makeText(HomeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+
+
+                                } else {
+                                    Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+                                    try {
+
+                                        Log.e("error", response.code() + "_" + response.errorBody().string());
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<RestuarantModel> call, Throwable t) {
+                            try {
+                                binding.progBar.setVisibility(View.GONE);
+
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        Toast.makeText(HomeActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(HomeActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+
+        }
+    }
+
+    private void loadMore(int page) {
+
+
+        try {
+            int uid;
+
+            if (userModel != null) {
+                uid = userModel.getUser().getId();
+            } else {
+                uid = 0;
+            }
+            Api.getService(Tags.base_url)
+                    .getRestaurant("on", category_id, uid + "", "20", current_page)
+                    .enqueue(new Callback<RestuarantModel>() {
+                        @Override
+                        public void onResponse(Call<RestuarantModel> call, Response<RestuarantModel> response) {
+                            isLoading = false;
+                            reDataList.remove(reDataList.size() - 1);
+                            restaurantAdapter.notifyItemRemoved(reDataList.size() - 1);
+
+
+                            if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
+
+                                int oldPos = reDataList.size() - 1;
+
+                                reDataList.addAll(response.body().getData());
+
+                                if (response.body().getData().size() > 0) {
+                                    current_page = response.body().getCurrent_page();
+                                    restaurantAdapter.notifyItemRangeChanged(oldPos, reDataList.size() - 1);
+
+                                }
+                            } else {
+                                if (response.code() == 500) {
+                                    Toast.makeText(HomeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+
+
+                                } else {
+                                    Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+                                    try {
+
+                                        Log.e("error", response.code() + "_" + response.errorBody().string());
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<RestuarantModel> call, Throwable t) {
+                            try {
+
+                                if (reDataList.get(reDataList.size() - 1) == null) {
+                                    isLoading = false;
+                                    reDataList.remove(reDataList.size() - 1);
+                                    restaurantAdapter.notifyItemRemoved(reDataList.size() - 1);
+
+                                }
+
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        Toast.makeText(HomeActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(HomeActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+
+        }
+
+    }
 
     private void updateTokenFireBase() {
 
@@ -370,5 +556,16 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
         if (requestCode == 100 && resultCode == RESULT_OK && data.getStringExtra("logout") != null) {
             Logout();
         }
+    }
+
+    public void setitemData(String s) {
+        category_id = s;
+        getRestaurant();
+    }
+
+    public void setrestauant(String s) {
+        Intent intent=new Intent(HomeActivity.this, RestuarnantActivity.class);
+        intent.putExtra("restaurand_id",s);
+        startActivity(intent);
     }
 }

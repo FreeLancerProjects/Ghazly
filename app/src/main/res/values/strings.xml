@@ -70,5 +70,8 @@
     <string name="something">Check internet connection</string>
     <string name="wait">Wait...</string>
     <string name="no_department_found">No Department Found</string>
+    <string name="we_hope_that_you_enter_the_6_digit_temporary_password_that_was_sent_to_your_sent_mobile_number">We hope that you enter the 6-digit temporary password that was sent to your sent mobile number</string>
+    <string name="resend">Resend</string>
+    <string name="number_of_branches">Branches Num :</string>
 
 </resources>

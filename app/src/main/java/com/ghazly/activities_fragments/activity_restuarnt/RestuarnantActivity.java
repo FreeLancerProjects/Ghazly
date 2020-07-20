@@ -19,6 +19,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.ghazly.R;
+import com.ghazly.activities_fragments.activity_foodlist.FoodListActivity;
+import com.ghazly.activities_fragments.activity_home.HomeActivity;
 import com.ghazly.activities_fragments.activity_restuarnt.fragments.Fragment_Book;
 import com.ghazly.activities_fragments.activity_restuarnt.fragments.Fragment_Convenience;
 import com.ghazly.adapters.ViewPagerAdapter;
@@ -54,6 +56,7 @@ public class RestuarnantActivity extends AppCompatActivity {
     private ViewPagerAdapter adapter;
     private List<Fragment> fragmentList;
     private List<String> title;
+    private String restaurand_id;
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -65,11 +68,19 @@ public class RestuarnantActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_restuarant);
+        getDataFromIntent();
         initView();
 
 
     }
 
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            restaurand_id = intent.getStringExtra("restaurand_id");
+
+        }
+    }
     private void initView() {
         fragmentManager = getSupportFragmentManager();
         preferences = Preferences.getInstance();
@@ -94,7 +105,6 @@ public class RestuarnantActivity extends AppCompatActivity {
         adapter.addTitles(title);
         binding.pager.setAdapter(adapter);
 
-
     }
 
 
@@ -104,4 +114,9 @@ public class RestuarnantActivity extends AppCompatActivity {
     }
 
 
+    public void showDepartmentlist() {
+        Intent intent=new Intent(RestuarnantActivity.this, FoodListActivity.class);
+        intent.putExtra("restaurand_id",restaurand_id);
+        startActivity(intent);
+    }
 }

@@ -94,7 +94,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="20dp"
                         android:gravity="center"
-                        android:text="@string/verfication_code"
+                        android:text="@string/we_hope_that_you_enter_the_6_digit_temporary_password_that_was_sent_to_your_sent_mobile_number"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"

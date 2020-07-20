@@ -70,5 +70,8 @@
     <string name="something">تحقق من الاتصال بالانترنت</string>
     <string name="wait">إنتظر قليلا...</string>
     <string name="no_department_found">No Department Found</string>
+    <string name="we_hope_that_you_enter_the_6_digit_temporary_password_that_was_sent_to_your_sent_mobile_number">نامل بادخال كلمة المرور المؤقته والمكونه من 6 خانات  والتى تم ارسالها لرقم جوالك المرسل</string>
+    <string name="resend">اعادة ارسال</string>
+    <string name="number_of_branches">عدد الفروع</string>
 
 </resources>

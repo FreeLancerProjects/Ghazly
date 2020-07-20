@@ -249,6 +249,7 @@
             </androidx.recyclerview.widget.RecyclerView>
 
             <Button
+                android:id="@+id/btmenu"
                 android:layout_width="90dp"
                 android:layout_height="30dp"
                 android:layout_gravity="start"
