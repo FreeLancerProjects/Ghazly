@@ -2,6 +2,7 @@ package com.ghazly.services;
 
 
 import com.ghazly.models.CategoryDataModel;
+import com.ghazly.models.FoodListModel;
 import com.ghazly.models.RestuarantDepartmentModel;
 import com.ghazly.models.RestuarantModel;
 import com.ghazly.models.SettingModel;
@@ -76,6 +77,18 @@ public interface Service {
             @Query("pagination") String pagination,
             @Query("category_id") String category_id,
             @Query("user_id") String user_id,
+            @Query("limit_per_page") String limit_per_page,
+            @Query("page") int page
+
+
+
+
+    );
+    @GET("api/restaurant-food-by-dep")
+    Call<FoodListModel> getFoodList(
+            @Query("pagination") String pagination,
+            @Query("department_id") String department_id,
+            @Query("restaurant_id") String restaurant_id,
             @Query("limit_per_page") String limit_per_page,
             @Query("page") int page
 

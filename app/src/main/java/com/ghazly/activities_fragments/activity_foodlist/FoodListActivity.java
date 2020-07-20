@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
@@ -15,15 +16,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ghazly.R;
-import com.ghazly.activities_fragments.activity_home.HomeActivity;
 import com.ghazly.adapters.DepartmentAdapter;
+import com.ghazly.adapters.FoodListAdapter;
 import com.ghazly.adapters.RestaurantDepartmentAdapter;
 import com.ghazly.databinding.ActivityFoodListBinding;
 import com.ghazly.databinding.ActivityMyOrdersBinding;
 import com.ghazly.interfaces.Listeners;
 import com.ghazly.language.Language;
 import com.ghazly.models.CategoryDataModel;
+import com.ghazly.models.FoodListModel;
 import com.ghazly.models.RestuarantDepartmentModel;
+import com.ghazly.models.FoodListModel;
 import com.ghazly.models.UserModel;
 import com.ghazly.preferences.Preferences;
 import com.ghazly.remote.Api;
@@ -44,14 +47,18 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
     private String lang;
 
     private LinearLayoutManager manager;
-    private boolean isLoading = false;
-    private int current_page2 = 1;
+
     private Preferences preferences;
     private UserModel userModel;
     private RestaurantDepartmentAdapter restaurantDepartmentAdapter;
     private List<RestuarantDepartmentModel.Data> resDataList;
     private String restaurand_id;
-
+    private FoodListAdapter foodListAdapter;
+    private List<FoodListModel.Data> fooDataList;
+    private LinearLayoutManager manager2;
+    private String category_id = "all";
+    private int current_page = 1;
+    private boolean isLoading = false;
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -78,6 +85,7 @@ getMainCategory();
 
     private void initView() {
         resDataList = new ArrayList<>();
+        fooDataList=new ArrayList<>();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         Paper.init(this);
@@ -86,9 +94,32 @@ getMainCategory();
         binding.setBackListener(this);
         manager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, true);
         restaurantDepartmentAdapter = new RestaurantDepartmentAdapter(resDataList, this);
-        binding.recViewdepart.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, true));
+        binding.recViewdepart.setLayoutManager(manager);
         binding.recViewdepart.setAdapter(restaurantDepartmentAdapter);
+        foodListAdapter = new FoodListAdapter(fooDataList, this);
+        binding.recView.setLayoutManager(manager2);
+        binding.recView.setAdapter(foodListAdapter);
+        getFoodlist();
+        binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    int total_item = binding.recView.getAdapter().getItemCount();
+                    int last_visible_item = ((LinearLayoutManager) binding.recView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
 
+                    if (total_item >= 20 && (total_item - last_visible_item) == 5 && !isLoading) {
+
+                        isLoading = true;
+                        int page = current_page + 1;
+                        fooDataList.add(null);
+                        foodListAdapter.notifyItemInserted(fooDataList.size() - 1);
+
+                        loadMore(page);
+                    }
+                }
+            }
+        });
     }
     private void getMainCategory() {
 
@@ -150,12 +181,152 @@ getMainCategory();
                 });
     }
 
+    private void getFoodlist() {
+        fooDataList.clear();
+        foodListAdapter.notifyDataSetChanged();
+        binding.tvNoData.setVisibility(View.GONE);
+        binding.progBar.setVisibility(View.VISIBLE);
+        try {
 
+            Api.getService(Tags.base_url)
+                    .getFoodList("on", category_id, restaurand_id+ "", "20", current_page)
+                    .enqueue(new Callback<FoodListModel>() {
+                        @Override
+                        public void onResponse(Call<FoodListModel> call, Response<FoodListModel> response) {
+                            binding.progBar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
+                                fooDataList.clear();
+                                fooDataList.addAll(response.body().getData());
+                                if (fooDataList.size() > 0) {
+
+                                    foodListAdapter.notifyDataSetChanged();
+
+                                    binding.tvNoData.setVisibility(View.GONE);
+                                } else {
+                                    binding.tvNoData.setVisibility(View.VISIBLE);
+
+                                }
+                            } else {
+                                if (response.code() == 500) {
+                                    Toast.makeText(FoodListActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+
+
+                                } else {
+                                    Toast.makeText(FoodListActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+                                    try {
+
+                                        Log.e("error", response.code() + "_" + response.errorBody().string());
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<FoodListModel> call, Throwable t) {
+                            try {
+                                binding.progBar.setVisibility(View.GONE);
+
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        Toast.makeText(FoodListActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(FoodListActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+
+        }
+    }
+
+    private void loadMore(int page) {
+
+
+        try {
+           
+            Api.getService(Tags.base_url)
+                    .getFoodList("on", category_id, restaurand_id+ "", "20", current_page)
+                    .enqueue(new Callback<FoodListModel>() {
+                        @Override
+                        public void onResponse(Call<FoodListModel> call, Response<FoodListModel> response) {
+                            isLoading = false;
+                            fooDataList.remove(fooDataList.size() - 1);
+                            foodListAdapter.notifyItemRemoved(fooDataList.size() - 1);
+
+
+                            if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
+
+                                int oldPos = fooDataList.size() - 1;
+
+                                fooDataList.addAll(response.body().getData());
+
+                                if (response.body().getData().size() > 0) {
+                                    current_page = response.body().getCurrent_page();
+                                    foodListAdapter.notifyItemRangeChanged(oldPos, fooDataList.size() - 1);
+
+                                }
+                            } else {
+                                if (response.code() == 500) {
+                                    Toast.makeText(FoodListActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+
+
+                                } else {
+                                    Toast.makeText(FoodListActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+                                    try {
+
+                                        Log.e("error", response.code() + "_" + response.errorBody().string());
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<FoodListModel> call, Throwable t) {
+                            try {
+
+                                if (fooDataList.get(fooDataList.size() - 1) == null) {
+                                    isLoading = false;
+                                    fooDataList.remove(fooDataList.size() - 1);
+                                    foodListAdapter.notifyItemRemoved(fooDataList.size() - 1);
+
+                                }
+
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        Toast.makeText(FoodListActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(FoodListActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+
+        }
+
+    }
     @Override
     public void back() {
         finish();
     }
 
     public void setitemData(String s) {
+        category_id=s;
+        getFoodlist();
     }
 }
