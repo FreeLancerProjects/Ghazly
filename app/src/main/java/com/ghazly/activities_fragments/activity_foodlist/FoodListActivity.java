@@ -92,6 +92,7 @@ getMainCategory();
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         binding.setBackListener(this);
+        manager2=new LinearLayoutManager(this);
         manager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, true);
         restaurantDepartmentAdapter = new RestaurantDepartmentAdapter(resDataList, this);
         binding.recViewdepart.setLayoutManager(manager);
@@ -194,6 +195,13 @@ getMainCategory();
                         @Override
                         public void onResponse(Call<FoodListModel> call, Response<FoodListModel> response) {
                             binding.progBar.setVisibility(View.GONE);
+                            try {
+                                Log.e("rrrkkr",restaurand_id+category_id+response.body().getData().get(0).getTitle());
+
+
+                            }catch (Exception e){
+
+                            }
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                                 fooDataList.clear();
                                 fooDataList.addAll(response.body().getData());

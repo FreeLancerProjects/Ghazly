@@ -22,8 +22,8 @@ import com.ghazly.models.RestuarantModel;
 import java.util.List;
 
 public class FoodListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private final int DATA_ROW =1;
-    private final int LOAD_ROW =2;
+    private final int DATA_ROW = 1;
+    private final int LOAD_ROW = 2;
 
     private List<FoodListModel.Data> list;
     private Context context;
@@ -41,15 +41,13 @@ public class FoodListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        if (viewType == DATA_ROW){
+        if (viewType == DATA_ROW) {
             FoodRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.food_row, parent, false);
             return new MyHolder(binding);
-        }else {
+        } else {
             LoadmoreRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.loadmore_row, parent, false);
             return new LoadMoreHolder(binding);
         }
-
-
 
 
     }
@@ -57,27 +55,23 @@ public class FoodListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        if (holder instanceof MyHolder){
+        if (holder instanceof MyHolder) {
             MyHolder myHolder = (MyHolder) holder;
 
             myHolder.binding.setModel(list.get(position));
-myHolder.itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
+            myHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 //        activity.setrestauant(list.get(holder.getLayoutPosition()).getId()+"");
-    }
-});
+                }
+            });
 
 
-
-        }else {
+        } else {
             LoadMoreHolder loadMoreHolder = (LoadMoreHolder) holder;
-            loadMoreHolder.binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+            loadMoreHolder.binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
             loadMoreHolder.binding.progBar.setIndeterminate(true);
         }
-
-
-
 
 
     }
@@ -95,7 +89,6 @@ myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             this.binding = binding;
 
 
-
         }
     }
 
@@ -107,7 +100,6 @@ myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             this.binding = binding;
 
 
-
         }
     }
 
@@ -115,9 +107,9 @@ myHolder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public int getItemViewType(int position) {
         FoodListModel.Data model = list.get(position);
-        if (model ==null){
+        if (model == null) {
             return LOAD_ROW;
-        }else {
+        } else {
             return DATA_ROW;
         }
     }
