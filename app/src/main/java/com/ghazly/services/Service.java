@@ -6,6 +6,7 @@ import com.ghazly.models.FoodListModel;
 import com.ghazly.models.RestuarantDepartmentModel;
 import com.ghazly.models.RestuarantModel;
 import com.ghazly.models.SettingModel;
+import com.ghazly.models.SingleRestaurantModel;
 import com.ghazly.models.UserModel;
 
 import okhttp3.MultipartBody;
@@ -95,5 +96,12 @@ public interface Service {
 
 
 
+    );
+
+    @GET("api/get-restaurant")
+    Call<SingleRestaurantModel> getSingleAds(
+
+            @Query("restaurant_id") String restaurant_id,
+            @Query("user_id") String user_id
     );
 }

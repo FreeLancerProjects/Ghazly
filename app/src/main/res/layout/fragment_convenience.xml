@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+<data>
+    <variable
+        name="model"
+        type="com.ghazly.models.SingleRestaurantModel" />
+</data>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -89,7 +93,7 @@
                         app:layout_constraintEnd_toEndOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-                >
+
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -101,7 +105,9 @@
                         android:id="@+id/map"
                         android:name="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+
+                        />
 
 
                 </FrameLayout>
@@ -127,16 +133,13 @@
                             android:textSize="14sp" />
 
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recViewimages"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
                         </androidx.recyclerview.widget.RecyclerView>
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
 
-                        </androidx.recyclerview.widget.RecyclerView>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -159,7 +162,13 @@
                             android:text="@string/rstuarant_images"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp" />
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recViewres"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                          >
 
+                        </androidx.recyclerview.widget.RecyclerView>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -189,9 +198,9 @@
                                 android:id="@+id/flPhone"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:layout_marginStart="40dp"
+                                android:layout_marginStart="10dp"
                                 android:layout_marginTop="20dp"
-                                android:layout_marginEnd="40dp"
+                                android:layout_marginEnd="10dp"
                                 android:layout_marginBottom="10dp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
@@ -216,8 +225,8 @@
                                 android:id="@+id/llPhone"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:layout_marginEnd="30dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/flPhone"
@@ -235,7 +244,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1087766666"
+                                    android:text='@{model.phone_code+model.phone}'
                                     android:textColor="@color/black"
                                     android:textSize="14sp" />
 
@@ -264,14 +273,14 @@
                                 android:id="@+id/fltype"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:layout_marginStart="40dp"
+                                android:layout_marginStart="10dp"
                                 android:layout_marginTop="20dp"
-                                android:layout_marginEnd="40dp"
+                                android:layout_marginEnd="10dp"
                                 android:layout_marginBottom="10dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
 
-                                >
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <de.hdodenhof.circleimageview.CircleImageView
                                     android:layout_width="40dp"
@@ -291,8 +300,8 @@
                                 android:id="@+id/lltype"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:layout_marginEnd="30dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/fltype"
@@ -303,14 +312,14 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/name"
+                                    android:text="@string/foods"
                                     android:textColor="@color/gray6"
                                     android:textSize="13sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/name"
+                                    android:text="@{model.foods}"
                                     android:textColor="@color/black"
                                     android:textSize="14sp" />
 
@@ -342,14 +351,14 @@
                                 android:id="@+id/flbirth"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:layout_marginStart="40dp"
+                                android:layout_marginStart="10dp"
                                 android:layout_marginTop="20dp"
-                                android:layout_marginEnd="40dp"
+                                android:layout_marginEnd="10dp"
                                 android:layout_marginBottom="10dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
 
-                                >
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <de.hdodenhof.circleimageview.CircleImageView
                                     android:layout_width="40dp"
@@ -369,8 +378,8 @@
                                 android:id="@+id/llbirth"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:layout_marginEnd="30dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/flbirth"
@@ -388,7 +397,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="350"
+                                    android:text='@{model.min_price+"-"+model.max_price}'
                                     android:textColor="@color/black"
                                     android:textSize="14sp" />
 
@@ -417,14 +426,14 @@
                                 android:id="@+id/flmail"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:layout_marginStart="40dp"
+                                android:layout_marginStart="10dp"
                                 android:layout_marginTop="20dp"
-                                android:layout_marginEnd="40dp"
+                                android:layout_marginEnd="10dp"
                                 android:layout_marginBottom="10dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
 
-                                >
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <de.hdodenhof.circleimageview.CircleImageView
                                     android:layout_width="40dp"
@@ -444,8 +453,8 @@
                                 android:id="@+id/llmail"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:layout_marginEnd="30dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/flmail"
@@ -463,7 +472,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="3:00 am :9:00 pm"
+                                    android:text='@{model.child_from+"-"+model.child_to}'
                                     android:textColor="@color/black"
                                     android:textSize="14sp" />
 
@@ -491,14 +500,14 @@
                                 android:id="@+id/fltime"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:layout_marginStart="40dp"
+                                android:layout_marginStart="10dp"
                                 android:layout_marginTop="20dp"
-                                android:layout_marginEnd="40dp"
+                                android:layout_marginEnd="10dp"
                                 android:layout_marginBottom="10dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
 
-                                >
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <de.hdodenhof.circleimageview.CircleImageView
                                     android:layout_width="40dp"
@@ -518,8 +527,8 @@
                                 android:id="@+id/lltime"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:layout_marginEnd="30dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/fltime"
@@ -537,7 +546,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="3:00 am : 9:00pm \n friday wensday"
+                                    android:text='@{model.work_from+"-"+model.work_to+"\n"+model.days}'
                                     android:textColor="@color/black"
                                     android:textSize="14sp" />
 
@@ -566,12 +575,13 @@
                                 android:id="@+id/flpay"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:layout_marginStart="40dp"
+                                android:layout_marginStart="10dp"
                                 android:layout_marginTop="20dp"
-                                android:layout_marginEnd="40dp"
+                                android:layout_marginEnd="10dp"
                                 android:layout_marginBottom="10dp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
 
                                 >
 
@@ -593,8 +603,8 @@
                                 android:id="@+id/llpay"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:layout_marginEnd="30dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/flpay"
@@ -612,7 +622,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Fisa cash"
+                                    android:text="@{model.payment_type}"
                                     android:textColor="@color/black"
                                     android:textSize="14sp" />
 
@@ -644,14 +654,14 @@
                                 android:id="@+id/fllocation"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:layout_marginStart="40dp"
+                                android:layout_marginStart="10dp"
                                 android:layout_marginTop="20dp"
-                                android:layout_marginEnd="40dp"
+                                android:layout_marginEnd="10dp"
                                 android:layout_marginBottom="10dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
 
-                                >
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <de.hdodenhof.circleimageview.CircleImageView
                                     android:layout_width="40dp"
@@ -671,8 +681,8 @@
                                 android:id="@+id/lllocation"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:layout_marginEnd="30dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/fllocation"
@@ -690,7 +700,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="_ _ _ _ _ _  _ _ "
+                                    android:text="@{model.website_address}"
                                     android:textColor="@color/black"
                                     android:textSize="14sp" />
 
@@ -719,14 +729,14 @@
                                 android:id="@+id/flcloth"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:layout_marginStart="40dp"
+                                android:layout_marginStart="10dp"
                                 android:layout_marginTop="20dp"
-                                android:layout_marginEnd="40dp"
+                                android:layout_marginEnd="10dp"
                                 android:layout_marginBottom="10dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
 
-                                >
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <de.hdodenhof.circleimageview.CircleImageView
                                     android:layout_width="40dp"
@@ -745,8 +755,8 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:layout_marginEnd="30dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/flcloth"
@@ -795,12 +805,13 @@
                                 android:id="@+id/flcar"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:layout_marginStart="40dp"
+                                android:layout_marginStart="10dp"
                                 android:layout_marginTop="20dp"
-                                android:layout_marginEnd="40dp"
+                                android:layout_marginEnd="10dp"
                                 android:layout_marginBottom="10dp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
 
                                 >
 
@@ -822,8 +833,8 @@
                                 android:id="@+id/llcar"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:layout_marginEnd="30dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/flcar"
@@ -841,7 +852,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Found"
+                                    android:text="@{model.parking}"
                                     android:textColor="@color/black"
                                     android:textSize="14sp" />
 
@@ -870,12 +881,13 @@
                                 android:id="@+id/flinfo"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:layout_marginStart="40dp"
+                                android:layout_marginStart="10dp"
                                 android:layout_marginTop="20dp"
-                                android:layout_marginEnd="40dp"
+                                android:layout_marginEnd="10dp"
                                 android:layout_marginBottom="10dp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
 
                                 >
 
@@ -896,8 +908,8 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:layout_marginEnd="30dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/flinfo"
@@ -915,7 +927,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Restaurnt Of Good Fish"
+                                    android:text="@{model.details}"
                                     android:textColor="@color/black"
                                     android:textSize="14sp" />
 

@@ -74,6 +74,9 @@
     <string name="resend">Resend</string>
     <string name="number_of_branches">Branches Num :</string>
     <string name="calories">Calories</string>
+    <string name="internal_sessions">Internal sessions</string>
+    <string name="external_sessions">External sessions</string>
+    <string name="foods">Foods</string>
 
     Calories
 </resources>

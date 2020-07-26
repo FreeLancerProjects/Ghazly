@@ -16,6 +16,7 @@ import com.ghazly.activities_fragments.activity_home.HomeActivity;
 import com.ghazly.databinding.LoadmoreRowBinding;
 import com.ghazly.databinding.RestaurantRowBinding;
 import com.ghazly.models.RestuarantModel;
+import com.ghazly.models.SingleRestaurantModel;
 
 import java.util.List;
 
@@ -23,12 +24,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private final int DATA_ROW =1;
     private final int LOAD_ROW =2;
 
-    private List<RestuarantModel.Data> list;
+    private List<SingleRestaurantModel> list;
     private Context context;
     private LayoutInflater inflater;
     private HomeActivity activity;
 
-    public RestaurantAdapter(List<RestuarantModel.Data> list, Context context) {
+    public RestaurantAdapter(List<SingleRestaurantModel> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -114,7 +115,7 @@ myHolder.itemView.setOnClickListener(new View.OnClickListener() {
 
     @Override
     public int getItemViewType(int position) {
-        RestuarantModel.Data model = list.get(position);
+     SingleRestaurantModel model = list.get(position);
         if (model ==null){
             return LOAD_ROW;
         }else {

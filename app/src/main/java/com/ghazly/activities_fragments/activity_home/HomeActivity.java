@@ -37,6 +37,7 @@ import com.ghazly.databinding.DialogCountriesBinding;
 import com.ghazly.interfaces.Listeners;
 import com.ghazly.models.CategoryDataModel;
 import com.ghazly.models.RestuarantModel;
+import com.ghazly.models.SingleRestaurantModel;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.ghazly.R;
 import com.ghazly.language.Language;
@@ -71,7 +72,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     private DepartmentAdapter departmentAdapter;
     private List<CategoryDataModel.Data> categoryDataModelDataList;
     private RestaurantAdapter restaurantAdapter;
-    private List<RestuarantModel.Data> reDataList;
+    private List<SingleRestaurantModel> reDataList;
     private LinearLayoutManager manager;
     private String category_id = "all";
     private int current_page = 1;

@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.ghazly.models.RestuarantModel.Data" />
+            type="com.ghazly.models.SingleRestaurantModel" />
 
 
         <import type="android.view.View" />

@@ -26,8 +26,12 @@ import com.ghazly.activities_fragments.activity_restuarnt.fragments.Fragment_Con
 import com.ghazly.adapters.ViewPagerAdapter;
 import com.ghazly.databinding.ActivityRestuarantBinding;
 import com.ghazly.language.Language;
+import com.ghazly.models.SingleRestaurantModel;
 import com.ghazly.models.UserModel;
 import com.ghazly.preferences.Preferences;
+import com.ghazly.remote.Api;
+import com.ghazly.share.Common;
+import com.ghazly.tags.Tags;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 
@@ -52,7 +56,6 @@ public class RestuarnantActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private UserModel userModel;
     private String lang;
-    private ActionBarDrawerToggle toggle;
     private ViewPagerAdapter adapter;
     private List<Fragment> fragmentList;
     private List<String> title;
@@ -70,8 +73,7 @@ public class RestuarnantActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_restuarant);
         getDataFromIntent();
         initView();
-
-
+        getsinglemarkets();
     }
 
     private void getDataFromIntent() {
@@ -81,6 +83,7 @@ public class RestuarnantActivity extends AppCompatActivity {
 
         }
     }
+
     private void initView() {
         fragmentManager = getSupportFragmentManager();
         preferences = Preferences.getInstance();
@@ -115,8 +118,76 @@ public class RestuarnantActivity extends AppCompatActivity {
 
 
     public void showDepartmentlist() {
-        Intent intent=new Intent(RestuarnantActivity.this, FoodListActivity.class);
-        intent.putExtra("restaurand_id",restaurand_id);
+        Intent intent = new Intent(RestuarnantActivity.this, FoodListActivity.class);
+        intent.putExtra("restaurand_id", restaurand_id);
         startActivity(intent);
     }
+
+    public void getsinglemarkets() {
+        //   Common.CloseKeyBoard(homeActivity, edt_name);
+
+        ProgressDialog dialog = Common.createProgressDialog(RestuarnantActivity.this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        // rec_sent.setVisibility(View.GONE);
+        try {
+            String id = "all";
+            if (userModel != null) {
+                id = userModel.getUser().getId() + "";
+            }
+
+            Api.getService(Tags.base_url)
+                    .getSingleAds(restaurand_id, id)
+                    .enqueue(new Callback<SingleRestaurantModel>() {
+                        @Override
+                        public void onResponse(Call<SingleRestaurantModel> call, Response<SingleRestaurantModel> response) {
+                            dialog.dismiss();
+
+                            //  binding.progBar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null) {
+                                //binding.coord1.scrollTo(0,0);
+
+                                update(response.body());
+                            } else {
+
+
+                                Toast.makeText(RestuarnantActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                try {
+                                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<SingleRestaurantModel> call, Throwable t) {
+                            try {
+
+                                dialog.dismiss();
+
+                                Toast.makeText(RestuarnantActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                Log.e("error", t.getMessage());
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            Log.e("fllvlvl", e.toString());
+            dialog.dismiss();
+        }
+    }
+
+    private void update(SingleRestaurantModel body) {
+        binding.setModel(body);
+
+        if (fragmentList != null && fragmentList.size() > 0) {
+
+            Fragment_Book fragment_book = (Fragment_Book) fragmentList.get(0);
+            fragment_book.setdata(body);
+            Fragment_Convenience fragment_convenience = (Fragment_Convenience) fragmentList.get(1);
+            fragment_convenience.setdata(body);
+        }
+    }
+
 }
