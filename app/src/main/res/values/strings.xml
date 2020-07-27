@@ -77,6 +77,11 @@
     <string name="internal_sessions">Internal sessions</string>
     <string name="external_sessions">External sessions</string>
     <string name="foods">Foods</string>
+    <string name="choose_untill_2">Choose Untill 2</string>
+    <string name="ryal">R.S</string>
+    <string name="Choose_session">Choose Session</string>
+    <string name="choose_family">Choose Family Or indvidual</string>
+    <string name="Choose_date">Choose Date</string>
 
     Calories
 </resources>

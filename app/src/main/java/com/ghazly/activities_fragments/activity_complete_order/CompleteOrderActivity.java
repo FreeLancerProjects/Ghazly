@@ -1,6 +1,7 @@
 package com.ghazly.activities_fragments.activity_complete_order;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import com.ghazly.databinding.ActivityCompleteOrderBinding;
 import com.ghazly.databinding.ActivityFoodDetailsBinding;
 import com.ghazly.interfaces.Listeners;
 import com.ghazly.language.Language;
+import com.ghazly.models.CreateOrderModel;
 import com.ghazly.models.UserModel;
 import com.ghazly.preferences.Preferences;
 
@@ -22,7 +24,7 @@ import io.paperdb.Paper;
 public class CompleteOrderActivity extends AppCompatActivity implements Listeners.BackListener {
     private ActivityCompleteOrderBinding binding;
     private String lang;
-
+private CreateOrderModel createOrderModel;
 
     private Preferences preferences;
     private UserModel userModel;
@@ -33,11 +35,19 @@ public class CompleteOrderActivity extends AppCompatActivity implements Listener
         super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
 
     }
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            createOrderModel = (CreateOrderModel) intent.getSerializableExtra("data");
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_complete_order);
+        getDataFromIntent();
         initView();
 
 

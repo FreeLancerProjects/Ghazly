@@ -1,5 +1,6 @@
 package com.ghazly.activities_fragments.activity_foodlist;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ghazly.R;
+import com.ghazly.activities_fragments.activity_food_detials.FoodDetialsActivity;
 import com.ghazly.adapters.DepartmentAdapter;
 import com.ghazly.adapters.FoodListAdapter;
 import com.ghazly.adapters.RestaurantDepartmentAdapter;
@@ -24,6 +27,8 @@ import com.ghazly.databinding.ActivityMyOrdersBinding;
 import com.ghazly.interfaces.Listeners;
 import com.ghazly.language.Language;
 import com.ghazly.models.CategoryDataModel;
+import com.ghazly.models.ChooseFoodListModel;
+import com.ghazly.models.CreateOrderModel;
 import com.ghazly.models.FoodListModel;
 import com.ghazly.models.RestuarantDepartmentModel;
 import com.ghazly.models.FoodListModel;
@@ -59,6 +64,9 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
     private String category_id = "all";
     private int current_page = 1;
     private boolean isLoading = false;
+    private List<ChooseFoodListModel> chooseFoodListModels;
+    private CreateOrderModel createOrderModel;
+    private double price;
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -73,8 +81,9 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
         getDataFromIntent();
 
         initView();
-getMainCategory();
+        getMainCategory();
     }
+
     private void getDataFromIntent() {
         Intent intent = getIntent();
         if (intent != null) {
@@ -85,14 +94,16 @@ getMainCategory();
 
     private void initView() {
         resDataList = new ArrayList<>();
-        fooDataList=new ArrayList<>();
+        fooDataList = new ArrayList<>();
+        chooseFoodListModels = new ArrayList<>();
+        createOrderModel = new CreateOrderModel();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         binding.setBackListener(this);
-        manager2=new LinearLayoutManager(this);
+        manager2 = new LinearLayoutManager(this);
         manager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, true);
         restaurantDepartmentAdapter = new RestaurantDepartmentAdapter(resDataList, this);
         binding.recViewdepart.setLayoutManager(manager);
@@ -122,16 +133,17 @@ getMainCategory();
             }
         });
     }
+
     private void getMainCategory() {
 
         Api.getService(Tags.base_url)
-                .getrestaurantdepartments("off",restaurand_id)
+                .getrestaurantdepartments("off", restaurand_id)
                 .enqueue(new Callback<RestuarantDepartmentModel>() {
                     @Override
                     public void onResponse(Call<RestuarantDepartmentModel> call, Response<RestuarantDepartmentModel> response) {
                         binding.progBardepart.setVisibility(View.GONE);
                         if (response.isSuccessful()) {
-                           // Log.e("dkkdkdk",response.body().getData().size()+"");
+                            // Log.e("dkkdkdk",response.body().getData().size()+"");
                             resDataList.clear();
                             resDataList.addAll(response.body().getData());
 
@@ -190,16 +202,16 @@ getMainCategory();
         try {
 
             Api.getService(Tags.base_url)
-                    .getFoodList("on", category_id, restaurand_id+ "", "20", current_page)
+                    .getFoodList("on", category_id, restaurand_id + "", "20", current_page)
                     .enqueue(new Callback<FoodListModel>() {
                         @Override
                         public void onResponse(Call<FoodListModel> call, Response<FoodListModel> response) {
                             binding.progBar.setVisibility(View.GONE);
                             try {
-                                Log.e("rrrkkr",restaurand_id+category_id+response.body().getData().get(0).getTitle());
+                                Log.e("rrrkkr", restaurand_id + category_id + response.body().getData().get(0).getTitle());
 
 
-                            }catch (Exception e){
+                            } catch (Exception e) {
 
                             }
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
@@ -259,9 +271,9 @@ getMainCategory();
 
 
         try {
-           
+
             Api.getService(Tags.base_url)
-                    .getFoodList("on", category_id, restaurand_id+ "", "20", current_page)
+                    .getFoodList("on", category_id, restaurand_id + "", "20", current_page)
                     .enqueue(new Callback<FoodListModel>() {
                         @Override
                         public void onResponse(Call<FoodListModel> call, Response<FoodListModel> response) {
@@ -328,13 +340,44 @@ getMainCategory();
         }
 
     }
+
     @Override
     public void back() {
+
+        Intent intent=getIntent();
+        intent.putExtra("data", createOrderModel);
+        setResult(RESULT_OK, intent);
         finish();
+        finish();
+
     }
 
     public void setitemData(String s) {
-        category_id=s;
+        category_id = s;
         getFoodlist();
+    }
+
+    public void showdetials(FoodListModel.Data data) {
+        Intent intent = new Intent(FoodListActivity.this, FoodDetialsActivity.class);
+        intent.putExtra("food", data);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            if (data.getSerializableExtra("data") != null) {
+                chooseFoodListModels.add((ChooseFoodListModel) data.getSerializableExtra("data"));
+            }
+          ChooseFoodListModel chooseFoodListModel=  (ChooseFoodListModel)data.getSerializableExtra("data");
+            price=Double.parseDouble(chooseFoodListModel.getPrice());
+            createOrderModel.setFoods(chooseFoodListModels);
+            if(createOrderModel.getTotal_price()!=null){
+            price+=Double.parseDouble(createOrderModel.getTotal_price());}
+
+            createOrderModel.setTotal_price(price+"");
+
+        }
     }
 }

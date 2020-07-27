@@ -3,6 +3,7 @@ package com.ghazly.adapters;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -24,6 +25,7 @@ public class RestaurnantBranchesAdapter extends RecyclerView.Adapter<RecyclerVie
     private Context context;
     private LayoutInflater inflater;
     private RestuarnantActivity restuarnantActivity;
+    private int i=-1;
     public RestaurnantBranchesAdapter(List<SingleRestaurantModel.Branchs> list, Context context) {
         this.list = list;
         this.context = context;
@@ -50,9 +52,22 @@ public class RestaurnantBranchesAdapter extends RecyclerView.Adapter<RecyclerVie
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
 
-        myHolder.itemView.setOnClickListener(view -> {
-//homeActivity.setitemData(list.get(holder.getLayoutPosition()).getId()+"");
-        });
+     myHolder.binding.rbChoose1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+         @Override
+         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+             if(b){
+                 i=position;
+                 notifyDataSetChanged();
+             }
+         }
+     });
+     if(i==position){
+         myHolder.binding.rbChoose1.setChecked(true);
+         restuarnantActivity.setbranchod(list.get(i).getId()+"");
+     }
+     else {
+         myHolder.binding.rbChoose1.setChecked(false);
+     }
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.ghazly.adapters;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -28,6 +29,7 @@ public class TypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private LayoutInflater inflater;
     private RestuarnantActivity activity;
+    private int i = -1;
 
     public TypeAdapter(List<TypeModel> list, Context context) {
         this.list = list;
@@ -56,10 +58,22 @@ public class TypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
         myHolder.binding.setLang(lang);
-        myHolder.itemView.setOnClickListener(view -> {
-            // activity.setItemData(list.get(myHolder.getAdapterPosition()));
 
+        myHolder.binding.rbChoose1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    i = position;
+                    notifyDataSetChanged();
+                }
+            }
         });
+        if (i == position) {
+            myHolder.binding.rbChoose1.setChecked(true);
+            activity.setfamily(list.get(i).getEnname() + "");
+        } else {
+            myHolder.binding.rbChoose1.setChecked(false);
+        }
     }
 
     @Override

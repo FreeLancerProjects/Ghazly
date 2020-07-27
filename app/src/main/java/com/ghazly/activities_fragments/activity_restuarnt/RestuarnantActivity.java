@@ -1,5 +1,6 @@
 package com.ghazly.activities_fragments.activity_restuarnt;
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -19,6 +21,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.ghazly.R;
+import com.ghazly.activities_fragments.activity_complete_order.CompleteOrderActivity;
 import com.ghazly.activities_fragments.activity_foodlist.FoodListActivity;
 import com.ghazly.activities_fragments.activity_home.HomeActivity;
 import com.ghazly.activities_fragments.activity_restuarnt.fragments.Fragment_Book;
@@ -26,6 +29,8 @@ import com.ghazly.activities_fragments.activity_restuarnt.fragments.Fragment_Con
 import com.ghazly.adapters.ViewPagerAdapter;
 import com.ghazly.databinding.ActivityRestuarantBinding;
 import com.ghazly.language.Language;
+import com.ghazly.models.ChooseFoodListModel;
+import com.ghazly.models.CreateOrderModel;
 import com.ghazly.models.SingleRestaurantModel;
 import com.ghazly.models.UserModel;
 import com.ghazly.preferences.Preferences;
@@ -60,6 +65,9 @@ public class RestuarnantActivity extends AppCompatActivity {
     private List<Fragment> fragmentList;
     private List<String> title;
     private String restaurand_id;
+    private CreateOrderModel createOrderModel;
+    private String family, branchid, session;
+    private String date;
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -107,7 +115,6 @@ public class RestuarnantActivity extends AppCompatActivity {
         adapter.addFragments(fragmentList);
         adapter.addTitles(title);
         binding.pager.setAdapter(adapter);
-
     }
 
 
@@ -120,7 +127,7 @@ public class RestuarnantActivity extends AppCompatActivity {
     public void showDepartmentlist() {
         Intent intent = new Intent(RestuarnantActivity.this, FoodListActivity.class);
         intent.putExtra("restaurand_id", restaurand_id);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
 
     public void getsinglemarkets() {
@@ -190,4 +197,61 @@ public class RestuarnantActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            if (data.getSerializableExtra("data") != null) {
+                createOrderModel = (CreateOrderModel) data.getSerializableExtra("data");
+            }
+        }
+    }
+
+    public void setbranchod(String s) {
+        branchid = s;
+    }
+
+    public void setfamily(String s) {
+        family = s;
+    }
+
+    public void setsession(String in) {
+        session = in;
+    }
+
+    public void checkdata(int numchild, int numpeople) {
+        if (branchid != null && family != null && session != null&&date!=null) {
+            if (createOrderModel == null) {
+                createOrderModel = new CreateOrderModel();
+                createOrderModel.setBranch_id(branchid);
+                createOrderModel.setNumber_of_child(numchild + "");
+                createOrderModel.setNumber_of_person(numpeople + "");
+                createOrderModel.setSession_type(family);
+                createOrderModel.setSession_place(session);
+                createOrderModel.setRestaurant_id(restaurand_id);
+                createOrderModel.setOrder_date(date);
+                Intent intent = new Intent(RestuarnantActivity.this, CompleteOrderActivity.class);
+                intent.putExtra("data", createOrderModel);
+                startActivityForResult(intent, 1);
+                finish();
+            }
+        } else {
+            if (branchid == null) {
+                Toast.makeText(RestuarnantActivity.this, getResources().getString(R.string.please_choose_the_required_branch), Toast.LENGTH_LONG).show();
+            }
+            if (family == null) {
+                Toast.makeText(RestuarnantActivity.this, getResources().getString(R.string.choose_family), Toast.LENGTH_LONG).show();
+            }
+            if (session == null) {
+                Toast.makeText(RestuarnantActivity.this, getResources().getString(R.string.Choose_session), Toast.LENGTH_LONG).show();
+            }
+            if (date == null) {
+                Toast.makeText(RestuarnantActivity.this, getResources().getString(R.string.Choose_date), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    public void setdate(String s) {
+        date=s;
+    }
 }

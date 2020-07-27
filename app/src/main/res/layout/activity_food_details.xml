@@ -9,9 +9,6 @@
             name="backListener"
             type="com.ghazly.interfaces.Listeners.BackListener" />
 
-        <variable
-            name="cartCount"
-            type="Integer" />
 
         <variable
             name="lang"
@@ -19,8 +16,8 @@
 
 
         <variable
-            name="marketName"
-            type="String" />
+            name="model"
+            type="com.ghazly.models.FoodListModel.Data" />
 
         <import type="android.view.View" />
 
@@ -82,8 +79,9 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="200dp">
 
-                                    <androidx.viewpager.widget.ViewPager
+                                    <ImageView
                                         android:id="@+id/pager"
+                                        image="@{model.image}"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent" />
 
@@ -104,7 +102,8 @@
                                         android:id="@+id/progBarSlider"
                                         android:layout_width="35dp"
                                         android:layout_height="35dp"
-                                        android:layout_gravity="center" />
+                                        android:layout_gravity="center"
+                                        android:visibility="gone" />
                                 </FrameLayout>
 
 
@@ -133,25 +132,24 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="0dp"
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
 
-                                        android:layout_weight="1"
                                         android:gravity="center_vertical"
-                                        android:text="Gambary"
+                                        android:text="@{model.title}"
                                         android:textColor="@color/black"
                                         android:textSize="15sp"
 
                                         />
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
-
-                                        android:gravity="center_vertical"
-                                        android:text="80 r.s"
+android:layout_weight="1"
+                                        android:gravity="end"
+                                        android:text="@{model.price}"
                                         android:textColor="@color/colorPrimary"
                                         android:textSize="15sp"
 
@@ -174,11 +172,11 @@
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
 
-                                        android:layout_weight="1"
                                         android:gravity="center_vertical"
                                         android:text="@string/addition"
                                         android:textColor="@color/black"
                                         android:textSize="15sp"
+                                        android:layout_weight="1"
 
                                         />
 
@@ -186,10 +184,9 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
-
                                         android:gravity="center_vertical"
-                                        android:text="@string/choose"
-                                        android:textColor="@color/colorPrimary"
+                                        android:text="@string/choose_untill_2"
+                                        android:textColor="@color/gray3"
                                         android:textSize="15sp"
 
                                         />
@@ -202,14 +199,18 @@
                                     >
 
                                     <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/recView"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent" />
+                                        android:layout_height="match_parent"
+
+                                        />
 
 
                                     <ProgressBar
                                         android:layout_width="35dp"
                                         android:layout_height="35dp"
-                                        android:layout_gravity="center" />
+                                        android:layout_gravity="center"
+                                        android:visibility="gone" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -220,47 +221,19 @@
                                         android:visibility="gone" />
                                 </FrameLayout>
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-
-                                        android:layout_weight="1"
-                                        android:gravity="center_vertical"
-                                        android:text="Gambary"
-                                        android:textColor="@color/black"
-                                        android:textSize="15sp"
-
-                                        />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-
-                                        android:gravity="center_vertical"
-                                        android:text="80 r.s"
-                                        android:textColor="@color/colorPrimary"
-                                        android:textSize="15sp"
-
-                                        />
-                                </LinearLayout>
 
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="2dp"
                                     android:layout_marginTop="8dp"
-                                    android:background="@color/gray8" />
+                                    android:background="@color/gray8"
+                                    android:visibility="gone" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
 
                                     <TextView
                                         android:layout_width="0dp"
@@ -291,8 +264,7 @@
                                 <FrameLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-
-                                    >
+                                    android:visibility="gone">
 
                                     <androidx.recyclerview.widget.RecyclerView
                                         android:layout_width="match_parent"
@@ -383,6 +355,7 @@
                                     app:layout_constraintTop_toTopOf="parent">
 
                                     <TextView
+                                        android:id="@+id/tvadd"
                                         android:layout_width="0dp"
                                         android:layout_height="match_parent"
                                         android:layout_gravity="center_vertical"
@@ -402,6 +375,7 @@
                                         android:background="@color/white" />
 
                                     <TextView
+                                        android:id="@+id/tvtotal"
                                         android:layout_width="0dp"
                                         android:layout_height="match_parent"
                                         android:layout_gravity="center_vertical"
@@ -466,8 +440,10 @@
                         android:layout_marginEnd="5dp"
                         android:clickable="false"
                         android:longClickable="false"
-                        android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        android:text="@{model.title}"
+                        />
                 </LinearLayout>
 
 

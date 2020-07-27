@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ghazly.R;
+import com.ghazly.activities_fragments.activity_foodlist.FoodListActivity;
 import com.ghazly.activities_fragments.activity_home.HomeActivity;
 import com.ghazly.databinding.FoodRowBinding;
 import com.ghazly.databinding.LoadmoreRowBinding;
@@ -28,12 +29,12 @@ public class FoodListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private List<FoodListModel.Data> list;
     private Context context;
     private LayoutInflater inflater;
-
+private FoodListActivity foodListActivity;
     public FoodListAdapter(List<FoodListModel.Data> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
-
+foodListActivity=(FoodListActivity)context;
 
     }
 
@@ -63,6 +64,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 @Override
                 public void onClick(View view) {
 //        activity.setrestauant(list.get(holder.getLayoutPosition()).getId()+"");
+                    foodListActivity.showdetials(list.get(myHolder.getLayoutPosition()));
                 }
             });
 

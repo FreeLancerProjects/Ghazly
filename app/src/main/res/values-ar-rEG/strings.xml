@@ -77,5 +77,10 @@
     <string name="internal_sessions">جلسات داخليه</string>
     <string name="external_sessions">جلسات خارجيه</string>
     <string name="foods">الاطعمه</string>
+    <string name="choose_untill_2">اختار لغاية 2</string>
+    <string name="ryal">R.S</string>
+    <string name="Choose_session">Choose Session</string>
+    <string name="choose_family">Choose Family Or indvidual</string>
+    <string name="Choose_date">Choose Date</string>
 
 </resources>
