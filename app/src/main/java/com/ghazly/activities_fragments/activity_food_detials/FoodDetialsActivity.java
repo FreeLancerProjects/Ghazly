@@ -119,6 +119,7 @@ if(ids.contains(snaksList.get(i).getId())){
         ChooseFoodListModel chooseFoodListModel=new ChooseFoodListModel();
         chooseFoodListModel.setSnaks(chooseSnakListModels);
         chooseFoodListModel.setAmount(amount+"");
+        chooseFoodListModel.setTitle(fData.getTitle());
         chooseFoodListModel.setFood_id(fData.getId()+"");
         chooseFoodListModel.setPrice(totalprice+"");
         Intent intent=getIntent();

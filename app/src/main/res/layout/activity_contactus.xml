@@ -8,7 +8,9 @@
         <variable
             name="backListener"
             type="com.ghazly.interfaces.Listeners.BackListener" />
-
+        <variable
+            name="contactlistener"
+            type="com.ghazly.interfaces.Listeners.contactActions" />
         <variable
             name="lang"
             type="String" />
@@ -96,7 +98,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp">
+                        android:layout_marginTop="30dp"
+                        android:onClick="@{()->contactlistener.email()}"
+
+                        >
 
 
                         <ImageView
@@ -121,6 +126,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/tvemail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|start"
@@ -137,6 +143,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
+                        android:onClick="@{()->contactlistener.call()}"
 
                         >
 
@@ -163,6 +170,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/tvphone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|start"
@@ -177,6 +185,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
+                        android:onClick="@{()->contactlistener.whats()}"
 
                         >
 
@@ -201,7 +210,9 @@
 
                     </LinearLayout>
 
+
                     <TextView
+                        android:id="@+id/tvwhats"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|start"
@@ -216,7 +227,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
-
+                        android:onClick="@{()->contactlistener.twitter()}"
                         >
 
 
@@ -241,6 +252,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/tvtwitter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|start"

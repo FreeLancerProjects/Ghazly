@@ -28,6 +28,7 @@ public interface Listeners {
         void profile();
 
         void contactus();
+        void citydialog();
     }
 
     interface RestaurantActions {
@@ -40,6 +41,16 @@ public interface Listeners {
         void increasepeople();
 
         void decreasepeople();
+    }
+    interface contactActions {
+        void email();
+
+        void call();
+
+        void whats();
+
+        void twitter();
+
     }
 
 

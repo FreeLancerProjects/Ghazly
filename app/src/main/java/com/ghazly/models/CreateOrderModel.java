@@ -16,7 +16,9 @@ public class CreateOrderModel implements Serializable {
     private String number_of_child;
     private String session_place;
     private String session_type;
-private List<ChooseFoodListModel> foods;
+    private List<ChooseFoodListModel> foods;
+    private List<ChooseDrinksListModel> drinks;
+
     public String getUser_id() {
         return user_id;
     }
@@ -119,6 +121,14 @@ private List<ChooseFoodListModel> foods;
 
     public void setFoods(List<ChooseFoodListModel> foods) {
         this.foods = foods;
+    }
+
+    public List<ChooseDrinksListModel> getDrinks() {
+        return drinks;
+    }
+
+    public void setDrinks(List<ChooseDrinksListModel> drinks) {
+        this.drinks = drinks;
     }
 }
 

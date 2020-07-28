@@ -31,11 +31,13 @@ import com.ghazly.activities_fragments.activity_restuarnt.RestuarnantActivity;
 import com.ghazly.adapters.DepartmentAdapter;
 import com.ghazly.adapters.RestaurantAdapter;
 import com.ghazly.adapters.RestaurnantBranchesAdapter;
+import com.ghazly.adapters.TimesAdapter;
 import com.ghazly.adapters.TypeAdapter;
 import com.ghazly.databinding.FragmentBookBinding;
 import com.ghazly.interfaces.Listeners;
 import com.ghazly.models.CategoryDataModel;
 import com.ghazly.models.SingleRestaurantModel;
+import com.ghazly.models.TimesModel;
 import com.ghazly.models.TypeModel;
 import com.ghazly.models.UserModel;
 import com.ghazly.preferences.Preferences;
@@ -65,7 +67,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Fragment_Book extends Fragment implements Listeners.RestaurantActions , DatePickerDialog.OnDateSetListener{
+public class Fragment_Book extends Fragment implements Listeners.RestaurantActions, DatePickerDialog.OnDateSetListener {
 
 
     private RestuarnantActivity activity;
@@ -76,6 +78,8 @@ public class Fragment_Book extends Fragment implements Listeners.RestaurantActio
     private List<SingleRestaurantModel.Branchs> branchsList;
     private TypeAdapter typeAdapter;
     private List<TypeModel> typeModelList;
+    private TimesAdapter timesAdapter;
+    private List<TimesModel> timesModels;
     int numchild;
     int numpeople;
     private DatePickerDialog datePickerDialog;
@@ -112,18 +116,28 @@ public class Fragment_Book extends Fragment implements Listeners.RestaurantActio
         typeModelList = new ArrayList<>();
         typeModelList.add(new TypeModel("0", "عائلات", "Families"));
         typeModelList.add(new TypeModel("1", "افراد", "ٍSingles"));
-
+        timesModels = new ArrayList<>();
+        settimes();
         restaurnantBranchesAdapter = new RestaurnantBranchesAdapter(branchsList, activity);
         typeAdapter = new TypeAdapter(typeModelList, activity);
+        timesAdapter = new TimesAdapter(timesModels, activity);
 
         binding.recViewbranches.setLayoutManager(new LinearLayoutManager(activity));
         binding.recViewbranches.setAdapter(restaurnantBranchesAdapter);
         binding.recViewtype.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, true));
         binding.recViewtype.setAdapter(typeAdapter);
+        binding.recViewtime.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, true));
+        binding.recViewtime.setAdapter(timesAdapter);
         binding.btmenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 activity.showDepartmentlist();
+            }
+        });
+        binding.btdrinks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.showDrinks();
             }
         });
         binding.rbChoose1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -152,6 +166,58 @@ public class Fragment_Book extends Fragment implements Listeners.RestaurantActio
             }
         });
         createDatePickerDialog();
+    }
+
+    private void settimes() {
+        timesModels.add(new TimesModel("00:00"));
+        timesModels.add(new TimesModel("00:30"));
+        timesModels.add(new TimesModel("01:00"));
+        timesModels.add(new TimesModel("01:30"));
+        timesModels.add(new TimesModel("02:00"));
+        timesModels.add(new TimesModel("02:30"));
+        timesModels.add(new TimesModel("03:00"));
+        timesModels.add(new TimesModel("03:30"));
+        timesModels.add(new TimesModel("04:00"));
+        timesModels.add(new TimesModel("04:30"));
+        timesModels.add(new TimesModel("05:00"));
+        timesModels.add(new TimesModel("05:30"));
+        timesModels.add(new TimesModel("06:00"));
+        timesModels.add(new TimesModel("06:30"));
+        timesModels.add(new TimesModel("07:00"));
+        timesModels.add(new TimesModel("07:30"));
+        timesModels.add(new TimesModel("08:00"));
+        timesModels.add(new TimesModel("08:30"));
+        timesModels.add(new TimesModel("09:00"));
+        timesModels.add(new TimesModel("09:30"));
+        timesModels.add(new TimesModel("10:00"));
+        timesModels.add(new TimesModel("10:30"));
+        timesModels.add(new TimesModel("11:00"));
+        timesModels.add(new TimesModel("11:30"));
+        timesModels.add(new TimesModel("12:00"));
+        timesModels.add(new TimesModel("12:30"));
+        timesModels.add(new TimesModel("13:00"));
+        timesModels.add(new TimesModel("13:30"));
+        timesModels.add(new TimesModel("14:00"));
+        timesModels.add(new TimesModel("14:30"));
+        timesModels.add(new TimesModel("15:00"));
+        timesModels.add(new TimesModel("15:30"));
+        timesModels.add(new TimesModel("16:00"));
+        timesModels.add(new TimesModel("16:30"));
+        timesModels.add(new TimesModel("17:00"));
+        timesModels.add(new TimesModel("17:30"));
+        timesModels.add(new TimesModel("18:00"));
+        timesModels.add(new TimesModel("18:30"));
+        timesModels.add(new TimesModel("19:00"));
+        timesModels.add(new TimesModel("19:30"));
+        timesModels.add(new TimesModel("20:00"));
+        timesModels.add(new TimesModel("20:30"));
+        timesModels.add(new TimesModel("21:00"));
+        timesModels.add(new TimesModel("21:30"));
+        timesModels.add(new TimesModel("22:00"));
+        timesModels.add(new TimesModel("22:30"));
+        timesModels.add(new TimesModel("23:00"));
+        timesModels.add(new TimesModel("23:30"));
+
     }
 
     private void createDatePickerDialog() {
@@ -226,6 +292,6 @@ public class Fragment_Book extends Fragment implements Listeners.RestaurantActio
         //Log.e("kkkk", calendar.getTime().getMonth() + "");
 
 
-        activity.setdate(dayOfMonth+"-"+(monthOfYear+1)+"-"+year);
+        activity.setdate(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
     }
 }

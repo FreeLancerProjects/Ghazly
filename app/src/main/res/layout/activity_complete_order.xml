@@ -18,6 +18,9 @@
 
             />
 
+        <variable
+            name="model"
+            type="com.ghazly.models.CreateOrderModel" />
 
         <variable
             name="title"
@@ -100,46 +103,12 @@
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
-                <androidx.cardview.widget.CardView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recViewfoods"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="8dp"
-                    app:contentPadding="10dp">
+                    android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:text="Gambary"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-
-                            />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-
-                            android:gravity="center_vertical"
-                            android:text="80 r.s"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="15sp"
-
-                            />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </androidx.recyclerview.widget.RecyclerView>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -172,6 +141,7 @@
                             android:layout_weight="1"
                             android:button="@drawable/rb_bg"
                             android:padding="5dp"
+                            android:checked="true"
                             android:text="@string/cash"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
@@ -198,6 +168,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:visibility="gone"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="8dp"
@@ -265,13 +236,12 @@
                             />
 
                         <EditText
-                            android:id="@+id/edtPhone"
+                            android:id="@+id/edtcopun"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
                             android:background="@drawable/small_rounded_btn_gray"
-                            android:inputType="number"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
                             android:singleLine="true"
@@ -320,7 +290,7 @@
                                 android:layout_gravity="center_vertical"
 
                                 android:gravity="center_vertical"
-                                android:text="80 r.s"
+                                android:text="@{model.total_price}"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="15sp"
 
@@ -352,7 +322,7 @@
                                 android:layout_gravity="center_vertical"
 
                                 android:gravity="center_vertical"
-                                android:text="80 r.s"
+                                android:text=""
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="15sp"
 
@@ -403,6 +373,20 @@
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btnConfirm"
+                    android:layout_width="180dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginEnd="90dp"
+                    android:background="@drawable/small_rounded_btn_primary"
+                    android:text="@string/complete"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

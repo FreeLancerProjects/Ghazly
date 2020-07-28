@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.ghazly.models.CityModel.Data" />
+
+        <variable
+            name="lang"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+
+        >
+
+
+        <RadioButton
+            android:id="@+id/rb_choose1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:button="@drawable/rb_bg"
+            android:padding="5dp"
+            android:text='@{lang.equals("ar")?model.city.ar_city_title:model.city.en_city_title}'
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

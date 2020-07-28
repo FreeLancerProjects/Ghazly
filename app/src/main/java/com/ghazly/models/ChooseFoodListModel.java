@@ -7,7 +7,8 @@ public class ChooseFoodListModel implements Serializable {
     private String food_id;
     private String price;
     private String amount;
-private List<ChooseSnakListModel> snaks;
+    private String title;
+    private List<ChooseSnakListModel> snaks;
 
     public String getFood_id() {
         return food_id;
@@ -39,6 +40,14 @@ private List<ChooseSnakListModel> snaks;
 
     public void setSnaks(List<ChooseSnakListModel> snaks) {
         this.snaks = snaks;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
 

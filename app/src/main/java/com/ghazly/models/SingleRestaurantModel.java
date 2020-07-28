@@ -46,7 +46,7 @@ public class SingleRestaurantModel implements Serializable {
     private Neighbor neighbor;
     private String branch_data_count;
     private List<Branchs> branchs;
-
+    private List<Drinks> drinks;
     public int getId() {
         return id;
     }
@@ -209,6 +209,10 @@ public class SingleRestaurantModel implements Serializable {
 
     public List<Branchs> getBranchs() {
         return branchs;
+    }
+
+    public List<Drinks> getDrinks() {
+        return drinks;
     }
 
     public class MenuImages implements Serializable {
@@ -508,6 +512,35 @@ public class SingleRestaurantModel implements Serializable {
         }
 
     }
+   public class Drinks implements Serializable
+    {
+        private int id;
+            private String title;
+            private String restaurant_id;
+            private String price;
+            private String is_free;
+
+        public int getId() {
+            return id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getRestaurant_id() {
+            return restaurant_id;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public String getIs_free() {
+            return is_free;
+        }
+    }
+
 }
 
 

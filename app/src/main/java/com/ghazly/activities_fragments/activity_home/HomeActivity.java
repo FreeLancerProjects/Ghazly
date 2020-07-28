@@ -1,5 +1,6 @@
 package com.ghazly.activities_fragments.activity_home;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -29,13 +30,18 @@ import com.ghazly.activities_fragments.activity_login.LoginActivity;
 import com.ghazly.activities_fragments.activity_my_orders.MyOrderActivity;
 import com.ghazly.activities_fragments.activity_profile.ProfileActivity;
 import com.ghazly.activities_fragments.activity_restuarnt.RestuarnantActivity;
+import com.ghazly.adapters.CitiesAdapter;
 import com.ghazly.adapters.CountriesAdapter;
 import com.ghazly.adapters.DepartmentAdapter;
+import com.ghazly.adapters.NeigboorAdapter;
 import com.ghazly.adapters.RestaurantAdapter;
 import com.ghazly.databinding.ActivityHomeBinding;
+import com.ghazly.databinding.DialogCitiesBinding;
 import com.ghazly.databinding.DialogCountriesBinding;
 import com.ghazly.interfaces.Listeners;
 import com.ghazly.models.CategoryDataModel;
+import com.ghazly.models.CityModel;
+import com.ghazly.models.NeigboorModel;
 import com.ghazly.models.RestuarantModel;
 import com.ghazly.models.SingleRestaurantModel;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -73,8 +79,13 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     private List<CategoryDataModel.Data> categoryDataModelDataList;
     private RestaurantAdapter restaurantAdapter;
     private List<SingleRestaurantModel> reDataList;
+    private CitiesAdapter citiesAdapter;
+    private List<CityModel.Data> citiesmodles;
+    private NeigboorAdapter neigboorAdapter;
+    private List<NeigboorModel.Data> neigboormodels;
     private LinearLayoutManager manager;
-    private String category_id = "all";
+    private String category_id = "all", cityid="all", niegboorid="all";
+
     private int current_page = 1;
     private boolean isLoading = false;
 
@@ -96,6 +107,8 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     private void initView() {
         categoryDataModelDataList = new ArrayList<>();
         reDataList = new ArrayList<>();
+        neigboormodels = new ArrayList<>();
+        neigboormodels = new ArrayList<>();
         fragmentManager = getSupportFragmentManager();
         preferences = Preferences.getInstance();
         manager = new LinearLayoutManager(this);
@@ -119,6 +132,8 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
         }
         departmentAdapter = new DepartmentAdapter(categoryDataModelDataList, this);
         restaurantAdapter = new RestaurantAdapter(reDataList, this);
+        citiesAdapter = new CitiesAdapter(citiesmodles, this);
+        neigboorAdapter = new NeigboorAdapter(neigboormodels, this);
         binding.recViewdepart.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, true));
         binding.recViewdepart.setAdapter(departmentAdapter);
         binding.recView.setLayoutManager(manager);
@@ -552,6 +567,11 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     }
 
     @Override
+    public void citydialog() {
+        CreatefilterAlert();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && resultCode == RESULT_OK && data.getStringExtra("logout") != null) {
@@ -565,8 +585,153 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     }
 
     public void setrestauant(String s) {
-        Intent intent=new Intent(HomeActivity.this, RestuarnantActivity.class);
-        intent.putExtra("restaurand_id",s);
+        Intent intent = new Intent(HomeActivity.this, RestuarnantActivity.class);
+        intent.putExtra("restaurand_id", s);
         startActivity(intent);
+    }
+
+    public void CreatefilterAlert() {
+        final AlertDialog dialog = new AlertDialog.Builder(this)
+                .create();
+
+        DialogCitiesBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_cities, null, false);
+        binding.recViewcities.setLayoutManager(new LinearLayoutManager(this));
+        binding.recViewcities.setAdapter(citiesAdapter);
+        binding.recViewneighboor.setLayoutManager(new LinearLayoutManager(this));
+        binding.recViewneighboor.setAdapter(neigboorAdapter);
+        binding.btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //  dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+        //dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setView(binding.getRoot());
+        dialog.show();
+        getcities(binding);
+    }
+
+    private void getcities(DialogCitiesBinding binding) {
+        binding.progBar.setVisibility(View.VISIBLE);
+        Api.getService(Tags.base_url)
+                .getMainCities()
+                .enqueue(new Callback<CityModel>() {
+                    @Override
+                    public void onResponse(Call<CityModel> call, Response<CityModel> response) {
+                        binding.progBar.setVisibility(View.GONE);
+                        if (response.isSuccessful()) {
+                            citiesmodles.clear();
+                            citiesmodles.addAll(response.body().getData());
+
+                            if (citiesmodles.size() > 0) {
+                                citiesAdapter.notifyDataSetChanged();
+                                // binding..setVisibility(View.GONE);
+                            } else {
+                                //binding.tvNoDatadepart.setVisibility(View.VISIBLE);
+
+                            }
+
+
+                        } else {
+                            binding.progBar.setVisibility(View.GONE);
+
+                            try {
+                                Log.e("errorNotCode", response.code() + "__" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            if (response.code() == 500) {
+                                Toast.makeText(HomeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<CityModel> call, Throwable t) {
+                        try {
+                            binding.progBar.setVisibility(View.GONE);
+
+                            if (t.getMessage() != null) {
+                                Log.e("error_not_code", t.getMessage() + "__");
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(HomeActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage() + "__");
+                        }
+                    }
+                });
+    }
+
+    public void getneighboor(String cityid) {
+        this.cityid = cityid;
+        Api.getService(Tags.base_url)
+                .getNeigboor(cityid)
+                .enqueue(new Callback<NeigboorModel>() {
+                    @Override
+                    public void onResponse(Call<NeigboorModel> call, Response<NeigboorModel> response) {
+                        // binding.progBar.setVisibility(View.GONE);
+                        if (response.isSuccessful()) {
+                            neigboormodels.clear();
+                            neigboormodels.addAll(response.body().getData());
+
+                            if (neigboormodels.size() > 0) {
+                                neigboorAdapter.notifyDataSetChanged();
+                                // binding..setVisibility(View.GONE);
+                            } else {
+                                //binding.tvNoDatadepart.setVisibility(View.VISIBLE);
+
+                            }
+
+
+                        } else {
+                            binding.progBar.setVisibility(View.GONE);
+
+                            try {
+                                Log.e("errorNotCode", response.code() + "__" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            if (response.code() == 500) {
+                                Toast.makeText(HomeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NeigboorModel> call, Throwable t) {
+                        try {
+                            binding.progBar.setVisibility(View.GONE);
+
+                            if (t.getMessage() != null) {
+                                Log.e("error_not_code", t.getMessage() + "__");
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(HomeActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage() + "__");
+                        }
+                    }
+                });
+    }
+
+    public void setniegboor(String neighbor_id) {
+        this.niegboorid=neighbor_id;
     }
 }

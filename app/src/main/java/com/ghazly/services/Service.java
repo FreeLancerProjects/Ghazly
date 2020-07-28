@@ -2,7 +2,10 @@ package com.ghazly.services;
 
 
 import com.ghazly.models.CategoryDataModel;
+import com.ghazly.models.CityModel;
+import com.ghazly.models.CreateOrderModel;
 import com.ghazly.models.FoodListModel;
+import com.ghazly.models.NeigboorModel;
 import com.ghazly.models.RestuarantDepartmentModel;
 import com.ghazly.models.RestuarantModel;
 import com.ghazly.models.SettingModel;
@@ -66,6 +69,10 @@ public interface Service {
 
     @GET("api/category")
     Call<CategoryDataModel> getMainCategory(@Query("pagination") String pagination);
+    @GET("api/cities")
+    Call<CityModel> getMainCities();
+    @GET("api/neighborhoods")
+    Call<NeigboorModel> getNeigboor(@Query("city_id")String city_id);
     @GET("api/restaurant-departments")
     Call<RestuarantDepartmentModel> getrestaurantdepartments(@Query("pagination") String pagination,
                                                              @Query("restaurant_id") String restaurant_id
@@ -104,4 +111,9 @@ public interface Service {
             @Query("restaurant_id") String restaurant_id,
             @Query("user_id") String user_id
     );
+    @POST("api/create-order")
+    Call<ResponseBody> createOrder(@Header("Authorization") String user_token,
+                                         @Body CreateOrderModel model
+    );
+
 }

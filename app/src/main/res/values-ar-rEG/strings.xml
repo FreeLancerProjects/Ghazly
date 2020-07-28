@@ -79,8 +79,11 @@
     <string name="foods">الاطعمه</string>
     <string name="choose_untill_2">اختار لغاية 2</string>
     <string name="ryal">R.S</string>
-    <string name="Choose_session">Choose Session</string>
-    <string name="choose_family">Choose Family Or indvidual</string>
+    <string name="Choose_session">اختر جلسات داخليه ام خارجيه</string>
+    <string name="choose_family">اختر عائلات ام افراد</string>
     <string name="Choose_date">Choose Date</string>
+    <string name="not_av">غير متاح حاليا</string>
+    <string name="Choose_time">اختر الوقت</string>
+    <string name="complete">تنفيذ</string>
 
 </resources>
