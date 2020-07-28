@@ -22,10 +22,10 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        TypefaceUtil.setDefaultFont(this, "DEFAULT", "fonts/ar_font.ttf");
-        TypefaceUtil.setDefaultFont(this, "MONOSPACE", "fonts/ar_font.ttf");
-        TypefaceUtil.setDefaultFont(this, "SERIF", "fonts/ar_font.ttf");
-        TypefaceUtil.setDefaultFont(this, "SANS_SERIF", "fonts/ar_font.ttf");
+        TypefaceUtil.setDefaultFont(this, "DEFAULT", "fonts/Hacen_Saudi_Arabia.ttf");
+        TypefaceUtil.setDefaultFont(this, "MONOSPACE", "fonts/Hacen_Saudi_Arabia.ttf");
+        TypefaceUtil.setDefaultFont(this, "SERIF", "fonts/Hacen_Saudi_Arabia.ttf");
+        TypefaceUtil.setDefaultFont(this, "SANS_SERIF", "fonts/Hacen_Saudi_Arabia.ttf");
 
     }
 }

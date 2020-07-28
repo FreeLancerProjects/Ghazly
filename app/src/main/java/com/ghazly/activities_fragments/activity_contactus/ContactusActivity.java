@@ -4,12 +4,10 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.ghazly.R;
-import com.ghazly.activities_fragments.activity_about_app.AboutAppActivity;
-import com.ghazly.databinding.ActivityAboutAppBinding;
+
 import com.ghazly.databinding.ActivityContactusBinding;
 import com.ghazly.interfaces.Listeners;
 import com.ghazly.language.Language;
@@ -35,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ContactusActivity extends AppCompatActivity implements Listeners.BackListener, Listeners.contactActions {
+public class ContactusActivity extends AppCompatActivity implements Listeners.BackListener, Listeners.ContactActions {
     private ActivityContactusBinding binding;
     private String lang;
     private String twitter, whats, email, phone;

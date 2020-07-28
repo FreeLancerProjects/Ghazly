@@ -27,7 +27,7 @@
             android:button="@drawable/rb_bg"
             android:padding="5dp"
             android:text='@{lang.equals("ar")?model.arname:model.enname}'
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/gray8"
             android:textSize="17sp"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"

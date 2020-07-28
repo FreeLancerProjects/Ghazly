@@ -125,11 +125,11 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
         toggle.syncState();
 
 
-        if (userModel != null) {
-            EventBus.getDefault().register(this);
-            updateTokenFireBase();
-
-        }
+//        if (userModel != null) {
+//            EventBus.getDefault().register(this);
+//            updateTokenFireBase();
+//
+//        }
         departmentAdapter = new DepartmentAdapter(categoryDataModelDataList, this);
         restaurantAdapter = new RestaurantAdapter(reDataList, this);
         citiesAdapter = new CitiesAdapter(citiesmodles, this);

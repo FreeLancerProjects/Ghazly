@@ -70,7 +70,7 @@ public class TimesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             myHolder.binding.rbChoose1.setTextColor(context.getResources().getColor(R.color.colorPrimary));
             activity.settime(list.get(i).getTitle());
         } else {
-            myHolder.binding.rbChoose1.setTextColor(context.getResources().getColor(R.color.gray6));
+            myHolder.binding.rbChoose1.setTextColor(context.getResources().getColor(R.color.gray8));
         }
     }
 

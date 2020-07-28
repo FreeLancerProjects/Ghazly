@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ghazly.R;
 import com.ghazly.databinding.LoadmoreRowBinding;
+import com.ghazly.databinding.OrderRowBinding;
 import com.ghazly.models.OrderModel;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         if (viewType==DATA) {
-            ClientOrderRowBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.client_order_row, parent, false);
+            OrderRowBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.order_row, parent, false);
             return new Holder1(binding);
 
 
@@ -82,9 +83,9 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public class Holder1 extends RecyclerView.ViewHolder {
-        private ClientOrderRowBinding binding;
+        private OrderRowBinding binding;
 
-        public Holder1(@NonNull ClientOrderRowBinding binding) {
+        public Holder1(@NonNull OrderRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

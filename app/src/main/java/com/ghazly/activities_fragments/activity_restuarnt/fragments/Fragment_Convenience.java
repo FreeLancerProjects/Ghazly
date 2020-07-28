@@ -124,8 +124,8 @@ restaurantImages=new ArrayList<>();
             mMap.setTrafficEnabled(false);
             mMap.setBuildingsEnabled(false);
             mMap.setIndoorEnabled(true);
-
-            AddMarker();
+if(singleRestaurantModel!=null){
+            AddMarker();}
         }
     }
 

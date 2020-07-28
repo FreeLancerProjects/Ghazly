@@ -10,7 +10,7 @@
             type="com.ghazly.interfaces.Listeners.BackListener" />
         <variable
             name="contactlistener"
-            type="com.ghazly.interfaces.Listeners.contactActions" />
+            type="com.ghazly.interfaces.Listeners.ContactActions" />
         <variable
             name="lang"
             type="String" />

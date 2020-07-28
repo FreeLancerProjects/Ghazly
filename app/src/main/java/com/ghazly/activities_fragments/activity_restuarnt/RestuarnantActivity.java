@@ -254,6 +254,20 @@ public class RestuarnantActivity extends AppCompatActivity {
                 startActivityForResult(intent, 3);
                 finish();
             }
+            else {
+                createOrderModel.setBranch_id(branchid);
+                createOrderModel.setNumber_of_child(numchild + "");
+                createOrderModel.setNumber_of_person(numpeople + "");
+                createOrderModel.setSession_type(family);
+                createOrderModel.setSession_place(session);
+                createOrderModel.setRestaurant_id(restaurand_id);
+                createOrderModel.setOrder_date(date);
+                createOrderModel.setOrder_time(time);
+                Intent intent = new Intent(RestuarnantActivity.this, CompleteOrderActivity.class);
+                intent.putExtra("data", createOrderModel);
+                startActivityForResult(intent, 3);
+                finish();
+            }
         } else {
 
             if (family == null) {

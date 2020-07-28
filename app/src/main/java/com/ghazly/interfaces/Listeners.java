@@ -42,7 +42,7 @@ public interface Listeners {
 
         void decreasepeople();
     }
-    interface contactActions {
+    interface ContactActions {
         void email();
 
         void call();
