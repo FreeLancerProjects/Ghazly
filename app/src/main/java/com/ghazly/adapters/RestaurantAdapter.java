@@ -5,6 +5,7 @@ import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -21,8 +22,8 @@ import com.ghazly.models.SingleRestaurantModel;
 import java.util.List;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private final int DATA_ROW =1;
-    private final int LOAD_ROW =2;
+    private final int DATA_ROW = 1;
+    private final int LOAD_ROW = 2;
 
     private List<SingleRestaurantModel> list;
     private Context context;
@@ -42,15 +43,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        if (viewType == DATA_ROW){
+        if (viewType == DATA_ROW) {
             RestaurantRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.restaurant_row, parent, false);
             return new MyHolder(binding);
-        }else {
+        } else {
             LoadmoreRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.loadmore_row, parent, false);
             return new LoadMoreHolder(binding);
         }
-
-
 
 
     }
@@ -58,27 +57,32 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        if (holder instanceof MyHolder){
+        if (holder instanceof MyHolder) {
             MyHolder myHolder = (MyHolder) holder;
 
             myHolder.binding.setModel(list.get(position));
-myHolder.itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        activity.setrestauant(list.get(holder.getLayoutPosition()).getId()+"");
-    }
-});
+            myHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    activity.setrestauant(list.get(holder.getLayoutPosition()).getId() + "");
+                }
+            });
+
+            myHolder.binding.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                    activity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
 
 
+                }
+            });
 
-        }else {
+        } else {
             LoadMoreHolder loadMoreHolder = (LoadMoreHolder) holder;
-            loadMoreHolder.binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+            loadMoreHolder.binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
             loadMoreHolder.binding.progBar.setIndeterminate(true);
         }
-
-
-
 
 
     }
@@ -96,7 +100,6 @@ myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             this.binding = binding;
 
 
-
         }
     }
 
@@ -108,17 +111,16 @@ myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             this.binding = binding;
 
 
-
         }
     }
 
 
     @Override
     public int getItemViewType(int position) {
-     SingleRestaurantModel model = list.get(position);
-        if (model ==null){
+        SingleRestaurantModel model = list.get(position);
+        if (model == null) {
             return LOAD_ROW;
-        }else {
+        } else {
             return DATA_ROW;
         }
     }

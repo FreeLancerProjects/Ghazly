@@ -4,14 +4,19 @@ import java.io.Serializable;
 
 public class UserModel implements Serializable {
     private User user;
+    private CopunData data;
 
     public User getUser() {
         return user;
     }
 
+    public CopunData getData() {
+        return data;
+    }
+
     public static class User implements Serializable {
-      private int id;
-              private String name;
+        private int id;
+        private String name;
         private String email;
         private String user_type;
         private String phone_code;
@@ -114,6 +119,44 @@ public class UserModel implements Serializable {
 
         public String getToken() {
             return token;
+        }
+    }
+
+    public class CopunData implements Serializable {
+        private int id;
+        private String coupon_num;
+        private String coupon_value;
+        private String from_date;
+        private String to_date;
+        private String created_at;
+        private String updated_at;
+
+        public int getId() {
+            return id;
+        }
+
+        public String getCoupon_num() {
+            return coupon_num;
+        }
+
+        public String getCoupon_value() {
+            return coupon_value;
+        }
+
+        public String getFrom_date() {
+            return from_date;
+        }
+
+        public String getTo_date() {
+            return to_date;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
         }
     }
 }

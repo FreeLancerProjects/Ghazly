@@ -2,6 +2,7 @@ package com.ghazly.adapters;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -16,6 +17,7 @@ import com.ghazly.R;
 import com.ghazly.databinding.LoadmoreRowBinding;
 import com.ghazly.databinding.OrderRowBinding;
 import com.ghazly.models.OrderModel;
+import com.ghazly.models.SingleOrderModel;
 
 import java.util.List;
 
@@ -26,10 +28,9 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private final int LOAD = 2;
 
     private Context context;
-    private List<OrderModel> list;
-    private Fragment fragment;
+    private List<SingleOrderModel> list;
     private String lang;
-    public OrderAdapter(Context context, List<OrderModel> list) {
+    public OrderAdapter(Context context, List<SingleOrderModel> list) {
         this.context = context;
         this.list = list;
         Paper.init(context);
@@ -57,14 +58,16 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        OrderModel model = list.get(position);
+        SingleOrderModel model = list.get(position);
 
         if (holder instanceof Holder1)
         {
             Holder1 holder1 = (Holder1) holder;
 
             holder1.binding.setModel(model);
-
+if(model.getDrinks()!=null){
+   Log.e("lfllvl",model.getDrinks().get(0).getAmount());
+}
 
         }else if (holder instanceof LoadHolder) {
             LoadHolder loadHolder = (LoadHolder) holder;

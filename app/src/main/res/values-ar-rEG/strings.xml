@@ -86,5 +86,9 @@
     <string name="Choose_time">اختر الوقت</string>
     <string name="complete">تنفيذ</string>
     <string name="drinks">مشروبات</string>
+    <string name="order_num">رقم الطلب</string>
+    <string name="notifications">الاشعارات</string>
+    <string name="coupon_not_found">كود الخصم غير موجود هل تريد اكمال الطلب بدون الكوبون ؟</string>
+    <string name="ok">نعم</string>
 
 </resources>

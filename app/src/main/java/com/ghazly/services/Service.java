@@ -6,6 +6,7 @@ import com.ghazly.models.CityModel;
 import com.ghazly.models.CreateOrderModel;
 import com.ghazly.models.FoodListModel;
 import com.ghazly.models.NeigboorModel;
+import com.ghazly.models.OrderModel;
 import com.ghazly.models.RestuarantDepartmentModel;
 import com.ghazly.models.RestuarantModel;
 import com.ghazly.models.SettingModel;
@@ -115,5 +116,27 @@ public interface Service {
     Call<ResponseBody> createOrder(@Header("Authorization") String user_token,
                                          @Body CreateOrderModel model
     );
+    @GET("api/client-orders")
+    Call<OrderModel> getOrders(@Header("Authorization") String user_token,
+                               @Query("user_id") String user_id,
+                               @Query("pagination") String pagination,
+                               @Query("page") int page,
+                               @Query("limit_per_page") int limit_per_page
+    );
+
+    @FormUrlEncoded
+    @POST("/api/find-coupon")
+    Call<UserModel> getCouponValue(@Header("Authorization") String user_token,
+                                   @Field("coupon_num") String coupon_num
+
+    );
+    @FormUrlEncoded
+    @POST("api/favorite-action")
+    Call<ResponseBody> addFavoriteProduct(
+            @Header("Authorization") String Authorization,
+            @Field("restaurant_id") String restaurant_id,
+            @Field("user_id") String user_id
+            )
+            ;
 
 }

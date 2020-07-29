@@ -86,5 +86,9 @@
     <string name="Choose_time">Choose Time</string>
     <string name="complete">Complete</string>
     <string name="drinks">Drinks</string>
+    <string name="order_num">Order Num</string>
+    <string name="notifications">Notifications</string>
+    <string name="coupon_not_found">Coupon Not Found Are You Want to Complete Order?</string>
+    <string name="ok">ok</string>
 
 </resources>

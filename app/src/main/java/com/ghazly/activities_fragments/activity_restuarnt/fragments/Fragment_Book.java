@@ -114,8 +114,8 @@ public class Fragment_Book extends Fragment implements Listeners.RestaurantActio
         binding.setRestaulistner(this);
         branchsList = new ArrayList<>();
         typeModelList = new ArrayList<>();
-        typeModelList.add(new TypeModel("0", "عائلات", "Families"));
-        typeModelList.add(new TypeModel("1", "افراد", "ٍSingles"));
+        typeModelList.add(new TypeModel("0", "عائلات", "family "));
+        typeModelList.add(new TypeModel("1", "افراد", "member"));
         timesModels = new ArrayList<>();
         settimes();
         restaurnantBranchesAdapter = new RestaurnantBranchesAdapter(branchsList, activity);
@@ -144,7 +144,7 @@ public class Fragment_Book extends Fragment implements Listeners.RestaurantActio
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    activity.setsession("In");
+                    activity.setsession("in");
                 }
             }
         });
@@ -290,8 +290,12 @@ public class Fragment_Book extends Fragment implements Listeners.RestaurantActio
         //order_time_calender.set(Calendar.MONTH,monthOfYear);
         //order_time_calender.set(Calendar.DAY_OF_MONTH,dayOfMonth);
         //Log.e("kkkk", calendar.getTime().getMonth() + "");
+        if (monthOfYear >= 9) {
 
+            activity.setdate(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+        } else {
+            activity.setdate(dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year);
 
-        activity.setdate(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+        }
     }
 }

@@ -18,20 +18,24 @@ import com.ghazly.models.NeigboorModel;
 
 import java.util.List;
 
+import io.paperdb.Paper;
+
 public class NeigboorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private final String lang;
     private List<NeigboorModel.Data> list;
     private Context context;
     private LayoutInflater inflater;
     private HomeActivity homeActivity;
-    private int i=-1;
+    private int i = -1;
 
     public NeigboorAdapter(List<NeigboorModel.Data> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
         homeActivity = (HomeActivity) context;
-
+        Paper.init(context);
+        lang = Paper.book().read("lang", "ar");
 
     }
 
@@ -51,7 +55,7 @@ public class NeigboorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
-
+        myHolder.binding.setLang(lang);
         myHolder.binding.rbChoose1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean ischecked) {

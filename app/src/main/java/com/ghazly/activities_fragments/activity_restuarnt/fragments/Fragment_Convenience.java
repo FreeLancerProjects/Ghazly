@@ -80,7 +80,8 @@ public class Fragment_Convenience extends Fragment implements OnMapReadyCallback
     private MenuImagesAdapter menuImagesAdapter;
     private List<SingleRestaurantModel.MenuImages> menuImagesList;
     private Marker marker;
-    private float zoom = 15.0f;
+    private float zoom = 6.0f;
+
     public static Fragment_Convenience newInstance() {
         return new Fragment_Convenience();
     }
@@ -97,15 +98,15 @@ public class Fragment_Convenience extends Fragment implements OnMapReadyCallback
 
     private void initView() {
         activity = (RestuarnantActivity) getActivity();
-menuImagesList=new ArrayList<>();
-restaurantImages=new ArrayList<>();
+        menuImagesList = new ArrayList<>();
+        restaurantImages = new ArrayList<>();
 
         restaurnantImagesAdapter = new RestaurnantImagesAdapter(restaurantImages, activity);
         menuImagesAdapter = new MenuImagesAdapter(menuImagesList, activity);
 
-        binding.recViewimages.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL,true));
+        binding.recViewimages.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, true));
         binding.recViewimages.setAdapter(menuImagesAdapter);
-        binding.recViewres.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL,true));
+        binding.recViewres.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, true));
         binding.recViewres.setAdapter(restaurnantImagesAdapter);
     }
 
@@ -123,15 +124,18 @@ restaurantImages=new ArrayList<>();
             mMap = googleMap;
             mMap.setTrafficEnabled(false);
             mMap.setBuildingsEnabled(false);
-            mMap.setIndoorEnabled(true);
-if(singleRestaurantModel!=null){
-            AddMarker();}
+            mMap.setIndoorEnabled(false);
+            if (singleRestaurantModel != null) {
+                if (singleRestaurantModel.getBranchs() != null && singleRestaurantModel.getBranchs().size() > 0) {
+                    updateDataMapUI(singleRestaurantModel.getBranchs());
+                } else {
+                    addMarker();
+                }
+            }
         }
     }
 
-    private void AddMarker() {
-
-
+    private void addMarker() {
 
 
         if (marker == null) {
@@ -146,18 +150,52 @@ if(singleRestaurantModel!=null){
 
     }
 
+    private void updateDataMapUI(List<SingleRestaurantModel.Branchs> data) {
+        if (data.size() > 0) {
+            for (SingleRestaurantModel.Branchs adModel : data) {
+                addMarker(adModel);
+            }
+
+            if (marker == null) {
+                marker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(singleRestaurantModel.getLatitude()), Double.parseDouble(singleRestaurantModel.getLongitude()))).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(singleRestaurantModel.getLatitude()), Double.parseDouble(singleRestaurantModel.getLongitude())), zoom));
+            } else {
+                marker.setPosition(new LatLng(Double.parseDouble(singleRestaurantModel.getLatitude()), Double.parseDouble(singleRestaurantModel.getLongitude())));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(singleRestaurantModel.getLatitude()), Double.parseDouble(singleRestaurantModel.getLongitude())), zoom));
+
+
+            }
+        } else {
+            addMarker();
+        }
+    }
+
+
+    private void addMarker(SingleRestaurantModel.Branchs branchs) {
+        IconGenerator iconGenerator = new IconGenerator(activity);
+        iconGenerator.setContentPadding(15, 15, 15, 15);
+        // iconGenerator.setTextAppearance(R.style.iconGenText);
+        iconGenerator.setBackground(getResources().getDrawable(R.drawable.ic_map));
+        // iconGenerator.setBackground(ContextCompat.getDrawable(activity, android:R.drawable.ic_map));
+       // iconGenerator.setColor(R.color.black);
+        Marker marker;
+
+
+        marker = mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(branchs.getLatitude()), Double.parseDouble(branchs.getLongitude()))).icon(BitmapDescriptorFactory.fromBitmap(iconGenerator.makeIcon())));
+
+
+        marker.setTag(branchs);
+    }
 
     public void setdata(SingleRestaurantModel body) {
         this.singleRestaurantModel = body;
         binding.setModel(singleRestaurantModel);
-        if (mMap != null) {
-            AddMarker();
-        }
-        if(singleRestaurantModel.getMenu_images()!=null){
+
+        if (singleRestaurantModel.getMenu_images() != null) {
             menuImagesList.addAll(singleRestaurantModel.getMenu_images());
             menuImagesAdapter.notifyDataSetChanged();
         }
-        if(singleRestaurantModel.getRestaurant_images()!=null){
+        if (singleRestaurantModel.getRestaurant_images() != null) {
             restaurantImages.addAll(singleRestaurantModel.getRestaurant_images());
             restaurnantImagesAdapter.notifyDataSetChanged();
         }

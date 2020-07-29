@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.paperdb.Paper;
 
 
 public class UI_General_Method {
@@ -40,7 +41,37 @@ public class UI_General_Method {
 
         }
     }
+    @BindingAdapter({"order_date"})
+    public static void date_time(TextView textView,long date)
+    {
+        Paper.init(textView.getContext());
+        String lang = Paper.book().read("lang","ar");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", new Locale(lang));
+        String d = dateFormat.format(new Date(date*1000));
 
+
+
+        textView.setText(d);
+    }
+//    @BindingAdapter({"order_status"})
+//    public static void orderStatus(TextView textView, String status, String pay_type) {
+//       if (status.equals("new_order")) {
+//            textView.setText(textView.getContext().getString(R.string.new_order));
+//        } else if (status.equals("driver_accept")) {
+//            textView.setText(textView.getContext().getString(R.string.accepted));
+//
+//        } else if (status.equals("driver_delivery")) {
+//            textView.setText(textView.getContext().getString(R.string.in_way));
+//
+//        } else if (status.equals("driver_refuser")) {
+//            textView.setText(textView.getContext().getString(R.string.refused));
+//
+//        } else if (status.equals("driver_end")) {
+//            textView.setText(textView.getContext().getString(R.string.completed));
+//
+//        }
+//
+//    }
 
     @BindingAdapter("image")
     public static void image(View view,String endPoint)

@@ -1,6 +1,7 @@
 package com.ghazly.activities_fragments.activity_contactus;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,6 +23,7 @@ import com.ghazly.interfaces.Listeners;
 import com.ghazly.language.Language;
 import com.ghazly.models.SettingModel;
 import com.ghazly.remote.Api;
+import com.ghazly.share.Common;
 import com.ghazly.tags.Tags;
 
 import java.io.IOException;
@@ -55,12 +57,15 @@ public class ContactusActivity extends AppCompatActivity implements Listeners.Ba
     }
 
     private void getAppData() {
-
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
         Api.getService(Tags.base_url)
                 .getSetting()
                 .enqueue(new Callback<SettingModel>() {
                     @Override
                     public void onResponse(Call<SettingModel> call, Response<SettingModel> response) {
+                        dialog.dismiss();
                         if (response.isSuccessful() && response.body() != null) {
 
                             twitter = response.body().getSettings().getTwitter();
@@ -92,7 +97,7 @@ public class ContactusActivity extends AppCompatActivity implements Listeners.Ba
                     @Override
                     public void onFailure(Call<SettingModel> call, Throwable t) {
                         try {
-
+                            dialog.dismiss();
                             if (t.getMessage() != null) {
                                 Log.e("error", t.getMessage());
                                 if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
@@ -143,7 +148,7 @@ public class ContactusActivity extends AppCompatActivity implements Listeners.Ba
     @Override
     public void call() {
         if (phone != null) {
-            intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "+9200 03450", null));
+            intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
 
             if (intent != null) {
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

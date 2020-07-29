@@ -67,6 +67,7 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
     private List<ChooseFoodListModel> chooseFoodListModels;
     private CreateOrderModel createOrderModel;
     private double price;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -344,12 +345,17 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
     @Override
     public void back() {
 
-        Intent intent=getIntent();
+        Intent intent = getIntent();
         intent.putExtra("data", createOrderModel);
         setResult(RESULT_OK, intent);
         finish();
-        finish();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        back();
     }
 
     public void setitemData(String s) {
@@ -359,7 +365,7 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
 
     public void showdetials(FoodListModel.Data data) {
         Intent intent = new Intent(FoodListActivity.this, FoodDetialsActivity.class);
-        intent.putExtra("food", data);
+        intent.putExtra("data", data);
         startActivityForResult(intent, 1);
     }
 
@@ -367,16 +373,23 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            ChooseFoodListModel chooseFoodListModel = null;
             if (data.getSerializableExtra("data") != null) {
-                chooseFoodListModels.add((ChooseFoodListModel) data.getSerializableExtra("data"));
+                chooseFoodListModel = (ChooseFoodListModel) data.getSerializableExtra("data");
             }
-          ChooseFoodListModel chooseFoodListModel=  (ChooseFoodListModel)data.getSerializableExtra("data");
-            price=Double.parseDouble(chooseFoodListModel.getPrice());
-            createOrderModel.setFoods(chooseFoodListModels);
-            if(createOrderModel.getTotal_price()!=null){
-            price+=Double.parseDouble(createOrderModel.getTotal_price());}
+            Log.e("ldlldl", chooseFoodListModel.getPrice());
+            if (chooseFoodListModel != null) {
+                chooseFoodListModels.add(chooseFoodListModel);
+                price = Double.parseDouble(chooseFoodListModel.getPrice());
 
-            createOrderModel.setTotal_price(price+"");
+                createOrderModel.setFoods(chooseFoodListModels);
+                if (createOrderModel.getTotal_price() != null) {
+                    price += Double.parseDouble(createOrderModel.getTotal_price());
+                }
+
+
+                createOrderModel.setTotal_price(price + "");
+            }
 
         }
     }

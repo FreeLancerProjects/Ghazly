@@ -132,7 +132,7 @@ if(ids.contains(snaksList.get(i).getId())){
     private void getDataFromIntent() {
         Intent intent = getIntent();
         if (intent != null) {
-            fData = (FoodListModel.Data) intent.getSerializableExtra("food");
+            fData = (FoodListModel.Data) intent.getSerializableExtra("data");
 
         }
     }

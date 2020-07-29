@@ -84,7 +84,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     private NeigboorAdapter neigboorAdapter;
     private List<NeigboorModel.Data> neigboormodels;
     private LinearLayoutManager manager;
-    private String category_id = "all", cityid="all", niegboorid="all";
+    private String category_id = "all", cityid = "all", niegboorid = "all";
 
     private int current_page = 1;
     private boolean isLoading = false;
@@ -107,7 +107,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     private void initView() {
         categoryDataModelDataList = new ArrayList<>();
         reDataList = new ArrayList<>();
-        neigboormodels = new ArrayList<>();
+        citiesmodles = new ArrayList<>();
         neigboormodels = new ArrayList<>();
         fragmentManager = getSupportFragmentManager();
         preferences = Preferences.getInstance();
@@ -445,6 +445,66 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
         }
 
     }
+    public int like_dislike(SingleRestaurantModel productModel, int pos) {
+        if (userModel != null) {
+            try {
+                Api.getService(Tags.base_url)
+                        .addFavoriteProduct(userModel.getUser().getToken(), productModel.getId() + "",userModel.getUser().getId()+"")
+                        .enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if (response.isSuccessful()) {
+
+                                    getRestaurant();
+                                } else {
+
+
+                                    if (response.code() == 500) {
+                                        Toast.makeText(HomeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+
+
+                                    } else {
+                                        Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+                                        try {
+
+                                            Log.e("error", response.code() + "_" + response.errorBody().string());
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                try {
+
+                                    if (t.getMessage() != null) {
+                                        Log.e("error", t.getMessage());
+                                        if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                            Toast.makeText(HomeActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(HomeActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                } catch (Exception e) {
+                                }
+                            }
+                        });
+            } catch (Exception e) {
+
+            }
+            return 1;
+
+        } else {
+
+           // Common.CreateDialogAlert(activity, getString(R.string.please_sign_in_or_sign_up));
+            return 0;
+
+        }
+    }
 
     private void updateTokenFireBase() {
 
@@ -536,8 +596,12 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
 
     @Override
     public void order() {
+        if(userModel!=null){
         Intent intent = new Intent(this, MyOrderActivity.class);
-        startActivity(intent);
+        startActivity(intent);}
+        else {
+
+        }
     }
 
     @Override
@@ -610,17 +674,16 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
         dialog.setCanceledOnTouchOutside(false);
         dialog.setView(binding.getRoot());
         dialog.show();
-        getcities(binding);
+        getcities();
     }
 
-    private void getcities(DialogCitiesBinding binding) {
-        binding.progBar.setVisibility(View.VISIBLE);
+    private void getcities() {
         Api.getService(Tags.base_url)
                 .getMainCities()
                 .enqueue(new Callback<CityModel>() {
                     @Override
                     public void onResponse(Call<CityModel> call, Response<CityModel> response) {
-                        binding.progBar.setVisibility(View.GONE);
+                        //  binding.progBar.setVisibility(View.GONE);
                         if (response.isSuccessful()) {
                             citiesmodles.clear();
                             citiesmodles.addAll(response.body().getData());
@@ -635,7 +698,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
 
 
                         } else {
-                            binding.progBar.setVisibility(View.GONE);
+                            //    binding.progBar.setVisibility(View.GONE);
 
                             try {
                                 Log.e("errorNotCode", response.code() + "__" + response.errorBody().string());
@@ -654,7 +717,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
                     @Override
                     public void onFailure(Call<CityModel> call, Throwable t) {
                         try {
-                            binding.progBar.setVisibility(View.GONE);
+                            //  binding.progBar.setVisibility(View.GONE);
 
                             if (t.getMessage() != null) {
                                 Log.e("error_not_code", t.getMessage() + "__");
@@ -732,6 +795,6 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     }
 
     public void setniegboor(String neighbor_id) {
-        this.niegboorid=neighbor_id;
+        this.niegboorid = neighbor_id;
     }
 }

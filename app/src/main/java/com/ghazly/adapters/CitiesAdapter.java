@@ -19,8 +19,11 @@ import com.ghazly.models.SingleRestaurantModel;
 
 import java.util.List;
 
+import io.paperdb.Paper;
+
 public class CitiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private final String lang;
     private List<CityModel.Data> list;
     private Context context;
     private LayoutInflater inflater;
@@ -32,7 +35,8 @@ public class CitiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.context = context;
         inflater = LayoutInflater.from(context);
         homeActivity = (HomeActivity) context;
-
+        Paper.init(context);
+        lang = Paper.book().read("lang", "ar");
 
     }
 
@@ -52,7 +56,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
-
+        myHolder.binding.setLang(lang);
         myHolder.binding.rbChoose1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean ischecked) {

@@ -208,7 +208,16 @@ public class RestuarnantActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             if (data.getSerializableExtra("data") != null) {
-                createOrderModel = (CreateOrderModel) data.getSerializableExtra("data");
+                if (createOrderModel == null) {
+                    createOrderModel = (CreateOrderModel) data.getSerializableExtra("data");
+
+
+                } else {
+                    CreateOrderModel createOrderModel1 = (CreateOrderModel) data.getSerializableExtra("data");
+                    createOrderModel.setFoods(createOrderModel1.getFoods());
+                    createOrderModel.setTotal_price((Double.parseDouble(createOrderModel1.getTotal_price()) + Double.parseDouble(createOrderModel.getTotal_price())) + "");
+                }
+                Log.e("ldlld", createOrderModel.getFoods().get(0).getAmount());
             }
         } else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
             if (data.getSerializableExtra("data") != null) {
@@ -221,6 +230,8 @@ public class RestuarnantActivity extends AppCompatActivity {
                     createOrderModel.setDrinks(createOrderModel1.getDrinks());
                     createOrderModel.setTotal_price((Double.parseDouble(createOrderModel1.getTotal_price()) + Double.parseDouble(createOrderModel.getTotal_price())) + "");
                 }
+                Log.e("ldlld", createOrderModel.getTotal_price());
+
             }
         }
     }
@@ -238,23 +249,25 @@ public class RestuarnantActivity extends AppCompatActivity {
     }
 
     public void checkdata(int numchild, int numpeople) {
-        if (family != null && session != null && date != null&&time!=null) {
+
+        if (family != null && session != null && date != null && time != null) {
+            Log.e("fllflfl", date + "  " + time);
             if (createOrderModel == null) {
                 createOrderModel = new CreateOrderModel();
                 createOrderModel.setBranch_id(branchid);
+                createOrderModel.setTotal_price("0");
                 createOrderModel.setNumber_of_child(numchild + "");
                 createOrderModel.setNumber_of_person(numpeople + "");
                 createOrderModel.setSession_type(family);
                 createOrderModel.setSession_place(session);
                 createOrderModel.setRestaurant_id(restaurand_id);
                 createOrderModel.setOrder_date(date);
-                createOrderModel.setOrder_time(time);
+                createOrderModel.setOrder_time(time + ":00");
                 Intent intent = new Intent(RestuarnantActivity.this, CompleteOrderActivity.class);
                 intent.putExtra("data", createOrderModel);
                 startActivityForResult(intent, 3);
                 finish();
-            }
-            else {
+            } else {
                 createOrderModel.setBranch_id(branchid);
                 createOrderModel.setNumber_of_child(numchild + "");
                 createOrderModel.setNumber_of_person(numpeople + "");
@@ -262,7 +275,7 @@ public class RestuarnantActivity extends AppCompatActivity {
                 createOrderModel.setSession_place(session);
                 createOrderModel.setRestaurant_id(restaurand_id);
                 createOrderModel.setOrder_date(date);
-                createOrderModel.setOrder_time(time);
+                createOrderModel.setOrder_time(time + ":00");
                 Intent intent = new Intent(RestuarnantActivity.this, CompleteOrderActivity.class);
                 intent.putExtra("data", createOrderModel);
                 startActivityForResult(intent, 3);
@@ -282,6 +295,9 @@ public class RestuarnantActivity extends AppCompatActivity {
             if (time == null) {
                 Toast.makeText(RestuarnantActivity.this, getResources().getString(R.string.Choose_time), Toast.LENGTH_LONG).show();
             }
+//            if (branchid == null) {
+//                Toast.makeText(RestuarnantActivity.this, getResources().getString(R.string.please_choose_the_required_branch), Toast.LENGTH_LONG).show();
+//            }
         }
     }
 
@@ -296,6 +312,6 @@ public class RestuarnantActivity extends AppCompatActivity {
     }
 
     public void settime(String title) {
-        time=title;
+        time = title;
     }
 }

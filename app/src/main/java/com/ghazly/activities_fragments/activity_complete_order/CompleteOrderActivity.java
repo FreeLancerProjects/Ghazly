@@ -6,10 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -110,14 +114,19 @@ public class CompleteOrderActivity extends AppCompatActivity implements Listener
         binding.btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                createOrderModel.setUser_id(userModel.getUser().getId() + "");
+
                 String copun = binding.edtcopun.getText().toString();
-                if (TextUtils.isEmpty(copun)) {
+                if (!TextUtils.isEmpty(copun)) {
+                    SendCoupon(copun);
 
                 } else {
+                    if (userModel != null) {
+                        createOrder();
+                    } else {
 
+                    }
                 }
-                createOrderModel.setUser_id(userModel.getUser().getId() + "");
-                createOrder();
             }
         });
     }
@@ -128,8 +137,84 @@ public class CompleteOrderActivity extends AppCompatActivity implements Listener
         finish();
     }
 
+    private void SendCoupon(String coupon) {
+        final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .getCouponValue(userModel.getUser().getToken(), coupon)
+                .enqueue(new Callback<UserModel>() {
+                    @Override
+                    public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+
+                            createOrderModel.setCoupon_id(response.body().getData().getId() + "");
+                            createOrder();
+                        } else {
+                            try {
+                                Log.e("error_code", response.code() + "_" + response.errorBody().string());
+                            } catch (Exception e) {
+                            }
+
+                            if (response.code() == 406) {
+                                CreateAlertDialog(getString(R.string.coupon_not_found));
+                            } else {
+                                Toast.makeText(CompleteOrderActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+
+
+                            }
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserModel> call, Throwable t) {
+
+                        try {
+                            dialog.dismiss();
+                            Toast.makeText(CompleteOrderActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                            Log.e("Error", t.getMessage());
+                        } catch (Exception e) {
+                        }
+
+
+                    }
+                });
+
+
+    }
+
+    public void CreateAlertDialog(String msg) {
+        final AlertDialog dialog = new AlertDialog.Builder(this)
+                .setCancelable(true)
+                .create();
+
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_sign, null);
+        Button doneBtn = view.findViewById(R.id.doneBtn);
+        TextView tv_msg = view.findViewById(R.id.tv_msg);
+        TextView tv_title = view.findViewById(R.id.tv_title);
+        tv_title.setText(getString(R.string.app_name));
+        tv_msg.setText(msg);
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createOrder();
+                dialog.dismiss();
+            }
+        });
+
+//        dialog.getWindow().getAttributes().windowAnimations=R.style.dialog_congratulation_animation;
+        dialog.setCanceledOnTouchOutside(true);
+//        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
+        dialog.setView(view);
+        dialog.show();
+    }
+
     public void createOrder() {
         try {
+
             ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
             dialog.setCancelable(false);
             dialog.setCanceledOnTouchOutside(false);
@@ -137,9 +222,9 @@ public class CompleteOrderActivity extends AppCompatActivity implements Listener
 
      /*       createOrderModel.setOrder_date(addOrderModel.getDate());
             createOrderModel.setOrder_time(addOrderModel.getTime());*/
-
+            Log.e("jfhfh", userModel.getUser().getId() + "" + userModel.getUser().getToken());
             Api.getService(Tags.base_url)
-                    .createOrder("Bearer " + userModel.getUser().getToken(), createOrderModel)
+                    .createOrder(userModel.getUser().getToken(), createOrderModel)
                     .enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -25,7 +25,7 @@ public class SingleOrderModel implements Serializable {
     private String barcode_image;
     private String details;
     private Branches branches;
-    private Restuarant restuarant;
+    private Restuarant resturant;
     private List<FoodsModel> foods;
     private List<DrinkModel> drinks;
 
@@ -124,7 +124,7 @@ public class SingleOrderModel implements Serializable {
     }
 
     public Restuarant getRestuarant() {
-        return restuarant;
+        return resturant;
     }
 
     public class FoodsModel implements Serializable {

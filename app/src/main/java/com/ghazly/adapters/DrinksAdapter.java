@@ -60,6 +60,25 @@ public class DrinksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 }
             }
         });
+        myHolder.binding.imgIncrease.setOnClickListener(v -> {
+                    int count = Integer.parseInt(myHolder.binding.tvCounter.getText().toString()) + 1;
+                    myHolder.binding.tvCounter.setText(String.valueOf(count));
+
+                }
+
+        );
+        myHolder.binding.imgDecrease.setOnClickListener(v -> {
+                    int count = Integer.parseInt(myHolder.binding.tvCounter.getText().toString());
+                    if (count > 1) {
+                        count = count - 1;
+
+                        myHolder.binding.tvCounter.setText(String.valueOf(count));
+
+                    }
+                }
+
+        );
+
     }
 
     @Override
