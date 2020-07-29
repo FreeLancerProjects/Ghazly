@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ghazly.R;
 import com.ghazly.activities_fragments.activity_home.HomeActivity;
+import com.ghazly.activities_fragments.activity_restuarant_filter_result.RestuarantFilterActivity;
 import com.ghazly.databinding.LoadmoreRowBinding;
 import com.ghazly.databinding.RestaurantRowBinding;
 import com.ghazly.models.RestuarantModel;
@@ -28,13 +29,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private List<SingleRestaurantModel> list;
     private Context context;
     private LayoutInflater inflater;
-    private HomeActivity activity;
-
+    private HomeActivity homeActivity;
+private RestuarantFilterActivity restuarantFilterActivity;
     public RestaurantAdapter(List<SingleRestaurantModel> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
-        activity = (HomeActivity) context;
 
 
     }
@@ -64,16 +64,32 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             myHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    activity.setrestauant(list.get(holder.getLayoutPosition()).getId() + "");
+                    if(context instanceof  HomeActivity){
+                        homeActivity=(HomeActivity)context;
+                        homeActivity.setrestauant(list.get(holder.getLayoutPosition()).getId() + "");
+
+                    }
+                    else {
+                        restuarantFilterActivity=(RestuarantFilterActivity)context;
+                        restuarantFilterActivity.setrestauant(list.get(holder.getLayoutPosition()).getId() + "");
+
+                    }
                 }
             });
 
             myHolder.binding.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(context instanceof  HomeActivity) {
+                        homeActivity = (HomeActivity) context;
+                        homeActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
+                    }
+                    else {
+                        restuarantFilterActivity=(RestuarantFilterActivity)context;
 
-                    activity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
+                        restuarantFilterActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
 
+                    }
 
                 }
             });

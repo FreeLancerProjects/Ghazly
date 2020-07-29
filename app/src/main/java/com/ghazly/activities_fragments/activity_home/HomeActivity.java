@@ -29,6 +29,7 @@ import com.ghazly.activities_fragments.activity_contactus.ContactusActivity;
 import com.ghazly.activities_fragments.activity_login.LoginActivity;
 import com.ghazly.activities_fragments.activity_my_orders.MyOrderActivity;
 import com.ghazly.activities_fragments.activity_profile.ProfileActivity;
+import com.ghazly.activities_fragments.activity_restuarant_filter_result.RestuarantFilterActivity;
 import com.ghazly.activities_fragments.activity_restuarnt.RestuarnantActivity;
 import com.ghazly.adapters.CitiesAdapter;
 import com.ghazly.adapters.CountriesAdapter;
@@ -445,11 +446,12 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
         }
 
     }
+
     public int like_dislike(SingleRestaurantModel productModel, int pos) {
         if (userModel != null) {
             try {
                 Api.getService(Tags.base_url)
-                        .addFavoriteProduct(userModel.getUser().getToken(), productModel.getId() + "",userModel.getUser().getId()+"")
+                        .addFavoriteProduct(userModel.getUser().getToken(), productModel.getId() + "", userModel.getUser().getId() + "")
                         .enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -500,7 +502,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
 
         } else {
 
-           // Common.CreateDialogAlert(activity, getString(R.string.please_sign_in_or_sign_up));
+            // Common.CreateDialogAlert(activity, getString(R.string.please_sign_in_or_sign_up));
             return 0;
 
         }
@@ -596,10 +598,10 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
 
     @Override
     public void order() {
-        if(userModel!=null){
-        Intent intent = new Intent(this, MyOrderActivity.class);
-        startActivity(intent);}
-        else {
+        if (userModel != null) {
+            Intent intent = new Intent(this, MyOrderActivity.class);
+            startActivity(intent);
+        } else {
 
         }
     }
@@ -666,6 +668,11 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
         binding.btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
+                Intent intent = new Intent(HomeActivity.this, RestuarantFilterActivity.class);
+                intent.putExtra("cityid", cityid);
+                intent.putExtra("niegboorid", niegboorid);
+                startActivity(intent);
 
             }
         });

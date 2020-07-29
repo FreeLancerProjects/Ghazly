@@ -93,6 +93,19 @@ public interface Service {
 
 
     );
+    @GET("api/search-restaurant")
+    Call<RestuarantModel> getRestaurantfilter(
+            @Query("pagination") String pagination,
+            @Query("city_id") String city_id,
+            @Query("neighbor_id") String neighbor_id,
+            @Query("user_id") String user_id,
+            @Query("limit_per_page") String limit_per_page,
+            @Query("page") int page
+
+
+
+
+    );
     @GET("api/restaurant-food-by-dep")
     Call<FoodListModel> getFoodList(
             @Query("pagination") String pagination,

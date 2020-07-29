@@ -90,5 +90,6 @@
     <string name="notifications">الاشعارات</string>
     <string name="coupon_not_found">كود الخصم غير موجود هل تريد اكمال الطلب بدون الكوبون ؟</string>
     <string name="ok">نعم</string>
+    <string name="restaurants">Restaurants</string>
 
 </resources>

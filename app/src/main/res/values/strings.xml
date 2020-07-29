@@ -90,5 +90,6 @@
     <string name="notifications">Notifications</string>
     <string name="coupon_not_found">Coupon Not Found Are You Want to Complete Order?</string>
     <string name="ok">ok</string>
+    <string name="restaurants">Restaurants</string>
 
 </resources>
