@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ghazly.activities_fragments.activity_about_app.AboutAppActivity;
 import com.ghazly.activities_fragments.activity_contactus.ContactusActivity;
 import com.ghazly.activities_fragments.activity_login.LoginActivity;
+import com.ghazly.activities_fragments.activity_my_favorite.MyFavoriteActivity;
 import com.ghazly.activities_fragments.activity_my_orders.MyOrderActivity;
 import com.ghazly.activities_fragments.activity_profile.ProfileActivity;
 import com.ghazly.activities_fragments.activity_restuarant_filter_result.RestuarantFilterActivity;
@@ -622,8 +623,12 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
 
     @Override
     public void profile() {
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivityForResult(intent, 100);
+        if(userModel!=null) {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivityForResult(intent, 100);
+        }
+    else {
+    }
     }
 
     @Override
@@ -635,6 +640,21 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     @Override
     public void citydialog() {
         CreatefilterAlert();
+    }
+
+    @Override
+    public void favourite() {
+        if(userModel!=null){
+        Intent intent = new Intent(this, MyFavoriteActivity.class);
+        startActivity(intent);}
+        else {
+
+        }
+    }
+
+    @Override
+    public void search() {
+
     }
 
     @Override

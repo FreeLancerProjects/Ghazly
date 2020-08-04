@@ -17,7 +17,7 @@
 
         <variable
             name="model"
-            type="com.ghazly.models.FoodListModel.Data" />
+            type="com.ghazly.models.SingleRestaurantModel.Drinks" />
 
         <import type="android.view.View" />
 

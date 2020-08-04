@@ -29,6 +29,8 @@ public interface Listeners {
 
         void contactus();
         void citydialog();
+        void favourite();
+        void search();
     }
 
     interface RestaurantActions {

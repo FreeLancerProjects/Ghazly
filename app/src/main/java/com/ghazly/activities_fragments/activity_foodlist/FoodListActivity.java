@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -32,6 +34,7 @@ import com.ghazly.models.CreateOrderModel;
 import com.ghazly.models.FoodListModel;
 import com.ghazly.models.RestuarantDepartmentModel;
 import com.ghazly.models.FoodListModel;
+import com.ghazly.models.SingleFoodModel;
 import com.ghazly.models.UserModel;
 import com.ghazly.preferences.Preferences;
 import com.ghazly.remote.Api;
@@ -59,7 +62,7 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
     private List<RestuarantDepartmentModel.Data> resDataList;
     private String restaurand_id;
     private FoodListAdapter foodListAdapter;
-    private List<FoodListModel.Data> fooDataList;
+    private List<SingleFoodModel> fooDataList;
     private LinearLayoutManager manager2;
     private String category_id = "all";
     private int current_page = 1;
@@ -67,6 +70,7 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
     private List<ChooseFoodListModel> chooseFoodListModels;
     private CreateOrderModel createOrderModel;
     private double price;
+    private String query = "all";
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -113,6 +117,16 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
         binding.recView.setLayoutManager(manager2);
         binding.recView.setAdapter(foodListAdapter);
         getFoodlist();
+        binding.imSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(binding.llsearch.getVisibility()==View.VISIBLE){
+                binding.llsearch.setVisibility(View.GONE);}
+                else {
+                    binding.llsearch.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -133,6 +147,35 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
                 }
             }
         });
+        binding.edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.toString().length() > 0) {
+                    query = editable.toString();
+
+                    getFoodlist();
+                    binding.progBar.setVisibility(View.GONE);
+                    binding.recView.setVisibility(View.VISIBLE);
+                } else {
+                    query = "";
+                    //productModelList.clear();
+                    //searchAdapter.notifyDataSetChanged();
+
+
+                }
+            }
+        });
+
     }
 
     private void getMainCategory() {
@@ -203,18 +246,18 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
         try {
 
             Api.getService(Tags.base_url)
-                    .getFoodList("on", category_id, restaurand_id + "", "20", current_page)
+                    .getFoodList("on", category_id, restaurand_id + "", "20", current_page, query)
                     .enqueue(new Callback<FoodListModel>() {
                         @Override
                         public void onResponse(Call<FoodListModel> call, Response<FoodListModel> response) {
                             binding.progBar.setVisibility(View.GONE);
-                            try {
-                                Log.e("rrrkkr", restaurand_id + category_id + response.body().getData().get(0).getTitle());
-
-
-                            } catch (Exception e) {
-
-                            }
+//                            try {
+//                                Log.e("rrrkkr", restaurand_id + category_id + response.body().getData().get(0).getTitle());
+//
+//
+//                            } catch (Exception e) {
+//
+//                            }
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                                 fooDataList.clear();
                                 fooDataList.addAll(response.body().getData());
@@ -274,7 +317,7 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
         try {
 
             Api.getService(Tags.base_url)
-                    .getFoodList("on", category_id, restaurand_id + "", "20", current_page)
+                    .getFoodList("on", category_id, restaurand_id + "", "20", page, query)
                     .enqueue(new Callback<FoodListModel>() {
                         @Override
                         public void onResponse(Call<FoodListModel> call, Response<FoodListModel> response) {
@@ -363,7 +406,7 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
         getFoodlist();
     }
 
-    public void showdetials(FoodListModel.Data data) {
+    public void showdetials(SingleFoodModel data) {
         Intent intent = new Intent(FoodListActivity.this, FoodDetialsActivity.class);
         intent.putExtra("data", data);
         startActivityForResult(intent, 1);

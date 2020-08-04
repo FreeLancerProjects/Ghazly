@@ -74,8 +74,8 @@
     <string name="resend">اعادة ارسال</string>
     <string name="number_of_branches">عدد الفروع</string>
     <string name="calories">سعر حررارى</string>
-    <string name="internal_sessions">جلسات داخليه</string>
-    <string name="external_sessions">جلسات خارجيه</string>
+    <string name="in">جلسات داخليه</string>
+    <string name="out">جلسات خارجيه</string>
     <string name="foods">الاطعمه</string>
     <string name="choose_untill_2">اختار لغاية 2</string>
     <string name="ryal">R.S</string>
@@ -90,6 +90,17 @@
     <string name="notifications">الاشعارات</string>
     <string name="coupon_not_found">كود الخصم غير موجود هل تريد اكمال الطلب بدون الكوبون ؟</string>
     <string name="ok">نعم</string>
-    <string name="restaurants">Restaurants</string>
+    <string name="restaurants">مطاعم</string>
+    <string name="my_favourite">المفضله</string>
+    <string name="new_order">طلب جديد</string>
+    <string name="current">حالى</string>
+    <string name="restuarant_confirm">تم اتاكيد طلبك من المطعم</string>
+    <string name="completed">مكتمل</string>
+    <string name="amount">الكميه</string>
+    <string name="additions">الاضافات</string>
+    <string name="sar">ر.س</string>
+    <string name="status">الحاله</string>
+    <string name="date">التاريخ</string>
+    <string name="place_of_reservation">مكان الحجز </string>
 
 </resources>

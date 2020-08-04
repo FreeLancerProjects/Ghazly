@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.ghazly.models.FoodListModel.Data" />
+            type="com.ghazly.models.SingleFoodModel" />
 
 
         <import type="android.view.View" />
@@ -84,7 +84,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text='@{model.price+@string/calories}'
+                            android:text='@{model.price+@string/sar}'
                             android:textColor="@color/colorPrimary"
                             android:textSize="13sp" />
                     </LinearLayout>

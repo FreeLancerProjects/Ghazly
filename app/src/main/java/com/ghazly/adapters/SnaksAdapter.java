@@ -14,17 +14,18 @@ import com.ghazly.activities_fragments.activity_food_detials.FoodDetialsActivity
 import com.ghazly.databinding.ImagerestaurantRowBinding;
 import com.ghazly.databinding.SnaksRowBinding;
 import com.ghazly.models.FoodListModel;
+import com.ghazly.models.SingleFoodModel;
 import com.ghazly.models.SingleRestaurantModel;
 
 import java.util.List;
 
 public class SnaksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<FoodListModel.Data.Snaks> list;
+    private List<SingleFoodModel.Snaks> list;
     private Context context;
     private LayoutInflater inflater;
     private FoodDetialsActivity foodDetialsActivity;
-    public SnaksAdapter(List<FoodListModel.Data.Snaks> list, Context context) {
+    public SnaksAdapter(List<SingleFoodModel.Snaks> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);

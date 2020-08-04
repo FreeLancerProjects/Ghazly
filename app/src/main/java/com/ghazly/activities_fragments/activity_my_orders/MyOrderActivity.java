@@ -1,6 +1,5 @@
 package com.ghazly.activities_fragments.activity_my_orders;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -15,15 +14,15 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
 import com.ghazly.R;
+import com.ghazly.activities_fragments.activity_order_details.OrderDetailsActivity;
 import com.ghazly.adapters.OrderAdapter;
 import com.ghazly.databinding.ActivityMyOrdersBinding;
 import com.ghazly.interfaces.Listeners;
 import com.ghazly.language.Language;
-import com.ghazly.models.OrderModel;
+import com.ghazly.models.OrderDataModel;
 import com.ghazly.models.SingleOrderModel;
 import com.ghazly.models.UserModel;
 import com.ghazly.preferences.Preferences;
@@ -36,7 +35,6 @@ import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -110,9 +108,9 @@ public class MyOrderActivity extends AppCompatActivity implements Listeners.Back
 
             Api.getService(Tags.base_url)
                     .getOrders(userModel.getUser().getToken(), String.valueOf(userModel.getUser().getId()), "on",  1, 20)
-                    .enqueue(new Callback<OrderModel>() {
+                    .enqueue(new Callback<OrderDataModel>() {
                         @Override
-                        public void onResponse(Call<OrderModel> call, Response<OrderModel> response) {
+                        public void onResponse(Call<OrderDataModel> call, Response<OrderDataModel> response) {
                             binding.progBar.setVisibility(View.GONE);
 
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
@@ -144,7 +142,7 @@ public class MyOrderActivity extends AppCompatActivity implements Listeners.Back
                         }
 
                         @Override
-                        public void onFailure(Call<OrderModel> call, Throwable t) {
+                        public void onFailure(Call<OrderDataModel> call, Throwable t) {
                             try {
 
                                 binding.progBar.setVisibility(View.GONE);
@@ -176,9 +174,9 @@ public class MyOrderActivity extends AppCompatActivity implements Listeners.Back
 
             Api.getService(Tags.base_url)
                     .getOrders(userModel.getUser().getToken(), String.valueOf(userModel.getUser().getId()), "on",  page, 20)
-                    .enqueue(new Callback<OrderModel>() {
+                    .enqueue(new Callback<OrderDataModel>() {
                         @Override
-                        public void onResponse(Call<OrderModel> call, Response<OrderModel> response) {
+                        public void onResponse(Call<OrderDataModel> call, Response<OrderDataModel> response) {
                             isLoading = false;
                             orderModelList.remove(orderModelList.size()-1);
                             adapter.notifyItemRemoved(orderModelList.size()-1);
@@ -210,7 +208,7 @@ public class MyOrderActivity extends AppCompatActivity implements Listeners.Back
                         }
 
                         @Override
-                        public void onFailure(Call<OrderModel> call, Throwable t) {
+                        public void onFailure(Call<OrderDataModel> call, Throwable t) {
                             try {
                                 if (orderModelList.get(orderModelList.size()-1)==null)
                                 {
@@ -244,4 +242,9 @@ public class MyOrderActivity extends AppCompatActivity implements Listeners.Back
         finish();
     }
 
+    public void showdetials(SingleOrderModel singleOrderModel) {
+        Intent intent = new Intent(MyOrderActivity.this, OrderDetailsActivity.class);
+        intent.putExtra("data",singleOrderModel);
+        startActivity(intent);
+    }
 }

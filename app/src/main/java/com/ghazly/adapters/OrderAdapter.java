@@ -4,19 +4,19 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.ghazly.R;
+import com.ghazly.activities_fragments.activity_my_orders.MyOrderActivity;
 import com.ghazly.databinding.LoadmoreRowBinding;
 import com.ghazly.databinding.OrderRowBinding;
-import com.ghazly.models.OrderModel;
 import com.ghazly.models.SingleOrderModel;
 
 import java.util.List;
@@ -68,6 +68,15 @@ public class OrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 if(model.getDrinks()!=null){
    Log.e("lfllvl",model.getDrinks().get(0).getAmount());
 }
+holder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        if(context instanceof MyOrderActivity){
+            MyOrderActivity myOrderActivity=(MyOrderActivity)context;
+            myOrderActivity.showdetials(list.get(holder.getLayoutPosition()));
+        }
+    }
+});
 
         }else if (holder instanceof LoadHolder) {
             LoadHolder loadHolder = (LoadHolder) holder;

@@ -108,13 +108,17 @@
                             android:layout_marginRight="8dp"
                             android:padding="5dp"
                             android:src="@drawable/ic_search"
-                            android:tint="@color/white" />
+                            android:tint="@color/white"
+                            android:onClick="@{()->homelistner.search()}"
+
+                            />
 
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_marginTop="3dp"
                             android:padding="5dp"
+                            android:onClick="@{()->homelistner.favourite()}"
 
                             android:src="@drawable/ic_heart"
                             android:tint="@color/white" />

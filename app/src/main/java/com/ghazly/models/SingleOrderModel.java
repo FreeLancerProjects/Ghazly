@@ -15,7 +15,7 @@ public class SingleOrderModel implements Serializable {
     private String total_price;
     private String latitude;
     private String longitude;
-    private String order_date;
+    private long order_date;
     private String order_time;
     private String pay_type;
     private String number_of_person;
@@ -24,7 +24,7 @@ public class SingleOrderModel implements Serializable {
     private String session_type;
     private String barcode_image;
     private String details;
-    private Branches branches;
+    private Branches branch;
     private Restuarant resturant;
     private List<FoodsModel> foods;
     private List<DrinkModel> drinks;
@@ -74,7 +74,7 @@ public class SingleOrderModel implements Serializable {
         return longitude;
     }
 
-    public String getOrder_date() {
+    public long getOrder_date() {
         return order_date;
     }
 
@@ -119,11 +119,11 @@ public class SingleOrderModel implements Serializable {
         return drinks;
     }
 
-    public Branches getBranches() {
-        return branches;
+    public Branches getBranch() {
+        return branch;
     }
 
-    public Restuarant getRestuarant() {
+    public Restuarant getResturant() {
         return resturant;
     }
 

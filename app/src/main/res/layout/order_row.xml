@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="model"
             type="com.ghazly.models.SingleOrderModel" />
@@ -17,89 +18,54 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="3dp"
         app:contentPadding="7dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp"
-            >
+            android:padding="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
                 android:layout_marginTop="5dp"
-                >
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:text="@string/order_num"
                     android:singleLine="true"
-                    />
+                    android:text="@string/order_num"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:text='@{"#"+model.order_code}'
                     android:textColor="@color/gray4"
                     android:textSize="15sp"
-                    android:text='@{"#"+model.order_code}'
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:singleLine="true"
 
                     />
+
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="15sp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:singleLine="true"
                     android:text='@{model.total_price}'
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:singleLine="true"
-                    android:gravity="center"
-
-                    />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="5dp"
-                >
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    android:text="@{model.Restuarant.name}"
-                    android:singleLine="true"
-                    android:layout_weight="1"
-                    />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:textColor="@color/colorPrimary"
                     android:textSize="15sp"
-                    order_date='@{Long.parseLong(model.order_date)}'
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:singleLine="true"
-                    android:gravity="center"
 
                     />
-
 
 
             </LinearLayout>
@@ -107,21 +73,50 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
                 android:layout_marginTop="5dp"
-                >
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
                 <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:text="@{model.resturant.name}"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    order_date='@{model.order_date}'
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    order_status="@{model.order_status}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray8"
-                    android:textSize="15sp"
-                    android:text="@{model.order_status}"
                     android:singleLine="true"
-                    />
-
-
-
+                    android:textColor="@color/gray8"
+                    android:textSize="15sp" />
 
 
             </LinearLayout>

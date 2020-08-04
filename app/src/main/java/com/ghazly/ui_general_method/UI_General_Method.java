@@ -53,25 +53,22 @@ public class UI_General_Method {
 
         textView.setText(d);
     }
-//    @BindingAdapter({"order_status"})
-//    public static void orderStatus(TextView textView, String status, String pay_type) {
-//       if (status.equals("new_order")) {
-//            textView.setText(textView.getContext().getString(R.string.new_order));
-//        } else if (status.equals("driver_accept")) {
-//            textView.setText(textView.getContext().getString(R.string.accepted));
-//
-//        } else if (status.equals("driver_delivery")) {
-//            textView.setText(textView.getContext().getString(R.string.in_way));
-//
-//        } else if (status.equals("driver_refuser")) {
-//            textView.setText(textView.getContext().getString(R.string.refused));
-//
-//        } else if (status.equals("driver_end")) {
-//            textView.setText(textView.getContext().getString(R.string.completed));
-//
-//        }
-//
-//    }
+    @BindingAdapter({"order_status"})
+    public static void orderStatus(TextView textView, String status) {
+       if (status.equals("new ")) {
+            textView.setText(textView.getContext().getString(R.string.new_order));
+        } else if (status.equals("current ")) {
+            textView.setText(textView.getContext().getString(R.string.current));
+
+        } else if (status.equals("confirmed ")) {
+            textView.setText(textView.getContext().getString(R.string.restuarant_confirm));
+
+        }  else if (status.equals("end")) {
+            textView.setText(textView.getContext().getString(R.string.completed));
+
+        }
+
+    }
 
     @BindingAdapter("image")
     public static void image(View view,String endPoint)

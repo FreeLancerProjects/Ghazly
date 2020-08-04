@@ -74,8 +74,8 @@
     <string name="resend">Resend</string>
     <string name="number_of_branches">Branches Num :</string>
     <string name="calories">Calories</string>
-    <string name="internal_sessions">Internal sessions</string>
-    <string name="external_sessions">External sessions</string>
+    <string name="in">Internal sessions</string>
+    <string name="out">External sessions</string>
     <string name="foods">Foods</string>
     <string name="choose_untill_2">Choose Untill 2</string>
     <string name="ryal">R.S</string>
@@ -91,5 +91,16 @@
     <string name="coupon_not_found">Coupon Not Found Are You Want to Complete Order?</string>
     <string name="ok">ok</string>
     <string name="restaurants">Restaurants</string>
+    <string name="my_favourite">My Favourite</string>
+    <string name="new_order">New Order</string>
+    <string name="current">Current</string>
+    <string name="restuarant_confirm">Restaurant Confirmed</string>
+    <string name="completed">Completed</string>
+    <string name="amount">Amount</string>
+    <string name="additions">additions</string>
+    <string name="sar">SAR</string>
+    <string name="status">Status</string>
+    <string name="date">Date</string>
+    <string name="place_of_reservation">Place of reservation</string>
 
 </resources>

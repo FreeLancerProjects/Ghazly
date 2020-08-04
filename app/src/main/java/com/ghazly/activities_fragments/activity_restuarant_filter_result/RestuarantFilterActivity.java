@@ -16,16 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ghazly.R;
-import com.ghazly.activities_fragments.activity_home.HomeActivity;
 import com.ghazly.activities_fragments.activity_restuarnt.RestuarnantActivity;
-import com.ghazly.adapters.OrderAdapter;
 import com.ghazly.adapters.RestaurantAdapter;
+import com.ghazly.databinding.ActivityFilterResultBinding;
 import com.ghazly.databinding.ActivityMyOrdersBinding;
 import com.ghazly.interfaces.Listeners;
 import com.ghazly.language.Language;
-import com.ghazly.models.OrderModel;
 import com.ghazly.models.RestuarantModel;
-import com.ghazly.models.SingleOrderModel;
 import com.ghazly.models.SingleRestaurantModel;
 import com.ghazly.models.UserModel;
 import com.ghazly.preferences.Preferences;
@@ -44,7 +41,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RestuarantFilterActivity extends AppCompatActivity implements Listeners.BackListener {
-    private ActivityMyOrdersBinding binding;
+    private ActivityFilterResultBinding binding;
     private String lang;
 
     private RestaurantAdapter restaurantAdapter;
@@ -65,7 +62,7 @@ public class RestuarantFilterActivity extends AppCompatActivity implements Liste
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_my_orders);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_filter_result);
         getDataFromIntent();
         initView();
 
@@ -157,7 +154,7 @@ public class RestuarantFilterActivity extends AppCompatActivity implements Liste
 
                                     try {
 
-                                        Log.e("error", response.code() + "_" + response.errorBody().string());
+                                        Log.e("errorssss", response.code() + "_" + response.errorBody().string());
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
@@ -171,7 +168,7 @@ public class RestuarantFilterActivity extends AppCompatActivity implements Liste
                                 binding.progBar.setVisibility(View.GONE);
 
                                 if (t.getMessage() != null) {
-                                    Log.e("error", t.getMessage());
+                                    Log.e("errorsssss", t.getClass().toString());
                                     if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
                                         Toast.makeText(RestuarantFilterActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
                                     } else {

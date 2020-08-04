@@ -18,6 +18,7 @@ import com.ghazly.language.Language;
 import com.ghazly.models.ChooseFoodListModel;
 import com.ghazly.models.ChooseSnakListModel;
 import com.ghazly.models.FoodListModel;
+import com.ghazly.models.SingleFoodModel;
 import com.ghazly.models.UserModel;
 import com.ghazly.preferences.Preferences;
 
@@ -31,9 +32,9 @@ public class FoodDetialsActivity extends AppCompatActivity implements Listeners.
     private ActivityFoodDetailsBinding binding;
     private String lang;
     private SnaksAdapter snaksAdapter;
-    private List<FoodListModel.Data.Snaks> snaksList;
+    private List<SingleFoodModel.Snaks> snaksList;
     private List<ChooseSnakListModel> chooseSnakListModels;
-    private FoodListModel.Data fData;
+    private SingleFoodModel fData;
     private Preferences preferences;
     private UserModel userModel;
     private int amount = 1, snakamount = 0;
@@ -132,7 +133,7 @@ if(ids.contains(snaksList.get(i).getId())){
     private void getDataFromIntent() {
         Intent intent = getIntent();
         if (intent != null) {
-            fData = (FoodListModel.Data) intent.getSerializableExtra("data");
+            fData = (SingleFoodModel) intent.getSerializableExtra("data");
 
         }
     }
