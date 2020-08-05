@@ -417,15 +417,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@drawable/small_rounded_stroke_gray" />
+
                     <com.makeramen.roundedimageview.RoundedImageView
                         image="@{orderModel.barcode_image}"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        app:riv_corner_radius="10dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
-                        />
+                        app:riv_corner_radius="10dp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
