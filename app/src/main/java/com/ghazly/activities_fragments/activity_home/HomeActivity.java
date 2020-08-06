@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -715,6 +717,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
         DialogCitiesBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_cities, null, false);
         binding.recViewcities.setLayoutManager(new LinearLayoutManager(this));
         binding.recViewcities.setAdapter(citiesAdapter);
+
         binding.recViewneighboor.setLayoutManager(new LinearLayoutManager(this));
         binding.recViewneighboor.setAdapter(neigboorAdapter);
         binding.btnConfirm.setOnClickListener(new View.OnClickListener() {
@@ -729,7 +732,8 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
             }
         });
         //  dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
-        //dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.small_rounded_btn_white);
+        //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCanceledOnTouchOutside(false);
         dialog.setView(binding.getRoot());
         dialog.show();
