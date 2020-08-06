@@ -4,7 +4,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/small_rounded_btn_white"
+        >
 
         <TextView
             android:layout_width="match_parent"
@@ -17,10 +19,17 @@
             android:textSize="16sp"
 
             />
+        <View
+            android:layout_width="130dp"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary"
+            />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            >
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recViewcities"
@@ -50,6 +59,7 @@
             android:background="@color/colorPrimary" />
 
         <TextView
+            android:id="@+id/tvneigbour"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"
@@ -58,12 +68,18 @@
             android:text="@string/neighbourhood"
             android:textColor="@color/black"
             android:textSize="16sp"
-
-            />
-
+           />
+<View
+    android:layout_width="130dp"
+    android:layout_height="1dp"
+    android:background="@color/colorPrimary"
+    />
         <FrameLayout
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            >
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -96,6 +112,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/small_rounded_btn_primary"
             android:text="@string/done"
             android:textAllCaps="false"

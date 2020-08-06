@@ -19,10 +19,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.ghazly.R;
 import com.ghazly.activities_fragments.activity_restuarant_filter_result.RestuarantFilterActivity;
 import com.ghazly.activities_fragments.activity_restuarnt.RestuarnantActivity;
+import com.ghazly.adapters.FavouriteRestaurantAdapter;
 import com.ghazly.adapters.RestaurantAdapter;
 import com.ghazly.databinding.ActivityMyFavoriteBinding;
 import com.ghazly.interfaces.Listeners;
 import com.ghazly.language.Language;
+import com.ghazly.models.FavouriteRestuarantModel;
 import com.ghazly.models.RestuarantModel;
 import com.ghazly.models.SingleRestaurantModel;
 import com.ghazly.models.UserModel;
@@ -53,13 +55,12 @@ public class MyFavoriteActivity extends AppCompatActivity implements Listeners.B
    // private int selected_pos = -1;
     //p//rivate boolean isFavoriteChange = false;
    // private boolean isItemAdded = false;
-    private List<SingleRestaurantModel> favouriteDataList;
-    private RestaurantAdapter favouriteProduct_adapter;
+    private List<FavouriteRestuarantModel.Data> favouriteDataList;
+    private FavouriteRestaurantAdapter favouriteProduct_adapter;
 
     @Override
-    protected void attachBaseContext(Context newBase) {
-        Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Language.updateResources(base, Language.getLanguage(base)));
     }
 
     @Override
@@ -84,7 +85,7 @@ public class MyFavoriteActivity extends AppCompatActivity implements Listeners.B
 
         manager = new GridLayoutManager(this, 1);
         binding.recView.setLayoutManager(manager);
-        favouriteProduct_adapter = new RestaurantAdapter(favouriteDataList, this);
+        favouriteProduct_adapter = new FavouriteRestaurantAdapter(favouriteDataList, this);
         binding.recView.setAdapter(favouriteProduct_adapter);
 //        binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 //            @Override
@@ -113,11 +114,11 @@ public class MyFavoriteActivity extends AppCompatActivity implements Listeners.B
         intent.putExtra("restaurand_id", s);
         startActivity(intent);
     }
-    public int like_dislike(SingleRestaurantModel productModel, int pos) {
+    public int like_dislike(FavouriteRestuarantModel.Data productModel, int pos) {
         if (userModel != null) {
             try {
                 Api.getService(Tags.base_url)
-                        .addFavoriteProduct(userModel.getUser().getToken(), productModel.getId() + "", userModel.getUser().getId() + "")
+                        .addFavoriteProduct(userModel.getUser().getToken(), productModel.getRestaurant().getId() + "", userModel.getUser().getId() + "")
                         .enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -186,9 +187,9 @@ public class MyFavoriteActivity extends AppCompatActivity implements Listeners.B
             }
             Api.getService(Tags.base_url)
                     .getMyFavoriteProducts(userModel.getUser().getToken(), "off")
-                    .enqueue(new Callback<RestuarantModel>() {
+                    .enqueue(new Callback<FavouriteRestuarantModel>() {
                         @Override
-                        public void onResponse(Call<RestuarantModel> call, Response<RestuarantModel> response) {
+                        public void onResponse(Call<FavouriteRestuarantModel> call, Response<FavouriteRestuarantModel> response) {
                             binding.progBar.setVisibility(View.GONE);
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                                 favouriteDataList.clear();
@@ -219,7 +220,7 @@ public class MyFavoriteActivity extends AppCompatActivity implements Listeners.B
                         }
 
                         @Override
-                        public void onFailure(Call<RestuarantModel> call, Throwable t) {
+                        public void onFailure(Call<FavouriteRestuarantModel> call, Throwable t) {
                             try {
                                 binding.progBar.setVisibility(View.GONE);
 

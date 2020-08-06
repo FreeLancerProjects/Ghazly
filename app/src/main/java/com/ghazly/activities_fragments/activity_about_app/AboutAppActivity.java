@@ -35,9 +35,8 @@ public class AboutAppActivity extends AppCompatActivity implements Listeners.Bac
 
 
     @Override
-    protected void attachBaseContext(Context newBase) {
-        Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Language.updateResources(base, Language.getLanguage(base)));
     }
 
     @Override

@@ -55,9 +55,8 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
     private String phone;
     private String phone_code;
     @Override
-    protected void attachBaseContext(Context newBase) {
-        Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Language.updateResources(base, Language.getLanguage(base)));
     }
 
     @Override
@@ -122,7 +121,7 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .signup(signUpModel.getName(),phone,phone_code)
+                .signup(signUpModel.getName(),phone,phone_code.replace("+","00"))
                 .enqueue(new Callback<UserModel>() {
                     @Override
                     public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -133,7 +132,11 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
                             navigateToHomeActivity();
                         }else
                         {
-                            Log.e("nnnnnnnnnnnn",response.code()+"");
+                            try {
+                                Log.e("nnnnnnnnnnnn",phone_code+phone+response.code()+response.errorBody().string()+"");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             Log.e("555555",response.message());
                             if (response.code()==500)
                             {

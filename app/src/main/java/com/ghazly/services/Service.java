@@ -4,6 +4,7 @@ package com.ghazly.services;
 import com.ghazly.models.CategoryDataModel;
 import com.ghazly.models.CityModel;
 import com.ghazly.models.CreateOrderModel;
+import com.ghazly.models.FavouriteRestuarantModel;
 import com.ghazly.models.FoodListModel;
 import com.ghazly.models.NeigboorModel;
 import com.ghazly.models.OrderDataModel;
@@ -105,7 +106,7 @@ public interface Service {
     );
 
     @GET("api/my-favorites")
-    Call<RestuarantModel> getMyFavoriteProducts(
+    Call<FavouriteRestuarantModel> getMyFavoriteProducts(
             @Header("Authorization") String Authorization,
             @Query("pagination") String pagination
     )
@@ -168,5 +169,11 @@ public interface Service {
 
     );
 
+    @FormUrlEncoded
+    @POST("api/update-profile-client")
+    Call<UserModel> editprofile(
+            @Header("Authorization") String user_token,
+            @Field("name") String name
 
+    );
 }

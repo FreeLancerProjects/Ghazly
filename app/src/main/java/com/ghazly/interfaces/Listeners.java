@@ -31,6 +31,8 @@ public interface Listeners {
         void citydialog();
         void favourite();
         void search();
+        void arLang();
+        void enLang();
     }
 
     interface RestaurantActions {
@@ -55,5 +57,9 @@ public interface Listeners {
 
     }
 
+    interface EditprofileListener
+    {
+        void Editprofile(String name);
 
+    }
 }

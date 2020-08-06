@@ -55,10 +55,8 @@ public class CompleteOrderActivity extends AppCompatActivity implements Listener
     private ChooseFoodsAdapter chooseFoodsAdapter;
 
     @Override
-    protected void attachBaseContext(Context newBase) {
-        Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
-
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Language.updateResources(base, Language.getLanguage(base)));
     }
 
     private void getDataFromIntent() {
@@ -90,7 +88,9 @@ public class CompleteOrderActivity extends AppCompatActivity implements Listener
         chooseFoodListModelList = new ArrayList<>();
         if (createOrderModel.getFoods() != null) {
             chooseFoodListModelList.addAll(createOrderModel.getFoods());
+            Log.e("lldld",createOrderModel.getFoods().size()+"");
         }
+
         chooseFoodsAdapter = new ChooseFoodsAdapter(chooseFoodListModelList, this);
         binding.recViewfoods.setLayoutManager(new LinearLayoutManager(this));
         binding.recViewfoods.setAdapter(chooseFoodsAdapter);

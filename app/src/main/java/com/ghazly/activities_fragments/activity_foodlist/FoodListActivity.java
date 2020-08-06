@@ -71,12 +71,11 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
     private CreateOrderModel createOrderModel;
     private double price;
     private String query = "all";
+    private String title;
 
     @Override
-    protected void attachBaseContext(Context newBase) {
-        Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
-
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Language.updateResources(base, Language.getLanguage(base)));
     }
 
     @Override
@@ -107,6 +106,13 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
+        if(lang.equals("en")){
+            title="all";
+
+        }
+        else {
+            title="الكل";
+        }
         binding.setBackListener(this);
         manager2 = new LinearLayoutManager(this);
         manager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, true);
@@ -120,9 +126,9 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
         binding.imSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(binding.llsearch.getVisibility()==View.VISIBLE){
-                binding.llsearch.setVisibility(View.GONE);}
-                else {
+                if (binding.llsearch.getVisibility() == View.VISIBLE) {
+                    binding.llsearch.setVisibility(View.GONE);
+                } else {
                     binding.llsearch.setVisibility(View.VISIBLE);
                 }
             }
@@ -243,6 +249,10 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
         foodListAdapter.notifyDataSetChanged();
         binding.tvNoData.setVisibility(View.GONE);
         binding.progBar.setVisibility(View.VISIBLE);
+        if(title!= null){
+            binding.tvTitle.setText(title);
+            binding.tvTitle.setVisibility(View.VISIBLE);
+        }
         try {
 
             Api.getService(Tags.base_url)
@@ -262,7 +272,8 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
                                 fooDataList.clear();
                                 fooDataList.addAll(response.body().getData());
                                 if (fooDataList.size() > 0) {
-
+                                    binding.tvTitle.setText(title);
+                                    binding.tvTitle.setVisibility(View.VISIBLE);
                                     foodListAdapter.notifyDataSetChanged();
 
                                     binding.tvNoData.setVisibility(View.GONE);
@@ -397,12 +408,13 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+       // super.onBackPressed();
         back();
     }
 
-    public void setitemData(String s) {
+    public void setitemData(String s, String title) {
         category_id = s;
+        this.title = title;
         getFoodlist();
     }
 

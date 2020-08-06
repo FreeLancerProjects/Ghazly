@@ -26,9 +26,8 @@ public class SplashActivity extends AppCompatActivity {
     private Preferences preferences;
 
     @Override
-    protected void attachBaseContext(Context newBase) {
-        Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Language.updateResources(base, Language.getLanguage(base)));
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

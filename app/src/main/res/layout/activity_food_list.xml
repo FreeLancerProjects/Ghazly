@@ -95,8 +95,8 @@
 
                 <ImageView
                     android:id="@+id/imSearch"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginRight="8dp"
@@ -113,7 +113,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recViewdepart"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
 
 
@@ -197,43 +197,60 @@
 
         </LinearLayout>
 
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="8dp"
-            app:cardElevation="5dp">
+            app:cardElevation="5dp"
+            app:contentPadding="3dp"
+            >
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
-                >
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    />
-
-
-                <ProgressBar
-                    android:id="@+id/progBar"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_gravity="center" />
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@id/tvNoData"
+                    android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:visibility="gone" />
-            </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    >
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        />
+
+
+                    <ProgressBar
+                        android:id="@+id/progBar"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center" />
+
+                    <TextView
+                        android:id="@id/tvNoData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:visibility="gone" />
+                </FrameLayout>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
 

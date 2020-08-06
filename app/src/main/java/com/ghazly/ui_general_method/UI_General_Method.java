@@ -82,6 +82,7 @@ public class UI_General_Method {
 Log.e("lllll",Tags.IMAGE_URL+endPoint);
                 Picasso.get().load(Uri.parse(Tags.IMAGE_URL+endPoint)).into(imageView);
             }
+
         }else if (view instanceof RoundedImageView)
         {
             RoundedImageView imageView = (RoundedImageView) view;

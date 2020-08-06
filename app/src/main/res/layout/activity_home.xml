@@ -151,7 +151,7 @@
 
                                 <androidx.recyclerview.widget.RecyclerView
                                   android:id="@+id/recViewdepart"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="match_parent" />
 
 
@@ -248,6 +248,38 @@
                         android:gravity="center"
                         android:textColor="@color/white"
                         android:textSize="17sp" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnEn"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:background="@drawable/small_rounded_stroke_primarydark"
+                            android:onClick="@{()->homelistner.enLang()}"
+                            android:text="En"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+
+                            />
+
+                        <Button
+                            android:id="@+id/btnAr"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/small_rounded_btn_gray"
+                            android:onClick="@{()->homelistner.arLang()}"
+                            android:text="عربي"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+
+                            />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/llProfile"

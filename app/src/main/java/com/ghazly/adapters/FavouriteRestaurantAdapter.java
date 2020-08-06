@@ -17,18 +17,19 @@ import com.ghazly.activities_fragments.activity_home.HomeActivity;
 import com.ghazly.activities_fragments.activity_my_favorite.MyFavoriteActivity;
 import com.ghazly.activities_fragments.activity_restuarant_filter_result.RestuarantFilterActivity;
 import com.ghazly.activities_fragments.activity_search.SearchActivity;
+import com.ghazly.databinding.FavouriterestaurantRowBinding;
 import com.ghazly.databinding.LoadmoreRowBinding;
 import com.ghazly.databinding.RestaurantRowBinding;
-import com.ghazly.models.RestuarantModel;
+import com.ghazly.models.FavouriteRestuarantModel;
 import com.ghazly.models.SingleRestaurantModel;
 
 import java.util.List;
 
-public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class FavouriteRestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int DATA_ROW = 1;
     private final int LOAD_ROW = 2;
 
-    private List<SingleRestaurantModel> list;
+    private List<FavouriteRestuarantModel.Data> list;
     private Context context;
     private LayoutInflater inflater;
     private HomeActivity homeActivity;
@@ -36,7 +37,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private MyFavoriteActivity myFavoriteActivity;
     private SearchActivity searchActivity;
 
-    public RestaurantAdapter(List<SingleRestaurantModel> list, Context context) {
+    public FavouriteRestaurantAdapter(List<FavouriteRestuarantModel.Data> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -49,7 +50,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         if (viewType == DATA_ROW) {
-            RestaurantRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.restaurant_row, parent, false);
+            FavouriterestaurantRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.favouriterestaurant_row, parent, false);
             return new MyHolder(binding);
         } else {
             LoadmoreRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.loadmore_row, parent, false);
@@ -69,45 +70,40 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             myHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (context instanceof HomeActivity) {
-                        homeActivity = (HomeActivity) context;
-                        homeActivity.setrestauant(list.get(holder.getLayoutPosition()).getId() + "");
-
-                    } else if (context instanceof RestuarantFilterActivity) {
-                        restuarantFilterActivity = (RestuarantFilterActivity) context;
-                        restuarantFilterActivity.setrestauant(list.get(holder.getLayoutPosition()).getId() + "");
-
-                    } else if(context instanceof MyFavoriteActivity) {
+//
+                    if (context instanceof MyFavoriteActivity) {
                         myFavoriteActivity = (MyFavoriteActivity) context;
-                        myFavoriteActivity.setrestauant(list.get(holder.getLayoutPosition()).getId() + "");
+                        myFavoriteActivity.setrestauant(list.get(holder.getLayoutPosition()).getRestaurant().getId() + "");
                     }
-                    else {
-                        searchActivity = (SearchActivity) context;
-                        searchActivity.setrestauant(list.get(holder.getLayoutPosition()).getId() + "");
-                    }
+//                    else {
+//                        searchActivity = (SearchActivity) context;
+//                        searchActivity.setrestauant(list.get(holder.getLayoutPosition()).getRestaurant().getId() + "");
+//                    }
+//                }
                 }
             });
 
             myHolder.binding.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (context instanceof HomeActivity) {
-                        homeActivity = (HomeActivity) context;
-                        homeActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
-                    } else if (context instanceof RestuarantFilterActivity) {
-                        restuarantFilterActivity = (RestuarantFilterActivity) context;
-
-                        restuarantFilterActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
+//                    if (context instanceof HomeActivity) {
+//                        homeActivity = (HomeActivity) context;
+//                        homeActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
+//                    } else if (context instanceof RestuarantFilterActivity) {
+//                        restuarantFilterActivity = (RestuarantFilterActivity) context;
+//
+//                        restuarantFilterActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
+//
+//                    } else
+                    if (context instanceof MyFavoriteActivity) {
+                        myFavoriteActivity = (MyFavoriteActivity) context;
+                        myFavoriteActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
                     }
-//                    } else if(context instanceof MyFavoriteActivity){
-//                        myFavoriteActivity = (MyFavoriteActivity) context;
-//                        myFavoriteActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
+//                    else {
+//                        searchActivity = (SearchActivity) context;
+//                        searchActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
+//
 //                    }
-                    else {
-                        searchActivity = (SearchActivity) context;
-                        searchActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
-
-                    }
 
 
                 }
@@ -128,9 +124,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
-        public RestaurantRowBinding binding;
+        public FavouriterestaurantRowBinding binding;
 
-        public MyHolder(@NonNull RestaurantRowBinding binding) {
+        public MyHolder(@NonNull FavouriterestaurantRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
@@ -152,7 +148,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemViewType(int position) {
-        SingleRestaurantModel model = list.get(position);
+        FavouriteRestuarantModel.Data model = list.get(position);
         if (model == null) {
             return LOAD_ROW;
         } else {

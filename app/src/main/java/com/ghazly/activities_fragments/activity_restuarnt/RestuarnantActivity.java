@@ -30,6 +30,7 @@ import com.ghazly.activities_fragments.activity_restuarnt.fragments.Fragment_Con
 import com.ghazly.activities_fragments.drinks_activity.DrinksActivity;
 import com.ghazly.adapters.ViewPagerAdapter;
 import com.ghazly.databinding.ActivityRestuarantBinding;
+import com.ghazly.interfaces.Listeners;
 import com.ghazly.language.Language;
 import com.ghazly.models.ChooseFoodListModel;
 import com.ghazly.models.CreateOrderModel;
@@ -58,7 +59,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RestuarnantActivity extends AppCompatActivity {
+public class RestuarnantActivity extends AppCompatActivity  implements Listeners.BackListener {
     private ActivityRestuarantBinding binding;
     private Preferences preferences;
     private FragmentManager fragmentManager;
@@ -74,9 +75,9 @@ public class RestuarnantActivity extends AppCompatActivity {
     private SingleRestaurantModel singlrestaurantmodel;
     private String time;
 
-    protected void attachBaseContext(Context newBase) {
-        Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Language.updateResources(base, Language.getLanguage(base)));
     }
 
 
@@ -103,12 +104,13 @@ public class RestuarnantActivity extends AppCompatActivity {
         userModel = preferences.getUserData(this);
 
         Paper.init(this);
-        lang = Paper.book().read("lang", "ar");
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
 
 
         fragmentList = new ArrayList<>();
         title = new ArrayList<>();
+        binding.setBackListener(this);
         binding.tab.setupWithViewPager(binding.pager);
         binding.pager.setOffscreenPageLimit(2);
 
@@ -217,7 +219,7 @@ public class RestuarnantActivity extends AppCompatActivity {
                     createOrderModel.setFoods(createOrderModel1.getFoods());
                     createOrderModel.setTotal_price((Double.parseDouble(createOrderModel1.getTotal_price()) + Double.parseDouble(createOrderModel.getTotal_price())) + "");
                 }
-                Log.e("ldlld", createOrderModel.getFoods().get(0).getAmount());
+
             }
         } else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
             if (data.getSerializableExtra("data") != null) {
@@ -313,5 +315,10 @@ public class RestuarnantActivity extends AppCompatActivity {
 
     public void settime(String title) {
         time = title;
+    }
+
+    @Override
+    public void back() {
+        finish();
     }
 }

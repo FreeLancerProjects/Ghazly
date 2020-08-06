@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.ghazly.models.SingleRestaurantModel" />
+            type="com.ghazly.models.FavouriteRestuarantModel.Data" />
 
 
         <import type="android.view.View" />
@@ -37,7 +37,7 @@
 
 
                     <com.makeramen.roundedimageview.RoundedImageView
-                        image="@{model.logo}"
+                        image="@{model.restaurant.logo}"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         app:riv_corner_radius="10dp" />
@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:maxLines="1"
                         android:padding="5dp"
-                        android:text='@{model.name}'
+                        android:text='@{model.restaurant.name}'
                         android:textColor="@color/colorPrimary"
                         android:textSize="13sp" />
 
@@ -67,7 +67,7 @@
                         android:layout_height="wrap_content"
 
                         android:padding="5dp"
-                        android:text='@{model.foods}'
+                        android:text='@{model.restaurant.foods}'
                         android:textColor="@color/colorPrimary"
                         android:textSize="13sp"
 
@@ -140,7 +140,7 @@
                             android:layout_margin="3dp"
                             android:background="@drawable/small_rounded_btn_white"
                             android:padding="5dp"
-                            android:text="@{model.branch_data_count}"
+                            android:text="@{model.restaurant.branch_data_count}"
                             android:textSize="14sp" />
 
                     </LinearLayout>
@@ -151,7 +151,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_margin="3dp"
                         android:padding="3dp"
-                        android:text='@{model.city.ar_city_title+"/"+model.address.substring(0,9)}'
+                        android:text='@{model.restaurant.city.ar_city_title+"/"+model.restaurant.address.substring(0,9)}'
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp" />
                 </LinearLayout>

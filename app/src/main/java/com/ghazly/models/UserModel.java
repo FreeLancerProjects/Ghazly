@@ -36,6 +36,8 @@ public class UserModel implements Serializable {
         private String created_at;
         private String updated_at;
         private String token;
+        private String gender;
+        private String date_of_barth;
 
         public int getId() {
             return id;
@@ -119,6 +121,14 @@ public class UserModel implements Serializable {
 
         public String getToken() {
             return token;
+        }
+
+        public String getGender() {
+            return gender;
+        }
+
+        public String getDate_of_barth() {
+            return date_of_barth;
         }
     }
 

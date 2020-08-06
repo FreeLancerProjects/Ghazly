@@ -48,11 +48,9 @@ public class VerificationCodeActivity extends AppCompatActivity {
     private String smsCode ;
     private Preferences preferences;
 
-
     @Override
-    protected void attachBaseContext(Context newBase) {
-        Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Language.updateResources(base, Language.getLanguage(base)));
     }
 
     @Override
@@ -200,7 +198,7 @@ Log.e("gllgll",e.getMessage());
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .login(phone_code,phone)
+                .login(phone_code.replace("+","00"),phone)
                 .enqueue(new Callback<UserModel>() {
                     @Override
                     public void onResponse(Call<UserModel> call, Response<UserModel> response) {

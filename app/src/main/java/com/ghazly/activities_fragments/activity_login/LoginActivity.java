@@ -44,9 +44,8 @@ public class LoginActivity extends AppCompatActivity implements Listeners.LoginL
     private String phone_code = "+20";
 
     @Override
-    protected void attachBaseContext(Context newBase) {
-        Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Language.updateResources(base, Language.getLanguage(base)));
     }
 
     @Override
@@ -89,8 +88,8 @@ public class LoginActivity extends AppCompatActivity implements Listeners.LoginL
         binding.btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent intent =new Intent(LoginActivity.this, HomeActivity.class);
-              startActivity(intent);
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(intent);
             }
         });
     }

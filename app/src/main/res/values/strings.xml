@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="map_api_key">AIzaSyC4l5QxL27z4w0uuD_5X3g0IRhaUdvb0Q4</string>
-    <string name="app_name">Ghazly</string>
+    <string name="app_name">jahezly</string>
     <string name="phone">Phone</string>
     <string name="login">Login</string>
     <string name="skip">Skip</string>
@@ -102,5 +103,7 @@
     <string name="status">Status</string>
     <string name="date">Date</string>
     <string name="place_of_reservation">Place of reservation</string>
+    <string name="edit">Edit</string>
+    <string name="back">Back</string>
 
 </resources>

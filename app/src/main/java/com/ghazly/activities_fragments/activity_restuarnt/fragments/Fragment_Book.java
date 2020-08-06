@@ -291,9 +291,10 @@ public class Fragment_Book extends Fragment implements Listeners.RestaurantActio
         //order_time_calender.set(Calendar.DAY_OF_MONTH,dayOfMonth);
         //Log.e("kkkk", calendar.getTime().getMonth() + "");
         if (monthOfYear >= 9) {
-
+            binding.tvdate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
             activity.setdate(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
         } else {
+            binding.tvdate.setText(dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year);
             activity.setdate(dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year);
 
         }

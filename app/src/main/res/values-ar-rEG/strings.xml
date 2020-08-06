@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="map_api_key">AIzaSyC4l5QxL27z4w0uuD_5X3g0IRhaUdvb0Q4</string>
     <string name="app_name">جهزلى</string>
@@ -28,7 +29,7 @@
     <string name="birthday">تاريخ الميلاد</string>
     <string name="logout">تسجيل الخروج</string>
     <string name="list">قائمه</string>
-    <string name="addition">اضافه</string>
+    <string name="addition">اضافات</string>
     <string name="choose">اختر</string>
     <string name="choose_from_drinks">اختر من المشروبات</string>
     <string name="add">اضف</string>
@@ -78,10 +79,10 @@
     <string name="out">جلسات خارجيه</string>
     <string name="foods">الاطعمه</string>
     <string name="choose_untill_2">اختار لغاية 2</string>
-    <string name="ryal">R.S</string>
+    <string name="ryal">ر.س</string>
     <string name="Choose_session">اختر جلسات داخليه ام خارجيه</string>
     <string name="choose_family">اختر عائلات ام افراد</string>
-    <string name="Choose_date">Choose Date</string>
+    <string name="Choose_date">اختر التاريخ</string>
     <string name="not_av">غير متاح حاليا</string>
     <string name="Choose_time">اختر الوقت</string>
     <string name="complete">تنفيذ</string>
@@ -102,5 +103,7 @@
     <string name="status">الحاله</string>
     <string name="date">التاريخ</string>
     <string name="place_of_reservation">مكان الحجز </string>
+    <string name="edit">تعديل</string>
+    <string name="back">رجوع</string>
 
 </resources>

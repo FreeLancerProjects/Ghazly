@@ -107,7 +107,17 @@
                         android:textSize="15sp"
 
                         />
+                    <TextView
+                        android:id="@+id/tvdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/gray8"
+                        android:textSize="15sp"
 
+                        />
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"

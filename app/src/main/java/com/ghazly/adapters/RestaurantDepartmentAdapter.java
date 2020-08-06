@@ -24,6 +24,7 @@ public class RestaurantDepartmentAdapter extends RecyclerView.Adapter<RecyclerVi
     private Context context;
     private LayoutInflater inflater;
     private FoodListActivity homeActivity;
+    private int i = -1;
 
     public RestaurantDepartmentAdapter(List<RestuarantDepartmentModel.Data> list, Context context) {
         this.list = list;
@@ -52,8 +53,20 @@ public class RestaurantDepartmentAdapter extends RecyclerView.Adapter<RecyclerVi
         myHolder.binding.setModel(list.get(position));
 
         myHolder.itemView.setOnClickListener(view -> {
-            homeActivity.setitemData(list.get(holder.getLayoutPosition()).getDepartment().getId() + "");
+
+            i = myHolder.getLayoutPosition();
+            notifyDataSetChanged();
         });
+        if (i == position) {
+            homeActivity.setitemData(list.get(holder.getLayoutPosition()).getDepartment().getId() + "",list.get(holder.getLayoutPosition()).getDepartment().getTitle());
+            myHolder.binding.cons.setBackgroundColor(context.getResources().getColor(R.color.colorAccents));
+            myHolder.binding.tvName.setTextColor(context.getResources().getColor(R.color.colorPrimary));
+
+        } else {
+            myHolder.binding.cons.setBackgroundColor(context.getResources().getColor(R.color.white));
+            myHolder.binding.tvName.setTextColor(context.getResources().getColor(R.color.gray9));
+
+        }
     }
 
     @Override

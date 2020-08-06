@@ -1,6 +1,7 @@
 package com.ghazly.adapters;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -28,7 +29,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Context context;
     private LayoutInflater inflater;
     private HomeActivity homeActivity;
-    private int i = -1;
+    private int i = 0;
 
     public CitiesAdapter(List<CityModel.Data> list, Context context) {
         this.list = list;
@@ -62,7 +63,8 @@ public class CitiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             public void onCheckedChanged(CompoundButton compoundButton, boolean ischecked) {
                 if (ischecked) {
                     i = position;
-                    notifyDataSetChanged();
+                    new Handler().postDelayed(() ->  notifyDataSetChanged(), 10);
+
                 }
             }
         });

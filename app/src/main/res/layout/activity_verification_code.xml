@@ -29,7 +29,7 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_height="230dp"
                     android:background="@color/colorPrimary">
 
                     <ImageView
@@ -59,9 +59,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="140dp"
+                android:layout_marginTop="180dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="490dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="5dp">
@@ -95,7 +95,7 @@
                         android:layout_marginRight="20dp"
                         android:gravity="center"
                         android:text="@string/we_hope_that_you_enter_the_6_digit_temporary_password_that_was_sent_to_your_sent_mobile_number"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/gray9"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -185,14 +185,17 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="30dp"
                         android:layout_marginEnd="20dp"
-                        android:background="@drawable/small_rounded_stroke_trans"
+                        android:layout_marginBottom="18dp"
+                        android:background="@drawable/small_rounded_btn_white"
                         android:text="@string/skip"
                         android:textAllCaps="false"
-                        android:textColor="@color/white"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ll" />
+                        app:layout_constraintTop_toBottomOf="@+id/ll"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

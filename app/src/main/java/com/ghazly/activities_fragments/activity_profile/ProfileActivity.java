@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 
 
 import com.ghazly.R;
+import com.ghazly.activities_fragments.activity_edit_profile.Edit_Profile_Activity;
 import com.ghazly.databinding.ActivityProfileBinding;
 import com.ghazly.interfaces.Listeners;
 import com.ghazly.language.Language;
@@ -28,9 +29,8 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
     private UserModel userModel;
 
     @Override
-    protected void attachBaseContext(Context newBase) {
-        Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Language.updateResources(base, Language.getLanguage(base)));
     }
 
     @Override
@@ -45,17 +45,26 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
+        binding.setBackListener(this);
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
-binding.btnlogout.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        Intent intent=getIntent();
-        intent.putExtra("logout","logout");
-        setResult(RESULT_OK, intent);
-        finish();
-    }
-});
+        binding.setModel(userModel.getUser());
+        binding.btnlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = getIntent();
+                intent.putExtra("logout", "logout");
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
+        binding.btnlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, Edit_Profile_Activity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -69,8 +78,10 @@ binding.btnlogout.setOnClickListener(new View.OnClickListener() {
     @Override
     protected void onResume() {
         super.onResume();
-        if(preferences!=null){
-            userModel=preferences.getUserData(this);
+        if (preferences != null) {
+            userModel = preferences.getUserData(this);
+            binding.setModel(userModel.getUser());
+
         }
     }
 }

@@ -32,6 +32,7 @@ import com.ghazly.activities_fragments.activity_my_orders.MyOrderActivity;
 import com.ghazly.activities_fragments.activity_profile.ProfileActivity;
 import com.ghazly.activities_fragments.activity_restuarant_filter_result.RestuarantFilterActivity;
 import com.ghazly.activities_fragments.activity_restuarnt.RestuarnantActivity;
+import com.ghazly.activities_fragments.activity_search.SearchActivity;
 import com.ghazly.adapters.CitiesAdapter;
 import com.ghazly.adapters.CountriesAdapter;
 import com.ghazly.adapters.DepartmentAdapter;
@@ -73,9 +74,8 @@ import retrofit2.Response;
 public class HomeActivity extends AppCompatActivity implements Listeners.HomeActions {
     private ActivityHomeBinding binding;
     private Preferences preferences;
-    private FragmentManager fragmentManager;
     private UserModel userModel;
-    private String lang;
+    private String current_lang;
     private ActionBarDrawerToggle toggle;
     private DepartmentAdapter departmentAdapter;
     private List<CategoryDataModel.Data> categoryDataModelDataList;
@@ -91,11 +91,10 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     private int current_page = 1;
     private boolean isLoading = false;
 
-    protected void attachBaseContext(Context newBase) {
-        Paper.init(newBase);
-        super.attachBaseContext(Language.updateResources(newBase, Locale.getDefault().getLanguage()));
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Language.updateResources(base, Language.getLanguage(base)));
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +110,6 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
         reDataList = new ArrayList<>();
         citiesmodles = new ArrayList<>();
         neigboormodels = new ArrayList<>();
-        fragmentManager = getSupportFragmentManager();
         preferences = Preferences.getInstance();
         manager = new LinearLayoutManager(this);
         userModel = preferences.getUserData(this);
@@ -120,12 +118,19 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
             //  Log.e("ldldldll",userModel.getData().getToken());
         }
         Paper.init(this);
-        lang = Paper.book().read("lang", "ar");
-        binding.setLang(lang);
+        current_lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        Log.e("llll", current_lang);
+        binding.setLang(current_lang);
         binding.setHomelistner(this);
         toggle = new ActionBarDrawerToggle(this, binding.drawer, binding.toolbar, R.string.open, R.string.close);
         toggle.syncState();
-
+        if (current_lang.equals("ar")) {
+            binding.btnAr.setBackgroundResource(R.drawable.small_rounded_stroke_primarydark);
+            binding.btnEn.setBackgroundResource(R.drawable.small_rounded_btn_gray);
+        } else {
+            binding.btnAr.setBackgroundResource(R.drawable.small_rounded_btn_gray);
+            binding.btnEn.setBackgroundResource(R.drawable.small_rounded_stroke_primarydark);
+        }
 
 //        if (userModel != null) {
 //            EventBus.getDefault().register(this);
@@ -137,6 +142,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
         citiesAdapter = new CitiesAdapter(citiesmodles, this);
         neigboorAdapter = new NeigboorAdapter(neigboormodels, this);
         binding.recViewdepart.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, true));
+
         binding.recViewdepart.setAdapter(departmentAdapter);
         binding.recView.setLayoutManager(manager);
         binding.recView.setAdapter(restaurantAdapter);
@@ -569,19 +575,23 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     }
 
 
-    public void refreshActivity(String lang) {
+    public void RefreshActivity(String lang) {
         Paper.book().write("lang", lang);
         Language.setNewLocale(this, lang);
         new Handler()
-                .postDelayed(() -> {
+                .postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
-                    Intent intent = getIntent();
-                    finish();
-                    startActivity(intent);
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
+                    }
                 }, 1050);
 
 
     }
+
 
 
     @Override
@@ -623,12 +633,11 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
 
     @Override
     public void profile() {
-        if(userModel!=null) {
+        if (userModel != null) {
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivityForResult(intent, 100);
+        } else {
         }
-    else {
-    }
     }
 
     @Override
@@ -644,16 +653,39 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
 
     @Override
     public void favourite() {
-        if(userModel!=null){
-        Intent intent = new Intent(this, MyFavoriteActivity.class);
-        startActivity(intent);}
-        else {
+        if (userModel != null) {
+            Intent intent = new Intent(this, MyFavoriteActivity.class);
+            startActivity(intent);
+        } else {
 
         }
     }
 
     @Override
     public void search() {
+        Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void arLang() {
+
+        if (!current_lang.equals("ar")) {
+            RefreshActivity("ar");
+            binding.btnAr.setBackgroundResource(R.drawable.small_rounded_btn_gray);
+            binding.btnEn.setBackgroundResource(R.drawable.small_rounded_stroke_primarydark);
+        }
+
+    }
+
+    @Override
+    public void enLang() {
+
+        if (!current_lang.equals("en")) {
+            RefreshActivity("en");
+            binding.btnAr.setBackgroundResource(R.drawable.small_rounded_stroke_primarydark);
+            binding.btnEn.setBackgroundResource(R.drawable.small_rounded_btn_gray);
+        }
 
     }
 
@@ -705,13 +737,18 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     }
 
     private void getcities() {
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
         Api.getService(Tags.base_url)
                 .getMainCities()
                 .enqueue(new Callback<CityModel>() {
                     @Override
                     public void onResponse(Call<CityModel> call, Response<CityModel> response) {
                         //  binding.progBar.setVisibility(View.GONE);
+                        dialog.dismiss();
                         if (response.isSuccessful()) {
+
                             citiesmodles.clear();
                             citiesmodles.addAll(response.body().getData());
 
@@ -744,6 +781,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
                     @Override
                     public void onFailure(Call<CityModel> call, Throwable t) {
                         try {
+                            dialog.dismiss();
                             //  binding.progBar.setVisibility(View.GONE);
 
                             if (t.getMessage() != null) {
@@ -763,13 +801,18 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     }
 
     public void getneighboor(String cityid) {
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
         this.cityid = cityid;
+
         Api.getService(Tags.base_url)
                 .getNeigboor(cityid)
                 .enqueue(new Callback<NeigboorModel>() {
                     @Override
                     public void onResponse(Call<NeigboorModel> call, Response<NeigboorModel> response) {
                         // binding.progBar.setVisibility(View.GONE);
+                        dialog.dismiss();
                         if (response.isSuccessful()) {
                             neigboormodels.clear();
                             neigboormodels.addAll(response.body().getData());
@@ -803,6 +846,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
                     @Override
                     public void onFailure(Call<NeigboorModel> call, Throwable t) {
                         try {
+                            dialog.dismiss();
                             binding.progBar.setVisibility(View.GONE);
 
                             if (t.getMessage() != null) {

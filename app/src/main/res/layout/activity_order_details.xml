@@ -133,7 +133,7 @@
 
                     <TextView
                         android:id="@+id/tv"
-                        android:layout_width="90dp"
+                        android:layout_width="100dp"
                         android:layout_height="45dp"
                         android:background='@{lang.equals("ar")?@drawable/backar:@drawable/backen}'
                         android:gravity="center"
