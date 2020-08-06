@@ -4,9 +4,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@drawable/small_rounded_btn_white"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -19,17 +18,16 @@
             android:textSize="16sp"
 
             />
+
         <View
-            android:layout_width="130dp"
+            android:layout_width="100dp"
             android:layout_height="1dp"
-            android:background="@color/colorPrimary"
-            />
+            android:background="@color/colorPrimary" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            >
+            android:layout_marginTop="8dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recViewcities"
@@ -67,19 +65,18 @@
             android:paddingRight="10dp"
             android:text="@string/neighbourhood"
             android:textColor="@color/black"
-            android:textSize="16sp"
-           />
-<View
-    android:layout_width="130dp"
-    android:layout_height="1dp"
-    android:background="@color/colorPrimary"
-    />
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="130dp"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary" />
+
         <FrameLayout
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            >
+            android:layout_marginTop="8dp">
 
 
             <androidx.recyclerview.widget.RecyclerView
