@@ -106,12 +106,11 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
-        if(lang.equals("en")){
-            title="all";
+        if (lang.equals("en")) {
+            title = "all";
 
-        }
-        else {
-            title="الكل";
+        } else {
+            title = "الكل";
         }
         binding.setBackListener(this);
         manager2 = new LinearLayoutManager(this);
@@ -249,7 +248,7 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
         foodListAdapter.notifyDataSetChanged();
         binding.tvNoData.setVisibility(View.GONE);
         binding.progBar.setVisibility(View.VISIBLE);
-        if(title!= null){
+        if (title != null) {
             binding.tvTitle.setText(title);
             binding.tvTitle.setVisibility(View.VISIBLE);
         }
@@ -408,7 +407,7 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
 
     @Override
     public void onBackPressed() {
-       // super.onBackPressed();
+        // super.onBackPressed();
         back();
     }
 

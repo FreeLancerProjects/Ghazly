@@ -199,4 +199,9 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

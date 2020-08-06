@@ -71,6 +71,7 @@ public class MyOrderActivity extends AppCompatActivity implements Listeners.Back
         Paper.init(this);
         lang = Paper.book().read("lang", "ar");
         binding.setLang(lang);
+        binding.setBackListener(this);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.recView.setLayoutManager(new LinearLayoutManager(this));
 

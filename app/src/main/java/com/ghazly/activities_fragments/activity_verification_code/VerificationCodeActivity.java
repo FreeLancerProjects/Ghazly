@@ -274,4 +274,9 @@ Log.e("gllgll",e.getMessage());
             timer.cancel();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

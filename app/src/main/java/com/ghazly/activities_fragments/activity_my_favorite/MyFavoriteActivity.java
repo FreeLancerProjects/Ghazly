@@ -30,6 +30,7 @@ import com.ghazly.models.SingleRestaurantModel;
 import com.ghazly.models.UserModel;
 import com.ghazly.preferences.Preferences;
 import com.ghazly.remote.Api;
+import com.ghazly.share.Common;
 import com.ghazly.tags.Tags;
 
 import java.io.IOException;
@@ -169,7 +170,7 @@ public class MyFavoriteActivity extends AppCompatActivity implements Listeners.B
 
         } else {
 
-            // Common.CreateDialogAlert(activity, getString(R.string.please_sign_in_or_sign_up));
+            Common.CreateNoSignAlertDialog(MyFavoriteActivity.this);
             return 0;
 
         }

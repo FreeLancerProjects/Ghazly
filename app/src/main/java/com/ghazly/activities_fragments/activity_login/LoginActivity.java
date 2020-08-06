@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity implements Listeners.LoginL
         intent.putExtra("phone_code", phone_code);
         intent.putExtra("phone", loginModel.getPhone());
         startActivity(intent);
-        finish();
+      //  finish();
 
     }
 
@@ -147,5 +147,10 @@ public class LoginActivity extends AppCompatActivity implements Listeners.LoginL
         phone_code = countryModel.getDialCode();
 //        binding.tvCode.setText(countryModel.getDialCode());
 //        binding.imageFlag.setImageResource(countryModel.getFlag());
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }
