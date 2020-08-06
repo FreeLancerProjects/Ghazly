@@ -8,9 +8,11 @@
         <variable
             name="backListener"
             type="com.ghazly.interfaces.Listeners.BackListener" />
+
         <variable
             name="contactlistener"
             type="com.ghazly.interfaces.Listeners.ContactActions" />
+
         <variable
             name="lang"
             type="String" />
@@ -133,6 +135,7 @@
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
                         android:gravity="center_vertical"
+                        android:onClick="@{()->contactlistener.email()}"
                         android:text="ah@yahoo.com"
                         android:textColor="@color/black"
                         android:textSize="18sp"
@@ -177,6 +180,7 @@
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
                         android:gravity="center_vertical"
+                        android:onClick="@{()->contactlistener.call()}"
                         android:text="0100377888"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
@@ -219,6 +223,8 @@
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
                         android:gravity="center_vertical"
+                        android:onClick="@{()->contactlistener.whats()}"
+
                         android:text="0100377888"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
@@ -227,8 +233,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
-                        android:onClick="@{()->contactlistener.twitter()}"
-                        >
+                        android:onClick="@{()->contactlistener.twitter()}">
 
 
                         <ImageView
@@ -259,6 +264,7 @@
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
                         android:gravity="center_vertical"
+                        android:onClick="@{()->contactlistener.twitter()}"
                         android:text="ah@twitter.com"
                         android:textColor="@color/black"
                         android:textSize="18sp" />

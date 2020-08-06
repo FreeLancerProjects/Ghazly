@@ -105,5 +105,7 @@
     <string name="place_of_reservation">Place of reservation</string>
     <string name="edit">Edit</string>
     <string name="back">Back</string>
-
+    <string name="sign_in">Sign In</string>
+    <string name="please_sign_in_or_sign_up">Please Sign In or Sign Up</string>
+    <string name="cancel">Cancel</string>
 </resources>

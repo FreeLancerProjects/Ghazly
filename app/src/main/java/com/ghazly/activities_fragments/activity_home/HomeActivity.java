@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ghazly.activities_fragments.activity_about_app.AboutAppActivity;
+import com.ghazly.activities_fragments.activity_complete_order.CompleteOrderActivity;
 import com.ghazly.activities_fragments.activity_contactus.ContactusActivity;
 import com.ghazly.activities_fragments.activity_login.LoginActivity;
 import com.ghazly.activities_fragments.activity_my_favorite.MyFavoriteActivity;
@@ -240,7 +241,8 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
 
 
         } else {
-            navigateToSignInActivity();
+            Common.CreateNoSignAlertDialog(HomeActivity.this);
+
         }
 
     }
@@ -595,7 +597,6 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     }
 
 
-
     @Override
     public void onBackPressed() {
         finish();
@@ -639,6 +640,8 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivityForResult(intent, 100);
         } else {
+            Common.CreateNoSignAlertDialog(HomeActivity.this);
+
         }
     }
 
@@ -659,6 +662,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
             Intent intent = new Intent(this, MyFavoriteActivity.class);
             startActivity(intent);
         } else {
+            Common.CreateNoSignAlertDialog(HomeActivity.this);
 
         }
     }

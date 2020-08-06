@@ -105,5 +105,7 @@
     <string name="place_of_reservation">مكان الحجز </string>
     <string name="edit">تعديل</string>
     <string name="back">رجوع</string>
-
+    <string name="sign_in">تسجيل الدخول</string>
+    <string name="please_sign_in_or_sign_up">برجاء تسجيل الدخول أو إنشاء حساب جديد.</string>
+    <string name="cancel">إلغاء</string>
 </resources>

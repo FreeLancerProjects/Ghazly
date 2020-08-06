@@ -124,7 +124,7 @@ public class CompleteOrderActivity extends AppCompatActivity implements Listener
                     if (userModel != null) {
                         createOrder();
                     } else {
-
+                        Common.CreateNoSignAlertDialog(CompleteOrderActivity.this);
                     }
                 }
             }

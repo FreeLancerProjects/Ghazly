@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -20,10 +21,15 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.ghazly.R;
+import com.ghazly.activities_fragments.activity_home.HomeActivity;
+import com.ghazly.activities_fragments.activity_login.LoginActivity;
+import com.ghazly.activities_fragments.activity_signup.SignUpActivity;
+import com.ghazly.databinding.DialogCustomBinding;
 
 import java.io.File;
 
@@ -47,6 +53,56 @@ public class Common {
 
 
     }
+    public static void CreateNoSignAlertDialog(Context context) {
+        final AlertDialog dialog = new AlertDialog.Builder(context)
+                .create();
+
+        AppCompatActivity activity = (AppCompatActivity) context;
+        DialogCustomBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_custom, null, false);
+
+        binding.btnSignUp.setOnClickListener((v) -> {
+            dialog.dismiss();
+
+            if (activity instanceof HomeActivity) {
+                HomeActivity homeActivity = (HomeActivity) activity;
+                Intent intent = new Intent(homeActivity, SignUpActivity.class);
+                context.startActivity(intent);
+                ((AppCompatActivity) context).finish();
+            } else {
+                Intent intent = new Intent(context, SignUpActivity.class);
+                context.startActivity(intent);
+                ((AppCompatActivity) context).finish();
+            }
+        });
+        binding.btnSignIn.setOnClickListener((v) -> {
+            dialog.dismiss();
+
+            if (activity instanceof HomeActivity) {
+                HomeActivity homeActivity = (HomeActivity) activity;
+                Intent intent = new Intent(homeActivity, LoginActivity.class);
+                context.startActivity(intent);
+                ((AppCompatActivity) context).finish();
+            } else {
+                Intent intent = new Intent(context, LoginActivity.class);
+                context.startActivity(intent);
+                ((AppCompatActivity) context).finish();
+
+
+            }
+
+        });
+
+        binding.btnCancel.setOnClickListener((v) ->
+                dialog.dismiss()
+
+        );
+        //dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setView(binding.getRoot());
+        dialog.show();
+    }
+
 
 //    public static void CreateDialogAlert(Context context,String msg) {
 //        final AlertDialog dialog = new AlertDialog.Builder(context)
