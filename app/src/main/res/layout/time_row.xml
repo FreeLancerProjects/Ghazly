@@ -28,7 +28,7 @@
             android:padding="5dp"
             android:text='@{model.title}'
             android:textColor="@color/gray8"
-            android:textSize="17sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

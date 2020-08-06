@@ -81,7 +81,7 @@
                         android:longClickable="false"
                         android:text="@string/contact_us"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
 
@@ -121,7 +121,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/email"
                             android:textColor="@color/gray5"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
 
                             />
 
@@ -138,7 +138,7 @@
                         android:onClick="@{()->contactlistener.email()}"
                         android:text="ah@yahoo.com"
                         android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
 
                         />
 
@@ -166,7 +166,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/phone"
                             android:textColor="@color/gray5"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
 
                             />
 
@@ -183,7 +183,7 @@
                         android:onClick="@{()->contactlistener.call()}"
                         android:text="0100377888"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -208,7 +208,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/whats_app"
                             android:textColor="@color/gray5"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
 
                             />
 
@@ -227,7 +227,7 @@
 
                         android:text="0100377888"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -250,7 +250,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/twitter"
                             android:textColor="@color/gray5"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
 
                             />
 
@@ -267,7 +267,7 @@
                         android:onClick="@{()->contactlistener.twitter()}"
                         android:text="ah@twitter.com"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </androidx.core.widget.NestedScrollView>

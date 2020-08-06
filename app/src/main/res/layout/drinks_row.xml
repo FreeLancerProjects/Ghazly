@@ -27,7 +27,7 @@
             android:padding="5dp"
             android:text='@{model.title}'
             android:textColor="@color/colorPrimary"
-            android:textSize="17sp"
+            android:textSize="15sp"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +61,7 @@
                 android:gravity="center"
                 android:text="1"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/imgDecrease"

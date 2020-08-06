@@ -38,9 +38,13 @@
 
                     <com.makeramen.roundedimageview.RoundedImageView
                         image="@{model.restaurant.logo}"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        app:riv_corner_radius="10dp" />
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/back"
+                        app:riv_corner_radius="10dp"
+
+                        />
 
 
                 </FrameLayout>
@@ -48,7 +52,9 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="3dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -56,17 +62,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
-                        android:padding="5dp"
+                        android:padding="3dp"
                         android:text='@{model.restaurant.name}'
                         android:textColor="@color/colorPrimary"
-                        android:textSize="13sp" />
+                        android:textSize="15sp" />
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
-                        android:padding="5dp"
+                        android:padding="3dp"
                         android:text='@{model.restaurant.foods}'
                         android:textColor="@color/colorPrimary"
                         android:textSize="13sp"
@@ -100,7 +106,7 @@
                             android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:background="@drawable/add_bg"
-                            android:padding="2dp"
+                            android:padding="5dp"
                             android:src="@drawable/ic_share" />
 
 
@@ -108,7 +114,8 @@
                             android:id="@+id/checkbox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
+                            android:layout_margin="8dp"
+                            android:checked="true"
                             android:button="@drawable/checkbox_bg"
 
 
@@ -131,17 +138,17 @@
                             android:padding="3dp"
                             android:text="@string/number_of_branches"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="25dp"
+                            android:layout_height="23dp"
                             android:layout_gravity="center_vertical"
                             android:layout_margin="3dp"
                             android:background="@drawable/small_rounded_btn_white"
                             android:padding="5dp"
                             android:text="@{model.restaurant.branch_data_count}"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
 
                     </LinearLayout>
 
@@ -153,7 +160,7 @@
                         android:padding="3dp"
                         android:text='@{model.restaurant.city.ar_city_title+"/"+model.restaurant.address.substring(0,9)}'
                         android:textColor="@color/colorPrimary"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 

@@ -77,7 +77,7 @@
                     android:longClickable="false"
                     android:text="@string/back"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="15sp" />
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <FrameLayout
@@ -168,7 +168,7 @@
                             android:text="@={viewModel.name}"
                             android:textColor="@color/black"
                             android:textColorHint="@color/gray4"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
 
 
                             />
@@ -197,7 +197,7 @@
                 android:onClick="@{()->editprofilelistner.Editprofile(viewModel.name)}"
                 android:text="@string/edit"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardView"

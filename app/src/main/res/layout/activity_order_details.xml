@@ -176,7 +176,7 @@
                             android:layout_marginEnd="10dp"
                             android:text="@string/status"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
+                            android:textSize="13sp" />
 
                         <TextView
                             order_status="@{orderModel.order_status}"
@@ -187,7 +187,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:textColor="@color/gray5"
-                            android:textSize="15sp" />
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
@@ -219,7 +219,7 @@
                             android:layout_marginEnd="10dp"
                             android:text="@string/date"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="15sp"
+                            android:textSize="13sp"
                             app:layout_constraintStart_toEndOf="@id/icon" />
 
                         <TextView
@@ -231,7 +231,7 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:textColor="@color/gray5"
-                            android:textSize="15sp" />
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
@@ -264,7 +264,7 @@
                             android:layout_marginEnd="10dp"
                             android:text="@string/payment_type"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
+                            android:textSize="13sp" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -275,7 +275,7 @@
                             android:gravity="center"
                             android:text="@{orderModel.pay_type}"
                             android:textColor="@color/gray5"
-                            android:textSize="15sp" />
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
@@ -308,7 +308,7 @@
                             android:layout_marginEnd="10dp"
                             android:text="@string/number_of_pepole"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="15sp"
+                            android:textSize="13sp"
 
                             />
 
@@ -321,7 +321,7 @@
                             android:gravity="center"
                             android:text="@{orderModel.number_of_person}"
                             android:textColor="@color/gray5"
-                            android:textSize="15sp" />
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
@@ -354,7 +354,7 @@
                             android:layout_marginEnd="10dp"
                             android:text="@string/number_of_children"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
+                            android:textSize="13sp" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -365,7 +365,7 @@
                             android:gravity="center"
                             android:text="@{orderModel.number_of_child}"
                             android:textColor="@color/gray5"
-                            android:textSize="15sp" />
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
@@ -398,7 +398,7 @@
                             android:layout_marginEnd="10dp"
                             android:text="@string/place_of_reservation"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
+                            android:textSize="13sp" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -409,7 +409,7 @@
                             android:gravity="center"
                             android:text='@{orderModel.session_place.equals("in")?@string/in:@string/out}'
                             android:textColor="@color/gray5"
-                            android:textSize="15sp" />
+                            android:textSize="13sp" />
 
                     </LinearLayout>
 
@@ -439,7 +439,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/foods"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
 
                         <androidx.recyclerview.widget.RecyclerView
@@ -456,7 +456,7 @@
                         android:layout_marginTop="10dp"
                         android:text="@string/drinks"
                         android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <FrameLayout
@@ -478,7 +478,7 @@
                             android:layout_gravity="center"
                             android:text="@string/no_data_to_show"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="13sp"
                             android:visibility="gone" />
                     </FrameLayout>
                 </LinearLayout>

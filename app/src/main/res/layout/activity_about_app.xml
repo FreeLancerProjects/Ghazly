@@ -79,7 +79,7 @@
                         android:longClickable="false"
                         android:text="@{title}"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
 
@@ -96,7 +96,7 @@
                     android:padding="10sp"
                     android:text="@{content}"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
 
                     />
 

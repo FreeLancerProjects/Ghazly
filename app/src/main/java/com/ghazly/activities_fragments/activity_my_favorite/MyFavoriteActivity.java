@@ -53,9 +53,9 @@ public class MyFavoriteActivity extends AppCompatActivity implements Listeners.B
     private LinearLayoutManager manager;
     private UserModel userModel;
     private Preferences preferences;
-   // private int selected_pos = -1;
+    // private int selected_pos = -1;
     //p//rivate boolean isFavoriteChange = false;
-   // private boolean isItemAdded = false;
+    // private boolean isItemAdded = false;
     private List<FavouriteRestuarantModel.Data> favouriteDataList;
     private FavouriteRestaurantAdapter favouriteProduct_adapter;
 
@@ -110,11 +110,13 @@ public class MyFavoriteActivity extends AppCompatActivity implements Listeners.B
 //        });*/
         getData();
     }
+
     public void setrestauant(String s) {
         Intent intent = new Intent(MyFavoriteActivity.this, RestuarnantActivity.class);
         intent.putExtra("restaurand_id", s);
         startActivity(intent);
     }
+
     public int like_dislike(FavouriteRestuarantModel.Data productModel, int pos) {
         if (userModel != null) {
             try {
@@ -177,7 +179,8 @@ public class MyFavoriteActivity extends AppCompatActivity implements Listeners.B
     }
 
     public void getData() {
-
+        favouriteDataList.clear();
+        favouriteProduct_adapter.notifyDataSetChanged();
         try {
 
             String token;
@@ -316,12 +319,6 @@ public class MyFavoriteActivity extends AppCompatActivity implements Listeners.B
     }
 
 
-
-
-
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -336,8 +333,6 @@ public class MyFavoriteActivity extends AppCompatActivity implements Listeners.B
 
         finish();
     }
-
-
 
 
     @Override

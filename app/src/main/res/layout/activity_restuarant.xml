@@ -77,7 +77,7 @@
                     android:longClickable="false"
                     android:text="@{model.name}"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
 
                     />
             </LinearLayout>
@@ -122,23 +122,23 @@
                             android:layout_gravity="bottom"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp"
-                            android:background="@drawable/small_rounded_btn_white"
-                            android:orientation="horizontal"
+                            android:gravity="center"
 
+                            android:orientation="horizontal"
                             app:layout_anchor="@id/collaps"
                             app:layout_anchorGravity="bottom|center"
-                            android:gravity="center"
 
                             >
 
-                            <ImageView
+                            <com.makeramen.roundedimageview.RoundedImageView
                                 image="@{model.logo}"
                                 android:layout_width="match_parent"
                                 android:layout_height="80dp"
-                                android:src="@drawable/logo"
                                 android:layout_gravity="center"
+                                android:scaleType="fitXY"
+                                app:riv_corner_radius="10dp"
 
-                               />
+                                />
 
 
                         </LinearLayout>

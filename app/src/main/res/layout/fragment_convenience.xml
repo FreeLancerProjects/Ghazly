@@ -46,7 +46,7 @@
                             android:gravity="center"
                             android:text="@string/review"
                             android:textColor="@color/black"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +133,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/menu_images"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recViewimages"
@@ -164,7 +164,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/rstuarant_images"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="14sp" />
+                            android:textSize="12sp" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recViewres"
@@ -249,7 +249,7 @@
                                     android:layout_height="wrap_content"
                                     android:text='@{model.phone_code+model.phone}'
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 
@@ -324,7 +324,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@{model.foods}"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 
@@ -402,7 +402,7 @@
                                     android:layout_height="wrap_content"
                                     android:text='@{model.min_price+"-"+model.max_price}'
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 
@@ -477,7 +477,7 @@
                                     android:layout_height="wrap_content"
                                     android:text='@{model.child_from+"-"+model.child_to}'
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 
@@ -551,7 +551,7 @@
                                     android:layout_height="wrap_content"
                                     android:text='@{model.work_from+"-"+model.work_to+"\n"+model.days}'
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 
@@ -627,7 +627,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@{model.payment_type}"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 
@@ -705,7 +705,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@{model.website_address}"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 
@@ -779,7 +779,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Cgoual"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 
@@ -857,7 +857,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@{model.parking}"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 
@@ -932,7 +932,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@{model.details}"
                                     android:textColor="@color/black"
-                                    android:textSize="14sp" />
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
 

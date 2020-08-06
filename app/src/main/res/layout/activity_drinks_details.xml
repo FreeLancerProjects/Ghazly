@@ -9,7 +9,6 @@
             name="backListener"
             type="com.ghazly.interfaces.Listeners.BackListener" />
 
-
         <variable
             name="lang"
             type="String" />
@@ -29,14 +28,15 @@
         android:layout_height="match_parent"
         android:background="@color/gray0"
         android:orientation="vertical">
+
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             app:contentInsetEnd="0dp"
             app:contentInsetLeft="0dp"
             app:contentInsetRight="0dp"
             app:contentInsetStart="0dp"
-            android:background="@color/colorPrimary"
 
             >
 
@@ -72,10 +72,9 @@
                     android:layout_marginEnd="5dp"
                     android:clickable="false"
                     android:longClickable="false"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="15sp"
                     android:text="@{model.title}"
-                    />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13sp" />
             </LinearLayout>
 
 
@@ -113,8 +112,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                         >
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="0dp"
@@ -125,7 +123,7 @@
                                 android:gravity="center_vertical"
                                 android:text="@string/choose_from_drinks"
                                 android:textColor="@color/black"
-                                android:textSize="15sp"
+                                android:textSize="13sp"
 
                                 />
 
@@ -137,7 +135,7 @@
                                 android:gravity="center_vertical"
                                 android:text="@string/choose_untill_2"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="15sp"
+                                android:textSize="13sp"
 
                                 />
                         </LinearLayout>
@@ -145,8 +143,7 @@
                         <FrameLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="1"
-                      >
+                            android:layout_weight="1">
 
 
                             <androidx.recyclerview.widget.RecyclerView
@@ -159,15 +156,14 @@
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
                                 android:layout_gravity="center"
-                                android:visibility="gone"
-                                />
+                                android:visibility="gone" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:textColor="@color/black"
-                                android:textSize="18sp"
+                                android:textSize="16sp"
                                 android:visibility="gone" />
                         </FrameLayout>
 
@@ -203,9 +199,7 @@
                                         android:gravity="center"
                                         android:text="@string/add"
                                         android:textColor="@color/white"
-                                        android:textSize="15sp" />
-
-
+                                        android:textSize="13sp" />
 
 
                                 </LinearLayout>

@@ -8,13 +8,13 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="35dp"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/cities"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
 
             />
 
@@ -32,7 +32,7 @@
                 android:id="@+id/recViewcities"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="5dp" />
 
             <ProgressBar
                 android:id="@+id/progBar"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="gone" />
         </FrameLayout>
 
@@ -58,13 +58,14 @@
         <TextView
             android:id="@+id/tvneigbour"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/neighbourhood"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <View
             android:layout_width="130dp"
@@ -82,7 +83,7 @@
                 android:id="@+id/recViewneighboor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="5dp" />
 
             <ProgressBar
                 android:id="@+id/progBarnieg"
@@ -96,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:visibility="gone" />
         </FrameLayout>
 
@@ -106,13 +107,13 @@
             android:layout_height="45dp"
             android:layout_gravity="end"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/small_rounded_btn_primary"
             android:text="@string/done"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
     </LinearLayout>
 </layout>

@@ -139,7 +139,7 @@
                                         android:gravity="center_vertical"
                                         android:text="@{model.title}"
                                         android:textColor="@color/black"
-                                        android:textSize="15sp"
+                                        android:textSize="13sp"
 
                                         />
 
@@ -151,7 +151,7 @@ android:layout_weight="1"
                                         android:gravity="end"
                                         android:text="@{model.price}"
                                         android:textColor="@color/colorPrimary"
-                                        android:textSize="15sp"
+                                        android:textSize="13sp"
 
                                         />
                                 </LinearLayout>
@@ -175,7 +175,7 @@ android:layout_weight="1"
                                         android:gravity="center_vertical"
                                         android:text="@string/addition"
                                         android:textColor="@color/black"
-                                        android:textSize="15sp"
+                                        android:textSize="13sp"
                                         android:layout_weight="1"
 
                                         />
@@ -187,7 +187,7 @@ android:layout_weight="1"
                                         android:gravity="center_vertical"
                                         android:text="@string/choose_untill_2"
                                         android:textColor="@color/gray3"
-                                        android:textSize="15sp"
+                                        android:textSize="13sp"
 
                                         />
                                 </LinearLayout>
@@ -217,7 +217,7 @@ android:layout_weight="1"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
                                         android:textColor="@color/black"
-                                        android:textSize="18sp"
+                                        android:textSize="16sp"
                                         android:visibility="gone" />
                                 </FrameLayout>
 
@@ -244,7 +244,7 @@ android:layout_weight="1"
                                         android:gravity="center_vertical"
                                         android:text="@string/choose_from_drinks"
                                         android:textColor="@color/black"
-                                        android:textSize="15sp"
+                                        android:textSize="13sp"
 
                                         />
 
@@ -256,7 +256,7 @@ android:layout_weight="1"
                                         android:gravity="center_vertical"
                                         android:text="@string/choose"
                                         android:textColor="@color/colorPrimary"
-                                        android:textSize="15sp"
+                                        android:textSize="13sp"
 
                                         />
                                 </LinearLayout>
@@ -281,7 +281,7 @@ android:layout_weight="1"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
                                         android:textColor="@color/black"
-                                        android:textSize="18sp"
+                                        android:textSize="16sp"
                                         android:visibility="gone" />
                                 </FrameLayout>
                             </LinearLayout>
@@ -332,7 +332,7 @@ android:layout_weight="1"
                                         android:gravity="center"
                                         android:text="1"
                                         android:textColor="@color/black"
-                                        android:textSize="18sp" />
+                                        android:textSize="16sp" />
 
                                     <ImageView
                                         android:id="@+id/imgDecrease"
@@ -364,7 +364,7 @@ android:layout_weight="1"
                                         android:gravity="center"
                                         android:text="@string/add"
                                         android:textColor="@color/white"
-                                        android:textSize="15sp" />
+                                        android:textSize="13sp" />
 
                                     <View
                                         android:layout_width="1dp"
@@ -384,7 +384,7 @@ android:layout_weight="1"
                                         android:padding="3dp"
                                         android:text="80 r.s"
                                         android:textColor="@color/white"
-                                        android:textSize="15sp" />
+                                        android:textSize="13sp" />
                                 </LinearLayout>
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -441,7 +441,7 @@ android:layout_weight="1"
                         android:clickable="false"
                         android:longClickable="false"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="15sp"
+                        android:textSize="13sp"
                         android:text="@{model.title}"
                         />
                 </LinearLayout>
