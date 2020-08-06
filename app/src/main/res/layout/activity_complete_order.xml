@@ -32,9 +32,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/white"
-        >
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -115,11 +114,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="@string/payment_type"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
-                    android:layout_marginTop="8dp"
-                    />
+                    android:textSize="14sp" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -144,8 +142,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:button="@drawable/rb_bg"
-                            android:padding="5dp"
                             android:checked="true"
+                            android:padding="5dp"
                             android:text="@string/cash"
                             android:textColor="@color/gray9"
                             android:textSize="15sp" />
@@ -305,8 +303,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
-                            android:visibility="gone"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
                             <TextView
                                 android:layout_width="0dp"
