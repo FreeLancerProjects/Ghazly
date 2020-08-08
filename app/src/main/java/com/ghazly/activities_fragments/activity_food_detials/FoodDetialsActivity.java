@@ -3,6 +3,7 @@ package com.ghazly.activities_fragments.activity_food_detials;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -61,6 +62,12 @@ public class FoodDetialsActivity extends AppCompatActivity implements Listeners.
         snaksList = new ArrayList<>();
         if (fData.getSnaks() != null) {
             snaksList.addAll(fData.getSnaks());
+        }
+        Log.e("uuuuuu",snaksList.size()+"");
+        if(snaksList.size()<=0){
+            binding.ll.setVisibility(View.GONE);
+           // binding.cons.setVisibility(View.GONE);
+            binding.tvNoData.setVisibility(View.VISIBLE);
         }
         totalprice += Double.parseDouble(fData.getPrice());
         preferences = Preferences.getInstance();

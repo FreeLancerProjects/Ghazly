@@ -281,6 +281,8 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
 
                                 }
                             } else {
+                                binding.tvNoData.setVisibility(View.VISIBLE);
+
                                 if (response.code() == 500) {
                                     Toast.makeText(FoodListActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
 
@@ -397,10 +399,11 @@ public class FoodListActivity extends AppCompatActivity implements Listeners.Bac
 
     @Override
     public void back() {
-
-        Intent intent = getIntent();
-        intent.putExtra("data", createOrderModel);
-        setResult(RESULT_OK, intent);
+        if (createOrderModel != null&&createOrderModel.getFoods()!=null) {
+            Intent intent = getIntent();
+            intent.putExtra("data", createOrderModel);
+            setResult(RESULT_OK, intent);
+        }
         finish();
 
     }

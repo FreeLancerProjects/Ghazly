@@ -65,6 +65,12 @@ public class DrinksActivity extends AppCompatActivity implements Listeners.BackL
         if (restaurantModel != null) {
             drinksList.addAll(restaurantModel.getDrinks());
         }
+        if(drinksList.size()<=0){
+            binding.ll.setVisibility(View.GONE);
+            binding.lll.setVisibility(View.GONE);
+            binding.tvNoData.setVisibility(View.VISIBLE);
+        }
+
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         Paper.init(this);

@@ -12,7 +12,7 @@
     <string name="confirm">تاكيد</string>
     <string name="field_required">الحقل مطلوب</string>
     <string name="country_code">كود الدوله</string>
-    <string name="profile">الملف الشخصى</string>
+    <string name="profile">حسابى</string>
     <string name="my_orders">طلباتى</string>
     <string name="about_us">عنا</string>
     <string name="contact_us">اتصل بنا</string>
@@ -28,7 +28,7 @@
     <string name="gender">نوع</string>
     <string name="birthday">تاريخ الميلاد</string>
     <string name="logout">تسجيل الخروج</string>
-    <string name="list">قائمه</string>
+    <string name="list">القائمه</string>
     <string name="addition">اضافات</string>
     <string name="choose">اختر</string>
     <string name="choose_from_drinks">اختر من المشروبات</string>
@@ -93,9 +93,9 @@
     <string name="ok">نعم</string>
     <string name="restaurants">مطاعم</string>
     <string name="my_favourite">المفضله</string>
-    <string name="new_order">طلب جديد</string>
+    <string name="new_order">يتم التعامل مع طلبك الان</string>
     <string name="current">حالى</string>
-    <string name="restuarant_confirm">تم اتاكيد طلبك من المطعم</string>
+    <string name="restuarant_confirm">تم إنهاء الحجز بنجاح </string>
     <string name="completed">مكتمل</string>
     <string name="amount">الكميه</string>
     <string name="additions">الاضافات</string>
@@ -109,4 +109,8 @@
     <string name="please_sign_in_or_sign_up">برجاء تسجيل الدخول أو إنشاء حساب جديد.</string>
     <string name="cancel">إلغاء</string>
     <string name="city">المدينه</string>
+    <string name="cancel_order">الغاء الطلب</string>
+    <string name="main_baranch">الفرع الرئيسي</string>
+
+
 </resources>

@@ -48,7 +48,7 @@
                     android:layout_weight="1"
                     android:singleLine="true"
                     android:text='@{"#"+model.order_code}'
-                    android:textColor="@color/gray4"
+                    android:textColor="@color/black"
                     android:textSize="13sp"
 
                     />
@@ -59,9 +59,9 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="end"
                     android:singleLine="true"
-                    android:text='@{model.total_price}'
+                    android:text='@{model.total_price+@string/sar}'
                     android:textColor="@color/colorPrimary"
                     android:textSize="13sp"
 
@@ -93,7 +93,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="end"
                     android:singleLine="true"
                     android:textColor="@color/colorPrimary"
                     android:textSize="13sp"
@@ -103,23 +103,17 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            <TextView
+                order_status="@{model.order_status}"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    order_status="@{model.order_status}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:textColor="@color/gray8"
-                    android:textSize="13sp" />
-
-
-            </LinearLayout>
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textColor="@color/gray8"
+                android:textSize="13sp" />
 
 
         </LinearLayout>

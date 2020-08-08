@@ -13,13 +13,12 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/cities"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:textSize="14sp"
-
-            />
+            android:textStyle="bold" />
 
         <View
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="1dp"
             android:background="@color/colorPrimary" />
 
@@ -64,11 +63,12 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/neighbourhood"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <View
-            android:layout_width="130dp"
+            android:layout_width="100dp"
             android:layout_height="1dp"
             android:background="@color/colorPrimary" />
 

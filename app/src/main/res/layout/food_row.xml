@@ -103,9 +103,11 @@
 
                         <com.makeramen.roundedimageview.RoundedImageView
                             image="@{model.image}"
-                            android:layout_width="90dp"
-                            android:layout_height="90dp"
-                            app:riv_corner_radius="10dp" />
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            app:riv_corner_radius="10dp"
+                            android:layout_marginTop="15dp"
+                            />
 
 
                     </FrameLayout>
@@ -118,6 +120,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray9" />
+                android:background="@color/gray9"
+                android:layout_marginTop="5dp"
+                />
         </LinearLayout>
 </layout>

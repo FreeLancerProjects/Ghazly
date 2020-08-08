@@ -170,6 +170,16 @@ public interface Service {
     );
 
     @FormUrlEncoded
+    @POST("api/cancel-order")
+    Call<ResponseBody> DelteOrders(
+            @Header("Authorization") String user_token,
+            @Field("branch_id") String branch_id,
+            @Field("order_id") String order_id,
+            @Field("restaurant_id") String restaurant_id,
+            @Field("user_id") String user_id
+    );
+
+    @FormUrlEncoded
     @POST("api/update-profile-client")
     Call<UserModel> editprofile(
             @Header("Authorization") String user_token,

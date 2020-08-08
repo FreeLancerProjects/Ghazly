@@ -1,5 +1,6 @@
 package com.ghazly.activities_fragments.activity_order_details;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,16 +18,17 @@ import com.ghazly.adapters.FoodAdapter;
 import com.ghazly.databinding.ActivityOrderDetailsBinding;
 import com.ghazly.interfaces.Listeners;
 import com.ghazly.language.Language;
-import com.ghazly.models.OrderDataModel;
 import com.ghazly.models.SingleOrderModel;
 import com.ghazly.models.UserModel;
 import com.ghazly.preferences.Preferences;
 import com.ghazly.remote.Api;
+import com.ghazly.share.Common;
 import com.ghazly.tags.Tags;
 
 import java.io.IOException;
 
 import io.paperdb.Paper;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -74,6 +76,12 @@ public class OrderDetailsActivity extends AppCompatActivity implements Listeners
         binding.recViewDrink.setLayoutManager(new LinearLayoutManager(this));
 
         getOrder();
+        binding.tvcancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelorder();
+            }
+        });
 
     }
 
@@ -83,7 +91,9 @@ public class OrderDetailsActivity extends AppCompatActivity implements Listeners
             binding.recViewFoods.setAdapter(foodAdapter);
         }
 
-
+        if (!orderModel.getOrder_status().equals("new")) {
+            binding.tvcancel.setVisibility(View.GONE);
+        }
         if (orderModel.getDrinks() != null && orderModel.getDrinks().size() > 0) {
             drinkAdapter = new DrinkAdapter(this, orderModel.getDrinks());
             binding.recViewDrink.setAdapter(drinkAdapter);
@@ -147,6 +157,63 @@ public class OrderDetailsActivity extends AppCompatActivity implements Listeners
                     });
         } catch (Exception e) {
 
+        }
+    }
+
+    public void cancelorder() {
+        //   Common.CloseKeyBoard(homeActivity, edt_name);
+
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        // rec_sent.setVisibility(View.GONE);
+        try {
+String branchid;
+if(orderModel.getBranch_id()==null){
+    branchid="0";
+}
+else {
+    branchid=orderModel.getBranch_id();
+}
+Log.e("lllll",branchid);
+            Api.getService(Tags.base_url)
+                    .DelteOrders(userModel.getUser().getToken(), branchid+ "", orderModel.getId() + "", orderModel.getRestaurant_id(), orderModel.getUser_id())
+                    .enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            dialog.dismiss();
+
+                            //  binding.progBar.setVisibility(View.GONE);
+                            if (response.isSuccessful() && response.body() != null && response.body() != null) {
+                                //binding.coord1.scrollTo(0,0);
+                                finish();
+                            } else {
+
+
+                                Toast.makeText(OrderDetailsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                try {
+                                    Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                                } catch (Exception e) {
+                                    Log.e("Error_code", response.code() + "");
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            try {
+
+                                dialog.dismiss();
+
+                                Toast.makeText(OrderDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                Log.e("error", t.getMessage());
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+
+            dialog.dismiss();
         }
     }
 

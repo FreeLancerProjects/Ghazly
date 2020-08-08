@@ -59,7 +59,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RestuarnantActivity extends AppCompatActivity  implements Listeners.BackListener {
+public class RestuarnantActivity extends AppCompatActivity implements Listeners.BackListener {
     private ActivityRestuarantBinding binding;
     private Preferences preferences;
     private FragmentManager fragmentManager;
@@ -127,7 +127,7 @@ public class RestuarnantActivity extends AppCompatActivity  implements Listeners
 
     @Override
     public void onBackPressed() {
-        finish();
+        back();
     }
 
 
@@ -197,11 +197,12 @@ public class RestuarnantActivity extends AppCompatActivity  implements Listeners
         binding.setModel(body);
 
         if (fragmentList != null && fragmentList.size() > 0) {
-
-            Fragment_Book fragment_book = (Fragment_Book) fragmentList.get(0);
-            fragment_book.setdata(body);
-            Fragment_Convenience fragment_convenience = (Fragment_Convenience) fragmentList.get(1);
-            fragment_convenience.setdata(body);
+            if (body != null) {
+                Fragment_Book fragment_book = (Fragment_Book) fragmentList.get(0);
+                fragment_book.setdata(body);
+                Fragment_Convenience fragment_convenience = (Fragment_Convenience) fragmentList.get(1);
+                fragment_convenience.setdata(body);
+            }
         }
     }
 

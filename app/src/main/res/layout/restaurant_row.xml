@@ -103,7 +103,7 @@
                             android:background="@drawable/add_bg"
                             android:padding="5dp"
                             android:src="@drawable/ic_share"
-                            android:tint="@color/colorPrimary" />
+                            android:tint="@color/black" />
 
 
                         <CheckBox

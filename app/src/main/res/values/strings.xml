@@ -109,4 +109,7 @@
     <string name="please_sign_in_or_sign_up">Please Sign In or Sign Up</string>
     <string name="cancel">Cancel</string>
     <string name="city">City</string>
+    <string name="cancel_order">Cancel Order</string>
+    <string name="main_baranch">Main Branch</string>
+
 </resources>

@@ -237,7 +237,8 @@ public class Fragment_Book extends Fragment implements Listeners.RestaurantActio
     }
 
     public void setdata(SingleRestaurantModel body) {
-        if (body.getBranchs() != null) {
+
+        if (body!=null&&body.getBranchs() != null) {
             branchsList.addAll(body.getBranchs());
             restaurnantBranchesAdapter.notifyDataSetChanged();
         }

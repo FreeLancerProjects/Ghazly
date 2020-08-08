@@ -248,6 +248,7 @@
                         android:layout_gravity="center"
                         android:textColor="@color/black"
                         android:textSize="16sp"
+                        android:text="@string/no_data_to_show"
                         android:visibility="gone" />
                 </FrameLayout>
             </LinearLayout>

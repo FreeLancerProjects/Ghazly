@@ -106,7 +106,7 @@ public class MyOrderActivity extends AppCompatActivity implements Listeners.Back
         try {
 
             Api.getService(Tags.base_url)
-                    .getOrders(userModel.getUser().getToken(), String.valueOf(userModel.getUser().getId()), "on",  1, 20)
+                    .getOrders(userModel.getUser().getToken(), String.valueOf(userModel.getUser().getId()), "on", 1, 20)
                     .enqueue(new Callback<OrderDataModel>() {
                         @Override
                         public void onResponse(Call<OrderDataModel> call, Response<OrderDataModel> response) {
@@ -170,21 +170,19 @@ public class MyOrderActivity extends AppCompatActivity implements Listeners.Back
         try {
 
 
-
             Api.getService(Tags.base_url)
-                    .getOrders(userModel.getUser().getToken(), String.valueOf(userModel.getUser().getId()), "on",  page, 20)
+                    .getOrders(userModel.getUser().getToken(), String.valueOf(userModel.getUser().getId()), "on", page, 20)
                     .enqueue(new Callback<OrderDataModel>() {
                         @Override
                         public void onResponse(Call<OrderDataModel> call, Response<OrderDataModel> response) {
                             isLoading = false;
-                            orderModelList.remove(orderModelList.size()-1);
-                            adapter.notifyItemRemoved(orderModelList.size()-1);
+                            orderModelList.remove(orderModelList.size() - 1);
+                            adapter.notifyItemRemoved(orderModelList.size() - 1);
 
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
                                 orderModelList.addAll(response.body().getData());
                                 adapter.notifyDataSetChanged();
-                                if (response.body().getData().size()>0)
-                                {
+                                if (response.body().getData().size() > 0) {
                                     current_page = response.body().getCurrent_page();
 
                                 }
@@ -209,11 +207,10 @@ public class MyOrderActivity extends AppCompatActivity implements Listeners.Back
                         @Override
                         public void onFailure(Call<OrderDataModel> call, Throwable t) {
                             try {
-                                if (orderModelList.get(orderModelList.size()-1)==null)
-                                {
+                                if (orderModelList.get(orderModelList.size() - 1) == null) {
                                     isLoading = false;
-                                    orderModelList.remove(orderModelList.size()-1);
-                                    adapter.notifyItemRemoved(orderModelList.size()-1);
+                                    orderModelList.remove(orderModelList.size() - 1);
+                                    adapter.notifyItemRemoved(orderModelList.size() - 1);
 
                                 }
                                 binding.progBar.setVisibility(View.GONE);
@@ -243,7 +240,15 @@ public class MyOrderActivity extends AppCompatActivity implements Listeners.Back
 
     public void showdetials(SingleOrderModel singleOrderModel) {
         Intent intent = new Intent(MyOrderActivity.this, OrderDetailsActivity.class);
-        intent.putExtra("data",singleOrderModel);
+        intent.putExtra("data", singleOrderModel);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (preferences != null) {
+            getOrders();
+        }
     }
 }

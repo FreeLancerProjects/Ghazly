@@ -121,7 +121,7 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .signup(signUpModel.getName(),phone,phone_code.replace("+","00"))
+                .signup(signUpModel.getName(),phone_code.replace("+","00"),phone)
                 .enqueue(new Callback<UserModel>() {
                     @Override
                     public void onResponse(Call<UserModel> call, Response<UserModel> response) {
