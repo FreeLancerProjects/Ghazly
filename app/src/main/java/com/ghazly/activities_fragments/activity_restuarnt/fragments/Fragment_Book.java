@@ -238,9 +238,12 @@ public class Fragment_Book extends Fragment implements Listeners.RestaurantActio
 
     public void setdata(SingleRestaurantModel body) {
 
-        if (body!=null&&body.getBranchs() != null) {
+        if (body != null && body.getBranchs() != null && body.getBranchs().size() > 0) {
             branchsList.addAll(body.getBranchs());
             restaurnantBranchesAdapter.notifyDataSetChanged();
+        } else {
+            binding.tvbranch.setVisibility(View.GONE);
+            binding.card.setVisibility(View.GONE);
         }
     }
 
@@ -291,13 +294,21 @@ public class Fragment_Book extends Fragment implements Listeners.RestaurantActio
         //order_time_calender.set(Calendar.MONTH,monthOfYear);
         //order_time_calender.set(Calendar.DAY_OF_MONTH,dayOfMonth);
         //Log.e("kkkk", calendar.getTime().getMonth() + "");
+        String day, month, years = year + "";
         if (monthOfYear >= 9) {
-            binding.tvdate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-            activity.setdate(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+            month = (monthOfYear + 1) + "";
         } else {
-            binding.tvdate.setText(dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year);
-            activity.setdate(dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year);
+            month = "0";
+            month += (monthOfYear + 1) + "";
 
         }
+        if (dayOfMonth >= 10) {
+            day = dayOfMonth + "";
+        } else {
+            day = "0";
+            day += dayOfMonth;
+        }
+        binding.tvdate.setText(day + "-" + month + "-" + years);
+        activity.setdate(day + "-" + month + "-" + years);
     }
 }

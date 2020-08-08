@@ -22,6 +22,8 @@ import com.ghazly.databinding.LoadmoreRowBinding;
 import com.ghazly.databinding.RestaurantRowBinding;
 import com.ghazly.models.FavouriteRestuarantModel;
 import com.ghazly.models.SingleRestaurantModel;
+import com.ghazly.preferences.Preferences;
+import com.ghazly.share.Common;
 
 import java.util.List;
 
@@ -95,9 +97,14 @@ public class FavouriteRestaurantAdapter extends RecyclerView.Adapter<RecyclerVie
 //                        restuarantFilterActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
 //
 //                    } else
-                    if (context instanceof MyFavoriteActivity) {
-                        myFavoriteActivity = (MyFavoriteActivity) context;
-                        myFavoriteActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
+                    if (Preferences.getInstance().getUserData(context) != null) {
+                        if (context instanceof MyFavoriteActivity) {
+                            myFavoriteActivity = (MyFavoriteActivity) context;
+                            myFavoriteActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
+                        }
+                    } else {
+                        myHolder.binding.checkbox.setChecked(false);
+                        Common.CreateNoSignAlertDialog(context);
                     }
 //                    else {
 //                        searchActivity = (SearchActivity) context;

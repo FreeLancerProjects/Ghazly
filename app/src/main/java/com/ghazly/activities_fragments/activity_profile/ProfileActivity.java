@@ -58,7 +58,7 @@ public class ProfileActivity extends AppCompatActivity implements Listeners.Back
                 finish();
             }
         });
-        binding.btnlogout.setOnClickListener(new View.OnClickListener() {
+        binding.btedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileActivity.this, Edit_Profile_Activity.class);

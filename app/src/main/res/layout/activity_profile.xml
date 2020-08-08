@@ -478,6 +478,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/ll">
 
                         <Button
+                            android:id="@+id/btedit"
                             android:layout_width="0dp"
                             android:layout_height="45dp"
                             android:layout_marginStart="10dp"

@@ -48,6 +48,7 @@
                             android:textColor="@color/black"
                             android:textSize="12sp"
                             android:textStyle="bold"
+                            android:visibility="gone"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/image" />
@@ -55,7 +56,9 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:visibility="gone"
+                            android:orientation="horizontal"
+                            >
 
                             <com.iarcuschin.simpleratingbar.SimpleRatingBar
                                 android:id="@+id/rateBar"
@@ -89,6 +92,7 @@
                         android:background="@drawable/small_rounded_btn_primary"
                         android:padding="10dp"
                         android:text="@string/show_all_reviews"
+                        android:visibility="gone"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:textSize="10sp"

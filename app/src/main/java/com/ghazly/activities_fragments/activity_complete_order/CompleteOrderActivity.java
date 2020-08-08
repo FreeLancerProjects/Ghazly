@@ -88,9 +88,10 @@ public class CompleteOrderActivity extends AppCompatActivity implements Listener
         chooseFoodListModelList = new ArrayList<>();
         if (createOrderModel.getFoods() != null) {
             chooseFoodListModelList.addAll(createOrderModel.getFoods());
-            Log.e("lldld",createOrderModel.getFoods().size()+"");
+            Log.e("lldld", createOrderModel.getFoods().size() + "");
+        } else {
+            binding.card.setVisibility(View.GONE);
         }
-
         chooseFoodsAdapter = new ChooseFoodsAdapter(chooseFoodListModelList, this);
         binding.recViewfoods.setLayoutManager(new LinearLayoutManager(this));
         binding.recViewfoods.setAdapter(chooseFoodsAdapter);
@@ -114,18 +115,20 @@ public class CompleteOrderActivity extends AppCompatActivity implements Listener
         binding.btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createOrderModel.setUser_id(userModel.getUser().getId() + "");
+                if (userModel != null) {
+                    createOrderModel.setUser_id(userModel.getUser().getId() + "");
 
-                String copun = binding.edtcopun.getText().toString();
-                if (!TextUtils.isEmpty(copun)) {
-                    SendCoupon(copun);
+                    String copun = binding.edtcopun.getText().toString();
+                    if (!TextUtils.isEmpty(copun)) {
+                        SendCoupon(copun);
 
-                } else {
-                    if (userModel != null) {
-                        createOrder();
                     } else {
-                        Common.CreateNoSignAlertDialog(CompleteOrderActivity.this);
+                        if (userModel != null) {
+                            createOrder();
+                        }
                     }
+                } else {
+                    Common.CreateNoSignAlertDialog(CompleteOrderActivity.this);
                 }
             }
         });

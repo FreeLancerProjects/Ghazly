@@ -21,6 +21,8 @@ import com.ghazly.databinding.LoadmoreRowBinding;
 import com.ghazly.databinding.RestaurantRowBinding;
 import com.ghazly.models.RestuarantModel;
 import com.ghazly.models.SingleRestaurantModel;
+import com.ghazly.preferences.Preferences;
+import com.ghazly.share.Common;
 
 import java.util.List;
 
@@ -35,6 +37,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private RestuarantFilterActivity restuarantFilterActivity;
     private MyFavoriteActivity myFavoriteActivity;
     private SearchActivity searchActivity;
+    private int i = -1;
 
     public RestaurantAdapter(List<SingleRestaurantModel> list, Context context) {
         this.list = list;
@@ -77,11 +80,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         restuarantFilterActivity = (RestuarantFilterActivity) context;
                         restuarantFilterActivity.setrestauant(list.get(holder.getLayoutPosition()).getId() + "");
 
-                    } else if(context instanceof MyFavoriteActivity) {
+                    } else if (context instanceof MyFavoriteActivity) {
                         myFavoriteActivity = (MyFavoriteActivity) context;
                         myFavoriteActivity.setrestauant(list.get(holder.getLayoutPosition()).getId() + "");
-                    }
-                    else {
+                    } else {
                         searchActivity = (SearchActivity) context;
                         searchActivity.setrestauant(list.get(holder.getLayoutPosition()).getId() + "");
                     }
@@ -91,27 +93,32 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             myHolder.binding.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (context instanceof HomeActivity) {
-                        homeActivity = (HomeActivity) context;
-                        homeActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
-                    } else if (context instanceof RestuarantFilterActivity) {
-                        restuarantFilterActivity = (RestuarantFilterActivity) context;
+                    if (Preferences.getInstance().getUserData(context) != null) {
+                        if (context instanceof HomeActivity) {
+                            homeActivity = (HomeActivity) context;
+                            homeActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
+                        } else if (context instanceof RestuarantFilterActivity) {
+                            restuarantFilterActivity = (RestuarantFilterActivity) context;
 
-                        restuarantFilterActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
-                    }
+                            restuarantFilterActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
+                        }
 //                    } else if(context instanceof MyFavoriteActivity){
 //                        myFavoriteActivity = (MyFavoriteActivity) context;
 //                        myFavoriteActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
 //                    }
-                    else {
-                        searchActivity = (SearchActivity) context;
-                        searchActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
+                        else {
+                            searchActivity = (SearchActivity) context;
+                            searchActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
 
+                        }
+                    } else {
+                        myHolder.binding.checkbox.setChecked(false);
+                        Common.CreateNoSignAlertDialog(context);
                     }
-
 
                 }
             });
+
 
         } else {
             LoadMoreHolder loadMoreHolder = (LoadMoreHolder) holder;

@@ -187,7 +187,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
                     String token = task.getResult().getToken();
 
                     Api.getService(Tags.base_url)
-                            .logout("Bearer " + userModel.getUser().getToken(), token, userModel.getUser().getId(), "android")
+                            .logout(userModel.getUser().getToken(), token, userModel.getUser().getId(), "android")
                             .enqueue(new Callback<ResponseBody>() {
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
