@@ -59,21 +59,26 @@
                     android:layout_height="wrap_content"
                     android:text="@string/order_detials"
                     android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text='@{"#"+orderModel.order_code}'
+                    android:textColor="@color/white"
+
+                    />
+
                 <TextView
                     android:id="@+id/tvcancel"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
                     android:text="@string/cancel_order"
                     android:textColor="@color/white"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text='@{"#"+orderModel.order_code}'
-                    android:textColor="@color/white"
-                    android:gravity="end"
+
                     />
 
             </LinearLayout>
@@ -106,10 +111,10 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             image="@{orderModel.resturant.logo}"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
 
-                             />
+                            />
 
 
                     </FrameLayout>
@@ -130,10 +135,10 @@
                             android:layout_height="wrap_content"
                             android:maxLines="1"
                             android:padding="2dp"
-                            android:textStyle="bold"
                             android:text='@{orderModel.resturant.name}'
                             android:textColor="@color/colorPrimary"
-                            android:textSize="13sp" />
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
 
                         <TextView
@@ -171,9 +176,9 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layerType="software"
+                        android:background="@drawable/small_rounded_stroke_gray"
 
-                        android:background="@drawable/small_rounded_stroke_gray" />
+                        android:layerType="software" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -213,8 +218,8 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="10dp"
-                        android:layerType="software"
-                        android:background="@drawable/small_rounded_stroke_gray" />
+                        android:background="@drawable/small_rounded_stroke_gray"
+                        android:layerType="software" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -258,9 +263,9 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="10dp"
-                        android:layerType="software"
+                        android:background="@drawable/small_rounded_stroke_gray"
 
-                        android:background="@drawable/small_rounded_stroke_gray" />
+                        android:layerType="software" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -304,9 +309,9 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="10dp"
-                        android:layerType="software"
+                        android:background="@drawable/small_rounded_stroke_gray"
 
-                        android:background="@drawable/small_rounded_stroke_gray" />
+                        android:layerType="software" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -352,9 +357,9 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="10dp"
-                        android:layerType="software"
+                        android:background="@drawable/small_rounded_stroke_gray"
 
-                        android:background="@drawable/small_rounded_stroke_gray" />
+                        android:layerType="software" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -398,9 +403,9 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="10dp"
-                        android:layerType="software"
+                        android:background="@drawable/small_rounded_stroke_gray"
 
-                        android:background="@drawable/small_rounded_stroke_gray" />
+                        android:layerType="software" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -444,8 +449,8 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="10dp"
-                        android:layerType="software"
-                        android:background="@drawable/small_rounded_stroke_gray" />
+                        android:background="@drawable/small_rounded_stroke_gray"
+                        android:layerType="software" />
 
                     <com.makeramen.roundedimageview.RoundedImageView
                         image="@{orderModel.barcode_image}"
