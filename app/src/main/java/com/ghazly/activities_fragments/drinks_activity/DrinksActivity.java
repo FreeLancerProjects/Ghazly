@@ -84,28 +84,30 @@ public class DrinksActivity extends AppCompatActivity implements Listeners.BackL
 
     private void checkdata() {
         double totlaprice = 0.0;
-        for (int i = 0; i < drinksAdapter.getItemCount(); i++) {
+        if (drinksList != null && drinksList.size() > 0) {
+            for (int i = 0; i < drinksAdapter.getItemCount(); i++) {
 
-            RecyclerView.ViewHolder view = binding.recviewdrinks.findViewHolderForAdapterPosition(i);
-            CheckBox checkBox = view.itemView.findViewById(R.id.ch_choose);
-            if (checkBox.isChecked()) {
-                TextView tvcounter = view.itemView.findViewById(R.id.tvCounter);
-                ChooseDrinksListModel chooseDrinksListModel = new ChooseDrinksListModel();
-                int amount = Integer.parseInt(tvcounter.getText().toString());
-                totlaprice += amount * Double.parseDouble(drinksList.get(i).getPrice());
-                chooseDrinksListModel.setAmount(amount + "");
-                chooseDrinksListModel.setDrink_id(drinksList.get(i).getId() + "");
-                chooseDrinksListModel.setPrice((amount * Double.parseDouble(drinksList.get(i).getPrice())) + "");
-                chooseDrinksListModel.setDrink_name(drinksList.get(i).getTitle());
-                chooseDrinksListModels.add(chooseDrinksListModel);
+                RecyclerView.ViewHolder view = binding.recviewdrinks.findViewHolderForAdapterPosition(i);
+                CheckBox checkBox = view.itemView.findViewById(R.id.ch_choose);
+                if (checkBox.isChecked()) {
+                    TextView tvcounter = view.itemView.findViewById(R.id.tvCounter);
+                    ChooseDrinksListModel chooseDrinksListModel = new ChooseDrinksListModel();
+                    int amount = Integer.parseInt(tvcounter.getText().toString());
+                    totlaprice += amount * Double.parseDouble(drinksList.get(i).getPrice());
+                    chooseDrinksListModel.setAmount(amount + "");
+                    chooseDrinksListModel.setDrink_id(drinksList.get(i).getId() + "");
+                    chooseDrinksListModel.setPrice((amount * Double.parseDouble(drinksList.get(i).getPrice())) + "");
+                    chooseDrinksListModel.setDrink_name(drinksList.get(i).getTitle());
+                    chooseDrinksListModels.add(chooseDrinksListModel);
+                }
             }
+            CreateOrderModel createOrderModel = new CreateOrderModel();
+            createOrderModel.setDrinks(chooseDrinksListModels);
+            createOrderModel.setTotal_price(totlaprice + "");
+            Intent intent = getIntent();
+            intent.putExtra("data", createOrderModel);
+            setResult(RESULT_OK, intent);
         }
-        CreateOrderModel createOrderModel=new CreateOrderModel();
-        createOrderModel.setDrinks(chooseDrinksListModels);
-        createOrderModel.setTotal_price(totlaprice+"");
-        Intent intent = getIntent();
-        intent.putExtra("data", createOrderModel);
-        setResult(RESULT_OK, intent);
         finish();
 
     }
