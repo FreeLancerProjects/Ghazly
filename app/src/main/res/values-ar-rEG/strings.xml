@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="map_api_key">AIzaSyC4l5QxL27z4w0uuD_5X3g0IRhaUdvb0Q4</string>
+    <string name="map_api_key">AIzaSyA6QI378BHt9eqBbiJKtqWHTSAZxcSwN3Q</string>
     <string name="app_name">جهزلى</string>
     <string name="phone">رقم الجوال</string>
     <string name="login">تسجيل دخول</string>
@@ -111,6 +111,9 @@
     <string name="city">المدينه</string>
     <string name="cancel_order">الغاء الطلب</string>
     <string name="main_baranch">الفرع الرئيسي</string>
+    <string name="images">الصور</string>
+    <string name="male">ذكر</string>
+    <string name="female">انثى</string>
 
 
 </resources>

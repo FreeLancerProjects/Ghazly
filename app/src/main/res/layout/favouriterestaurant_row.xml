@@ -115,8 +115,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:checked="true"
                             android:button="@drawable/checkbox_bg"
+                            android:checked="true"
 
 
                             />
@@ -124,6 +124,7 @@
 
 
                     <LinearLayout
+                        android:id="@+id/llnum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"

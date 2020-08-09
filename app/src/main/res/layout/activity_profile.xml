@@ -304,7 +304,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{model.gender}"
+                                    android:text='@{model.gender!=null?model.gender.equals("male")?@string/male:@string/female:""}'
                                     android:textColor="@color/black"
                                     android:textSize="12sp" />
 

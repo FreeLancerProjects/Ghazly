@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="map_api_key">AIzaSyC4l5QxL27z4w0uuD_5X3g0IRhaUdvb0Q4</string>
+    <string name="map_api_key">AIzaSyA6QI378BHt9eqBbiJKtqWHTSAZxcSwN3Q</string>
     <string name="app_name">jahezly</string>
     <string name="phone">Phone</string>
     <string name="login">Login</string>
@@ -111,5 +111,8 @@
     <string name="city">City</string>
     <string name="cancel_order">Cancel Order</string>
     <string name="main_baranch">Main Branch</string>
+    <string name="images">Images</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 
 </resources>

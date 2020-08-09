@@ -69,6 +69,9 @@ public class FavouriteRestaurantAdapter extends RecyclerView.Adapter<RecyclerVie
             MyHolder myHolder = (MyHolder) holder;
 
             myHolder.binding.setModel(list.get(position));
+            if(list.get(position).getRestaurant().getBranch_data_count().equals("0")){
+                myHolder.binding.llnum.setVisibility(View.GONE);
+            }
             myHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

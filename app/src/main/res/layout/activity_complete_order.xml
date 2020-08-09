@@ -104,17 +104,25 @@
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recViewfoods"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    >
 
-                </androidx.recyclerview.widget.RecyclerView>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recViewfoods"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                      >
+
+                    </androidx.recyclerview.widget.RecyclerView>
+                </FrameLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="15dp"
                     android:text="@string/payment_type"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp" />

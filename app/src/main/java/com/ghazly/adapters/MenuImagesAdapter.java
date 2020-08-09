@@ -49,7 +49,8 @@ public class MenuImagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         myHolder.binding.setModel(list.get(position));
 
         myHolder.itemView.setOnClickListener(view -> {
-//homeActivity.setitemData(list.get(holder.getLayoutPosition()).getId()+"");
+restuarnantActivity.setitemData();
+
         });
     }
 

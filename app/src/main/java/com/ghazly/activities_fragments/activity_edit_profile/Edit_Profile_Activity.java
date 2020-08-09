@@ -12,6 +12,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,9 +33,11 @@ import com.ghazly.remote.Api;
 import com.ghazly.share.Common;
 import com.ghazly.tags.Tags;
 import com.mukesh.countrypicker.CountryPicker;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Locale;
 
 import io.paperdb.Paper;
@@ -43,7 +47,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Edit_Profile_Activity extends AppCompatActivity implements Listeners.EditprofileListener, Listeners.BackListener {
+public class Edit_Profile_Activity extends AppCompatActivity implements Listeners.EditprofileListener, Listeners.BackListener, DatePickerDialog.OnDateSetListener {
     private String current_language;
     private ActivityEditProfileBinding binding;
     private CountryPicker countryPicker;
@@ -56,6 +60,9 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
     private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
     private final String write_permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     private final String camera_permission = Manifest.permission.CAMERA;
+    private String gender = null, date = null;
+    private DatePickerDialog datePickerDialog;
+
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -79,7 +86,17 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
         this.userModel = userModel;
         preferences.create_update_userdata(this, userModel);
         editprofileModel.setName(this.userModel.getUser().getName());
-
+        date = userModel.getUser().getDate_of_barth();
+        editprofileModel.setEmail(userModel.getUser().getEmail());
+        gender = userModel.getUser().getGender();
+        if(gender!=null){
+            if(gender.equals("male")){
+                binding.rbChoose1.setChecked(true);
+            }
+            else {
+                binding.rbChoose2.setChecked(true);
+            }
+        }
         binding.setUserModel(userModel);
         binding.setViewModel(editprofileModel);
     }
@@ -100,9 +117,50 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
 
         binding.image.setOnClickListener(view -> CreateImageAlertDialog());
 
+        binding.rbChoose1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    gender = "male";
+                }
+            }
+        });
+        binding.rbChoose2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    gender = "female";
+                }
+            }
+        });
+        binding.lldate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                datePickerDialog.show(getFragmentManager(), "");
+
+            }
+        });
+        createDatePickerDialog();
 
     }
 
+    private void createDatePickerDialog() {
+        Calendar calendar = Calendar.getInstance();
+        datePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.dismissOnPause(true);
+        datePickerDialog.setAccentColor(ActivityCompat.getColor(this, R.color.colorPrimary));
+        datePickerDialog.setCancelColor(ActivityCompat.getColor(this, R.color.gray4));
+        datePickerDialog.setOkColor(ActivityCompat.getColor(this, R.color.colorPrimary));
+        // datePickerDialog.setOkText(getString(R.string.select));
+        //datePickerDialog.setCancelText(getString(R.string.cancel));
+        datePickerDialog.setLocale(new Locale(current_language));
+        datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_2);
+        datePickerDialog.setMinDate(calendar);
+
+
+    }
 
     @Override
     public void Editprofile(String name) {
@@ -115,12 +173,17 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
     }
 
     private void edit(EditprofileModel editprofileModel) {
+        String email = null;
+        if (editprofileModel.getEmail() != null) {
+            email = editprofileModel.getEmail();
+        }
+
         try {
             ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
             dialog.setCancelable(false);
             dialog.show();
             Api.getService(Tags.base_url)
-                    .editprofile(userModel.getUser().getToken(), editprofileModel.getName())
+                    .editprofile(userModel.getUser().getToken(), userModel.getUser().getId() + "", editprofileModel.getName(), email, gender, date)
                     .enqueue(new Callback<UserModel>() {
                         @Override
                         public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -134,7 +197,7 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
                             } else {
                                 try {
 
-                                    Log.e("error", response.code() + "_" + response.errorBody().string());
+                                    Log.e("errorsssss", response.code() + "_" + response.errorBody().string());
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -357,6 +420,36 @@ public class Edit_Profile_Activity extends AppCompatActivity implements Listener
 
         }
         return null;
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, monthOfYear + 1);
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+
+        // order_time_calender.set(Calendar.YEAR,year);
+        //order_time_calender.set(Calendar.MONTH,monthOfYear);
+        //order_time_calender.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+        //Log.e("kkkk", calendar.getTime().getMonth() + "");
+        String day, month, years = year + "";
+        if (monthOfYear >= 9) {
+            month = (monthOfYear + 1) + "";
+        } else {
+            month = "0";
+            month += (monthOfYear + 1) + "";
+
+        }
+        if (dayOfMonth >= 10) {
+            day = dayOfMonth + "";
+        } else {
+            day = "0";
+            day += dayOfMonth;
+        }
+        binding.tvdate.setText(day + "-" + month + "-" + years);
+        date = day + "-" + month + "-" + years;
     }
 
 }

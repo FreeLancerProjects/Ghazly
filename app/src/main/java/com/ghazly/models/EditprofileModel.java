@@ -17,6 +17,7 @@ import java.io.Serializable;
 public class EditprofileModel extends BaseObservable implements Serializable {
 
     private String name;
+    private String email;
 
     public ObservableField<String> error_name = new ObservableField<>();
 
@@ -31,6 +32,14 @@ public class EditprofileModel extends BaseObservable implements Serializable {
     public EditprofileModel(String name) {
         setName(name);
 
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Bindable

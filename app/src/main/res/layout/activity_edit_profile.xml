@@ -180,8 +180,143 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:background="@color/colorPrimary" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:padding="5dp"
+                            android:src="@drawable/ic_user"
+                            android:tint="@color/colorPrimary" />
+
+                        <View
+                            android:layout_width="1px"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@color/gray4" />
+
+                        <EditText
+                            android:id="@+id/edtemail"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:background="@color/transparent"
+                            android:hint="@string/email"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:inputType="textEmailAddress"
+                            android:singleLine="true"
+                            android:text="@={viewModel.email}"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray4"
+                            android:textSize="12sp"
 
 
+                            />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/colorPrimary" />
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <RadioButton
+                            android:id="@+id/rb_choose1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:button="@drawable/rb_bg"
+                            android:padding="5dp"
+                            android:text="@string/male"
+                            android:textColor="@color/gray8"
+                            android:textSize="13sp" />
+
+
+                        <RadioButton
+                            android:id="@+id/rb_choose2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:button="@drawable/rb_bg"
+
+                            android:padding="5dp"
+                            android:text="@string/female"
+                            android:textColor="@color/gray8"
+                            android:textSize="13sp"
+
+                            />
+
+
+                    </RadioGroup>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/colorPrimary" />
+                    <LinearLayout
+                        android:id="@+id/lldate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="@string/choose_day"
+                            android:textColor="@color/gray8"
+                            android:textSize="13sp"
+
+                            />
+                        <TextView
+                            android:id="@+id/tvdate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/gray8"
+                            android:textSize="13sp"
+                            android:text="@{userModel.user.date_of_barth}"
+
+                            />
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center_vertical"
+                            android:padding="5dp"
+                            android:src="@drawable/ic_calendar"
+                            android:tint="@color/colorAccent" />
+
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/colorPrimary" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

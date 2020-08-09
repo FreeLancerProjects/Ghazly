@@ -126,6 +126,7 @@ public class Fragment_Convenience extends Fragment implements OnMapReadyCallback
             mMap.setBuildingsEnabled(false);
             mMap.setIndoorEnabled(false);
             if (singleRestaurantModel != null) {
+                Log.e("fllflf",singleRestaurantModel.getLatitude());
                 if (singleRestaurantModel.getBranchs() != null && singleRestaurantModel.getBranchs().size() > 0) {
                     updateDataMapUI(singleRestaurantModel.getBranchs());
                 } else {
@@ -152,6 +153,8 @@ public class Fragment_Convenience extends Fragment implements OnMapReadyCallback
 
     private void updateDataMapUI(List<SingleRestaurantModel.Branchs> data) {
         if (data.size() > 0) {
+            Log.e("fllflf",singleRestaurantModel.getLatitude());
+
             for (SingleRestaurantModel.Branchs adModel : data) {
                 addMarker(adModel);
             }

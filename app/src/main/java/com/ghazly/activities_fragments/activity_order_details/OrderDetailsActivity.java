@@ -90,6 +90,9 @@ public class OrderDetailsActivity extends AppCompatActivity implements Listeners
             foodAdapter = new FoodAdapter(this, orderModel.getFoods());
             binding.recViewFoods.setAdapter(foodAdapter);
         }
+        else {
+
+        }
 
         if (!orderModel.getOrder_status().equals("new")) {
             binding.tvcancel.setVisibility(View.GONE);
@@ -100,7 +103,8 @@ public class OrderDetailsActivity extends AppCompatActivity implements Listeners
             binding.tvNoDrink.setVisibility(View.GONE);
 
         } else {
-            binding.tvNoDrink.setVisibility(View.VISIBLE);
+           // binding.tv
+          //  binding.tvNoDrink.setVisibility(View.VISIBLE);
         }
 
 

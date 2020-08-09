@@ -135,11 +135,11 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
             binding.btnEn.setBackgroundResource(R.drawable.small_rounded_stroke_primarydark);
         }
 
-//        if (userModel != null) {
-//            EventBus.getDefault().register(this);
-//            updateTokenFireBase();
-//
-//        }
+        if (userModel != null) {
+           // EventBus.getDefault().register(this);
+            updateTokenFireBase();
+
+        }
         departmentAdapter = new DepartmentAdapter(categoryDataModelDataList, this);
         restaurantAdapter = new RestaurantAdapter(reDataList, this);
         citiesAdapter = new CitiesAdapter(citiesmodles, this);
@@ -532,7 +532,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
                     try {
 
                         Api.getService(Tags.base_url)
-                                .updatePhoneToken("Bearer " + userModel.getUser().getToken(), token, userModel.getUser().getId(), "android", userModel.getUser().getUser_type())
+                                .updatePhoneToken( userModel.getUser().getToken(), token, userModel.getUser().getId(), "android", userModel.getUser().getUser_type())
                                 .enqueue(new Callback<ResponseBody>() {
                                     @Override
                                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -616,7 +616,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
             Intent intent = new Intent(this, MyOrderActivity.class);
             startActivity(intent);
         } else {
-
+            Common.CreateNoSignAlertDialog(this);
         }
     }
 

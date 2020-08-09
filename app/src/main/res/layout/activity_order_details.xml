@@ -491,11 +491,13 @@
                         android:text="@string/drinks"
                         android:textColor="@color/black"
                         android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="@{orderModel.drinks!=null?(orderModel.drinks.size()>0?View.VISIBLE:View.GONE):View.GONE}" />
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="@{orderModel.drinks!=null?(orderModel.drinks.size()>0?View.VISIBLE:View.GONE):View.GONE}"
 
                         >
 

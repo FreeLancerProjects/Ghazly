@@ -25,6 +25,7 @@ import com.ghazly.R;
 import com.ghazly.activities_fragments.activity_complete_order.CompleteOrderActivity;
 import com.ghazly.activities_fragments.activity_foodlist.FoodListActivity;
 import com.ghazly.activities_fragments.activity_home.HomeActivity;
+import com.ghazly.activities_fragments.activity_image.Image_Activity;
 import com.ghazly.activities_fragments.activity_restuarnt.fragments.Fragment_Book;
 import com.ghazly.activities_fragments.activity_restuarnt.fragments.Fragment_Convenience;
 import com.ghazly.activities_fragments.drinks_activity.DrinksActivity;
@@ -269,7 +270,7 @@ public class RestuarnantActivity extends AppCompatActivity implements Listeners.
                 Intent intent = new Intent(RestuarnantActivity.this, CompleteOrderActivity.class);
                 intent.putExtra("data", createOrderModel);
                 startActivityForResult(intent, 3);
-                finish();
+                //finish();
             } else {
                 createOrderModel.setBranch_id(branchid);
                 createOrderModel.setNumber_of_child(numchild + "");
@@ -282,7 +283,7 @@ public class RestuarnantActivity extends AppCompatActivity implements Listeners.
                 Intent intent = new Intent(RestuarnantActivity.this, CompleteOrderActivity.class);
                 intent.putExtra("data", createOrderModel);
                 startActivityForResult(intent, 3);
-                finish();
+                //finish();
             }
         } else {
 
@@ -321,5 +322,19 @@ public class RestuarnantActivity extends AppCompatActivity implements Listeners.
     @Override
     public void back() {
         finish();
+    }
+
+    public void setitemData() {
+        Intent intent=new Intent(RestuarnantActivity.this, Image_Activity.class);
+        intent.putExtra("single_rest",singlrestaurantmodel);
+        intent.putExtra("type","1");
+        startActivity(intent);
+    }
+
+    public void showrestuarntimeges() {
+        Intent intent=new Intent(RestuarnantActivity.this, Image_Activity.class);
+        intent.putExtra("single_rest",singlrestaurantmodel);
+        intent.putExtra("type","2");
+        startActivity(intent);
     }
 }

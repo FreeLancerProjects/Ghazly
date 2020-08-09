@@ -183,7 +183,12 @@ public interface Service {
     @POST("api/update-profile-client")
     Call<UserModel> editprofile(
             @Header("Authorization") String user_token,
-            @Field("name") String name
+            @Field("user_id") String user_id,
+            @Field("name") String name,
+            @Field("email") String email,
+            @Field("gender") String gender,
+            @Field("date_of_barth") String date_of_barth
+
 
     );
 }

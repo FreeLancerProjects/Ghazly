@@ -22,11 +22,12 @@ public class RestaurnantImagesAdapter extends RecyclerView.Adapter<RecyclerView.
     private Context context;
     private LayoutInflater inflater;
     private RestuarnantActivity restuarnantActivity;
+
     public RestaurnantImagesAdapter(List<SingleRestaurantModel.RestaurantImages> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
-        restuarnantActivity=(RestuarnantActivity) context;
+        restuarnantActivity = (RestuarnantActivity) context;
 
 
     }
@@ -49,7 +50,7 @@ public class RestaurnantImagesAdapter extends RecyclerView.Adapter<RecyclerView.
         myHolder.binding.setModel(list.get(position));
 
         myHolder.itemView.setOnClickListener(view -> {
-//homeActivity.setitemData(list.get(holder.getLayoutPosition()).getId()+"");
+            restuarnantActivity.showrestuarntimeges();
         });
     }
 
@@ -67,8 +68,6 @@ public class RestaurnantImagesAdapter extends RecyclerView.Adapter<RecyclerView.
 
         }
     }
-
-
 
 
 }
