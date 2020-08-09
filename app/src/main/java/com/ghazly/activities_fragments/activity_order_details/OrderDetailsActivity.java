@@ -89,8 +89,7 @@ public class OrderDetailsActivity extends AppCompatActivity implements Listeners
         if (orderModel.getFoods() != null && orderModel.getFoods().size() > 0) {
             foodAdapter = new FoodAdapter(this, orderModel.getFoods());
             binding.recViewFoods.setAdapter(foodAdapter);
-        }
-        else {
+        } else {
 
         }
 
@@ -103,8 +102,8 @@ public class OrderDetailsActivity extends AppCompatActivity implements Listeners
             binding.tvNoDrink.setVisibility(View.GONE);
 
         } else {
-           // binding.tv
-          //  binding.tvNoDrink.setVisibility(View.VISIBLE);
+            // binding.tv
+            //  binding.tvNoDrink.setVisibility(View.VISIBLE);
         }
 
 
@@ -172,16 +171,15 @@ public class OrderDetailsActivity extends AppCompatActivity implements Listeners
         dialog.show();
         // rec_sent.setVisibility(View.GONE);
         try {
-String branchid;
-if(orderModel.getBranch_id()==null){
-    branchid="0";
-}
-else {
-    branchid=orderModel.getBranch_id();
-}
-Log.e("lllll",branchid);
+            String branchid;
+            if (orderModel.getBranch_id() == null) {
+                branchid = "0";
+            } else {
+                branchid = orderModel.getBranch_id();
+            }
+            Log.e("lllll", branchid);
             Api.getService(Tags.base_url)
-                    .DelteOrders(userModel.getUser().getToken(), branchid+ "", orderModel.getId() + "", orderModel.getRestaurant_id(), orderModel.getUser_id())
+                    .DelteOrders(userModel.getUser().getToken(), branchid + "", orderModel.getId() + "", orderModel.getRestaurant_id(), orderModel.getUser_id())
                     .enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
