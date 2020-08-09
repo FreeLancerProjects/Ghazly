@@ -153,6 +153,7 @@ public class CompleteOrderActivity extends AppCompatActivity implements Listener
                         if (response.isSuccessful()) {
 
                             createOrderModel.setCoupon_id(response.body().getData().getId() + "");
+                            createOrderModel.setTotal_price(((Double.parseDouble(createOrderModel.getTotal_price())) - ((Double.parseDouble(createOrderModel.getTotal_price()) * Double.parseDouble(response.body().getData().getCoupon_value())) / 100)) + "");
                             createOrder();
                         } else {
                             try {

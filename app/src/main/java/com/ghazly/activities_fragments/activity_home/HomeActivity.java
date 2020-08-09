@@ -136,7 +136,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
         }
 
         if (userModel != null) {
-           // EventBus.getDefault().register(this);
+            // EventBus.getDefault().register(this);
             updateTokenFireBase();
 
         }
@@ -532,7 +532,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
                     try {
 
                         Api.getService(Tags.base_url)
-                                .updatePhoneToken( userModel.getUser().getToken(), token, userModel.getUser().getId(), "android", userModel.getUser().getUser_type())
+                                .updatePhoneToken(userModel.getUser().getToken(), token, userModel.getUser().getId(), "android", userModel.getUser().getUser_type())
                                 .enqueue(new Callback<ResponseBody>() {
                                     @Override
                                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
