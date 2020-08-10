@@ -26,6 +26,7 @@ import com.ghazly.share.Common;
 import com.ghazly.tags.Tags;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import io.paperdb.Paper;
 import okhttp3.ResponseBody;
@@ -68,7 +69,7 @@ public class OrderDetailsActivity extends AppCompatActivity implements Listeners
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         Paper.init(this);
-        lang = Paper.book().read("lang", "ar");
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         binding.setOrderModel(orderModel);
         binding.setBackListener(this);

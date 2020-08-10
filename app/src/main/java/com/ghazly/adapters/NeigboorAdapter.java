@@ -17,6 +17,7 @@ import com.ghazly.models.CityModel;
 import com.ghazly.models.NeigboorModel;
 
 import java.util.List;
+import java.util.Locale;
 
 import io.paperdb.Paper;
 
@@ -35,9 +36,8 @@ public class NeigboorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         inflater = LayoutInflater.from(context);
         homeActivity = (HomeActivity) context;
         Paper.init(context);
-        lang = Paper.book().read("lang", "ar");
-
-    }
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+}
 
     @NonNull
     @Override

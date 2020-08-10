@@ -77,8 +77,8 @@ public class VerificationCodeActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         Paper.init(this);
-        lang = Paper.book().read("lang", "ar");
-        binding.btnSkip.setOnClickListener(view ->sendSmsCode());
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+binding.btnSkip.setOnClickListener(view ->sendSmsCode());
 
         binding.btnConfirm.setOnClickListener(view -> {
             String code = binding.edtCode.getText().toString().trim();

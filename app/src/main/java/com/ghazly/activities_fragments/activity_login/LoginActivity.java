@@ -61,8 +61,8 @@ public class LoginActivity extends AppCompatActivity implements Listeners.LoginL
         binding.setLoginModel(loginModel);
         binding.setListener(this);
         Paper.init(this);
-        lang = Paper.book().read("lang", "ar");
-        binding.setLang(lang);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+binding.setLang(lang);
 
         binding.edtPhone.addTextChangedListener(new TextWatcher() {
             @Override

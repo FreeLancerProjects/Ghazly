@@ -79,8 +79,8 @@ public class RestuarantFilterActivity extends AppCompatActivity implements Liste
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         Paper.init(this);
-        lang = Paper.book().read("lang", "ar");
-        binding.setLang(lang);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+binding.setLang(lang);
         binding.setBackListener(this);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.recView.setLayoutManager(new LinearLayoutManager(this));

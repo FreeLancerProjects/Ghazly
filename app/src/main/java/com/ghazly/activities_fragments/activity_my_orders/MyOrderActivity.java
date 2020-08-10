@@ -69,7 +69,7 @@ public class MyOrderActivity extends AppCompatActivity implements Listeners.Back
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(this);
         Paper.init(this);
-        lang = Paper.book().read("lang", "ar");
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         binding.setBackListener(this);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);

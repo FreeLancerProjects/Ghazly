@@ -19,6 +19,7 @@ import com.ghazly.models.CityModel;
 import com.ghazly.models.SingleRestaurantModel;
 
 import java.util.List;
+import java.util.Locale;
 
 import io.paperdb.Paper;
 
@@ -37,9 +38,8 @@ public class CitiesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         inflater = LayoutInflater.from(context);
         homeActivity = (HomeActivity) context;
         Paper.init(context);
-        lang = Paper.book().read("lang", "ar");
-
-    }
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+}
 
     @NonNull
     @Override
