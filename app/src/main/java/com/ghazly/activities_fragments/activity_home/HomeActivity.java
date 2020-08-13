@@ -144,7 +144,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
         restaurantAdapter = new RestaurantAdapter(reDataList, this);
         citiesAdapter = new CitiesAdapter(citiesmodles, this);
         neigboorAdapter = new NeigboorAdapter(neigboormodels, this);
-        binding.recViewdepart.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, true));
+        binding.recViewdepart.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
         binding.recViewdepart.setAdapter(departmentAdapter);
         binding.recView.setLayoutManager(manager);
@@ -262,6 +262,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
                             if (categoryDataModelDataList.size() > 0) {
                                 departmentAdapter.notifyDataSetChanged();
                                 binding.tvNoDatadepart.setVisibility(View.GONE);
+                                Log.e(",dkdfkfkkfk", categoryDataModelDataList.get(0).getTitle());
                             } else {
                                 binding.tvNoDatadepart.setVisibility(View.VISIBLE);
 
