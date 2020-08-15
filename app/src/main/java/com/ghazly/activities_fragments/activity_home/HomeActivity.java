@@ -877,4 +877,11 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     public void setniegboor(String neighbor_id) {
         this.niegboorid = neighbor_id;
     }
+
+    public void share(SingleRestaurantModel singleRestaurantModel) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, singleRestaurantModel.getName());
+        startActivity(intent);
+       }
 }

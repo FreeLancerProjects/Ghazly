@@ -92,7 +92,24 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     }
                 }
             });
+myHolder.binding.imgshare.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        if (context instanceof HomeActivity) {
+            homeActivity = (HomeActivity) context;
+            homeActivity.share(list.get(myHolder.getAdapterPosition()));
+        } else if (context instanceof RestuarantFilterActivity) {
+            restuarantFilterActivity = (RestuarantFilterActivity) context;
 
+            restuarantFilterActivity.share(list.get(myHolder.getAdapterPosition()));
+        }
+        else {
+            searchActivity = (SearchActivity) context;
+            searchActivity.share(list.get(myHolder.getAdapterPosition()));
+
+        }
+    }
+});
             myHolder.binding.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

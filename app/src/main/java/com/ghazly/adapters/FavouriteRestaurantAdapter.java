@@ -72,6 +72,7 @@ public class FavouriteRestaurantAdapter extends RecyclerView.Adapter<RecyclerVie
             if(list.get(position).getRestaurant().getBranch_data_count().equals("0")){
                 myHolder.binding.llnum.setVisibility(View.GONE);
             }
+
             myHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -88,6 +89,21 @@ public class FavouriteRestaurantAdapter extends RecyclerView.Adapter<RecyclerVie
                 }
             });
 
+            myHolder.binding.imgshare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//
+                    if (context instanceof MyFavoriteActivity) {
+                        myFavoriteActivity = (MyFavoriteActivity) context;
+                        myFavoriteActivity.share(list.get(myHolder.getLayoutPosition()).getRestaurant());
+                    }
+//                    else {
+//                        searchActivity = (SearchActivity) context;
+//                        searchActivity.setrestauant(list.get(holder.getLayoutPosition()).getRestaurant().getId() + "");
+//                    }
+//                }
+                }
+            });
             myHolder.binding.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
