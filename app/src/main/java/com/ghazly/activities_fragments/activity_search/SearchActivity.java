@@ -414,7 +414,7 @@ public class SearchActivity extends AppCompatActivity implements Listeners.BackL
     public void share(SingleRestaurantModel singleRestaurantModel) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT,singleRestaurantModel.getName());
+        intent.putExtra(Intent.EXTRA_TEXT,singleRestaurantModel.getShare_link());
         startActivity(intent);
     }
 

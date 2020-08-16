@@ -93,6 +93,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
 
     private int current_page = 1;
     private boolean isLoading = false;
+    private String id;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -103,9 +104,21 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        getDataFromIntent();
         initView();
 
 
+    }
+
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        if (intent.getData() != null) {
+            List<String> pathSegments = intent.getData().getPathSegments();
+            id = pathSegments.get(pathSegments.size() - 1);
+            Intent intent1 = new Intent(HomeActivity.this, RestuarnantActivity.class);
+            intent1.putExtra("restaurand_id", id);
+            startActivity(intent1);
+        }
     }
 
     private void initView() {
@@ -881,7 +894,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     public void share(SingleRestaurantModel singleRestaurantModel) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, singleRestaurantModel.getName());
+        intent.putExtra(Intent.EXTRA_TEXT, singleRestaurantModel.getShare_link());
         startActivity(intent);
-       }
+    }
 }

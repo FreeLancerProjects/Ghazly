@@ -40,6 +40,7 @@ public class SingleRestaurantModel implements Serializable {
     private String group_id = null;
     private String created_at;
     private String updated_at;
+    private String share_link;
     private List<MenuImages> menu_images;
     private List<RestaurantImages> restaurant_images;
     private City city;
@@ -47,6 +48,7 @@ public class SingleRestaurantModel implements Serializable {
     private String branch_data_count;
     private List<Branchs> branchs;
     private List<Drinks> drinks;
+
     public int getId() {
         return id;
     }
@@ -185,6 +187,10 @@ public class SingleRestaurantModel implements Serializable {
 
     public String getUpdated_at() {
         return updated_at;
+    }
+
+    public String getShare_link() {
+        return share_link;
     }
 
     public List<MenuImages> getMenu_images() {
@@ -512,13 +518,13 @@ public class SingleRestaurantModel implements Serializable {
         }
 
     }
-   public class Drinks implements Serializable
-    {
+
+    public class Drinks implements Serializable {
         private int id;
-            private String title;
-            private String restaurant_id;
-            private String price;
-            private String is_free;
+        private String title;
+        private String restaurant_id;
+        private String price;
+        private String is_free;
 
         public int getId() {
             return id;

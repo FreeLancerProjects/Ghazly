@@ -334,12 +334,13 @@ public class MyFavoriteActivity extends AppCompatActivity implements Listeners.B
         finish();
     }
 
-    public void share ( SingleRestaurantModel singleRestaurantModel) {
+    public void share(SingleRestaurantModel singleRestaurantModel) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT,singleRestaurantModel.getName());
+        intent.putExtra(Intent.EXTRA_TEXT, singleRestaurantModel.getShare_link());
         startActivity(intent);
     }
+
     @Override
     public void onBackPressed() {
         back();

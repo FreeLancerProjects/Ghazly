@@ -71,6 +71,7 @@ public class Image_Activity extends AppCompatActivity implements Listeners.BackL
             NUM_PAGES = menuImagesList.size();
             singleslidingImage__adapter = new SlidingMenuImage_Adapter(this, menuImagesList);
             binding.pager.setAdapter(singleslidingImage__adapter);
+
         } else if (restaurantImages != null && restaurantImages.size() > 0) {
             NUM_PAGES = restaurantImages.size();
             slidingRestuarnatImage_adapter = new SlidingRestuarnatImage_Adapter(this, restaurantImages);
