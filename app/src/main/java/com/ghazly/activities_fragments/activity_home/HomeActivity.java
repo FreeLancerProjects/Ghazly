@@ -115,7 +115,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
         if (intent.getData() != null) {
             List<String> pathSegments = intent.getData().getPathSegments();
             id = pathSegments.get(pathSegments.size() - 1);
-            id=id.split("=")[1];
+            Log.e("llflfllflf", id);
             Intent intent1 = new Intent(HomeActivity.this, RestuarnantActivity.class);
             intent1.putExtra("restaurand_id", id);
             startActivity(intent1);
