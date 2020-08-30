@@ -48,6 +48,7 @@ public class SingleRestaurantModel implements Serializable {
     private String branch_data_count;
     private List<Branchs> branchs;
     private List<Drinks> drinks;
+    private String clothes;
 
     public int getId() {
         return id;
