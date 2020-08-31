@@ -120,7 +120,7 @@ public interface Service {
     @GET("api/search-food")
     Call<FoodListModel> getFoodList(
             @Query("pagination") String pagination,
-            @Query("department_id") String department_id,
+            @Query("departemnt_id") String department_id,
             @Query("restaurant_id") String restaurant_id,
             @Query("limit_per_page") String limit_per_page,
             @Query("page") int page,
