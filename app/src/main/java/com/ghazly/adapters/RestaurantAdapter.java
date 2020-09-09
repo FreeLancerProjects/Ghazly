@@ -2,6 +2,7 @@ package com.ghazly.adapters;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             myHolder.binding.setModel(list.get(position));
             if(list.get(position).getBranch_data_count().equals("0")){
                 myHolder.binding.llnum.setVisibility(View.GONE);
+            }
+            if(list.get(position).getFavorite()!=null){
+                Log.e("sssssss",list.get(position).getFavorite().getId()+"");
+                myHolder.binding.checkbox.setChecked(true);
             }
             myHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

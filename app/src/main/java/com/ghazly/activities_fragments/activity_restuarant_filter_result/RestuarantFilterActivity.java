@@ -117,6 +117,7 @@ binding.setLang(lang);
         restaurantAdapter.notifyDataSetChanged();
         binding.tvNoData.setVisibility(View.GONE);
         binding.progBar.setVisibility(View.VISIBLE);
+        current_page=1;
         try {
             int uid;
 

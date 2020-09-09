@@ -181,6 +181,7 @@ public class MyFavoriteActivity extends AppCompatActivity implements Listeners.B
     public void getData() {
         favouriteDataList.clear();
         favouriteProduct_adapter.notifyDataSetChanged();
+
         try {
 
             String token;

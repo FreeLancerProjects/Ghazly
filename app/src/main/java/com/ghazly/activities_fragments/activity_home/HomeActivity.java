@@ -322,10 +322,12 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
     }
 
     private void getRestaurant() {
+
         reDataList.clear();
         restaurantAdapter.notifyDataSetChanged();
         binding.tvNoData.setVisibility(View.GONE);
         binding.progBar.setVisibility(View.VISIBLE);
+        current_page=1;
         try {
             int uid;
 
@@ -341,7 +343,6 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
                         public void onResponse(Call<RestuarantModel> call, Response<RestuarantModel> response) {
                             binding.progBar.setVisibility(View.GONE);
                             if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
-                                reDataList.clear();
                                 reDataList.addAll(response.body().getData());
                                 if (reDataList.size() > 0) {
 
@@ -405,7 +406,7 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
                 uid = 0;
             }
             Api.getService(Tags.base_url)
-                    .getRestaurant("on", category_id, uid + "", "20", current_page)
+                    .getRestaurant("on", category_id, uid + "", "20", page)
                     .enqueue(new Callback<RestuarantModel>() {
                         @Override
                         public void onResponse(Call<RestuarantModel> call, Response<RestuarantModel> response) {

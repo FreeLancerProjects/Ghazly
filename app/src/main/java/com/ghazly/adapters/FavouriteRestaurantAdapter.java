@@ -2,6 +2,7 @@ package com.ghazly.adapters;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +73,7 @@ public class FavouriteRestaurantAdapter extends RecyclerView.Adapter<RecyclerVie
             if(list.get(position).getRestaurant().getBranch_data_count().equals("0")){
                 myHolder.binding.llnum.setVisibility(View.GONE);
             }
+                myHolder.binding.checkbox.setChecked(true);
 
             myHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
