@@ -70,11 +70,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             MyHolder myHolder = (MyHolder) holder;
 
             myHolder.binding.setModel(list.get(position));
-            if(list.get(position).getBranch_data_count().equals("0")){
+            if (list.get(position).getBranch_data_count().equals("0")) {
                 myHolder.binding.llnum.setVisibility(View.GONE);
             }
-            if(list.get(position).getFavorite()!=null){
-                Log.e("sssssss",list.get(position).getFavorite().getId()+"");
+            if (list.get(position).getFavorite() != null) {
+                Log.e("sssssss", list.get(position).getFavorite().getId() + "");
                 myHolder.binding.checkbox.setChecked(true);
             }
             myHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -97,27 +97,26 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     }
                 }
             });
-myHolder.binding.imgshare.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        if (context instanceof HomeActivity) {
-            homeActivity = (HomeActivity) context;
-            homeActivity.share(list.get(myHolder.getAdapterPosition()));
-        } else if (context instanceof RestuarantFilterActivity) {
-            restuarantFilterActivity = (RestuarantFilterActivity) context;
-
-            restuarantFilterActivity.share(list.get(myHolder.getAdapterPosition()));
-        }
-        else {
-            searchActivity = (SearchActivity) context;
-            searchActivity.share(list.get(myHolder.getAdapterPosition()));
-
-        }
-    }
-});
-            myHolder.binding.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            myHolder.binding.imgshare.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                public void onClick(View view) {
+                    if (context instanceof HomeActivity) {
+                        homeActivity = (HomeActivity) context;
+                        homeActivity.share(list.get(myHolder.getAdapterPosition()));
+                    } else if (context instanceof RestuarantFilterActivity) {
+                        restuarantFilterActivity = (RestuarantFilterActivity) context;
+
+                        restuarantFilterActivity.share(list.get(myHolder.getAdapterPosition()));
+                    } else {
+                        searchActivity = (SearchActivity) context;
+                        searchActivity.share(list.get(myHolder.getAdapterPosition()));
+
+                    }
+                }
+            });
+            myHolder.binding.checkbox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     if (Preferences.getInstance().getUserData(context) != null) {
                         if (context instanceof HomeActivity) {
                             homeActivity = (HomeActivity) context;
@@ -140,7 +139,6 @@ myHolder.binding.imgshare.setOnClickListener(new View.OnClickListener() {
                         myHolder.binding.checkbox.setChecked(false);
                         Common.CreateNoSignAlertDialog(context);
                     }
-
                 }
             });
 

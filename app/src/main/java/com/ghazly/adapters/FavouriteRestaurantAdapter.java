@@ -106,18 +106,9 @@ public class FavouriteRestaurantAdapter extends RecyclerView.Adapter<RecyclerVie
 //                }
                 }
             });
-            myHolder.binding.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            myHolder.binding.checkbox.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                    if (context instanceof HomeActivity) {
-//                        homeActivity = (HomeActivity) context;
-//                        homeActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
-//                    } else if (context instanceof RestuarantFilterActivity) {
-//                        restuarantFilterActivity = (RestuarantFilterActivity) context;
-//
-//                        restuarantFilterActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
-//
-//                    } else
+                public void onClick(View view) {
                     if (Preferences.getInstance().getUserData(context) != null) {
                         if (context instanceof MyFavoriteActivity) {
                             myFavoriteActivity = (MyFavoriteActivity) context;
@@ -127,13 +118,6 @@ public class FavouriteRestaurantAdapter extends RecyclerView.Adapter<RecyclerVie
                         myHolder.binding.checkbox.setChecked(false);
                         Common.CreateNoSignAlertDialog(context);
                     }
-//                    else {
-//                        searchActivity = (SearchActivity) context;
-//                        searchActivity.like_dislike(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
-//
-//                    }
-
-
                 }
             });
 
