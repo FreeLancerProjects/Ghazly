@@ -321,6 +321,12 @@ public class HomeActivity extends AppCompatActivity implements Listeners.HomeAct
                 });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getRestaurant();
+    }
+
     private void getRestaurant() {
 
         reDataList.clear();
