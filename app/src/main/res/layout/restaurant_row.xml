@@ -112,6 +112,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:button="@drawable/checkbox_bg"
+                            android:checked='@{model.favorite!=null?true:false, default=false}'
 
 
                             />

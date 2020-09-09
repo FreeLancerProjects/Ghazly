@@ -49,6 +49,7 @@ public class SingleRestaurantModel implements Serializable {
     private List<Branchs> branchs;
     private List<Drinks> drinks;
     private String clothes;
+    private Favorite favorite;
 
     public int getId() {
         return id;
@@ -220,6 +221,14 @@ public class SingleRestaurantModel implements Serializable {
 
     public List<Drinks> getDrinks() {
         return drinks;
+    }
+
+    public String getClothes() {
+        return clothes;
+    }
+
+    public Favorite getFavorite() {
+        return favorite;
     }
 
     public class MenuImages implements Serializable {
@@ -548,6 +557,23 @@ public class SingleRestaurantModel implements Serializable {
         }
     }
 
+    public class Favorite implements Serializable {
+        private int id;
+        private int restaurant_id;
+        private int user_id;
+
+        public int getId() {
+            return id;
+        }
+
+        public int getRestaurant_id() {
+            return restaurant_id;
+        }
+
+        public int getUser_id() {
+            return user_id;
+        }
+    }
 }
 
 

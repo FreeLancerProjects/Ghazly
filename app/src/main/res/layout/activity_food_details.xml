@@ -147,7 +147,7 @@
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
-android:layout_weight="1"
+                                        android:layout_weight="1"
                                         android:gravity="end"
                                         android:text='@{model.price+@string/sar}'
                                         android:textColor="@color/colorPrimary"
@@ -155,30 +155,45 @@ android:layout_weight="1"
 
                                         />
                                 </LinearLayout>
-
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="2dp"
                                     android:layout_marginTop="8dp"
-                                    android:background="@color/gray8" />
+                                    android:background="@color/gray5" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+
+                                    android:gravity="center_vertical"
+                                    android:text="@{model.contents}"
+                                    android:textColor="@color/gray6"
+                                    android:textSize="11sp"
+
+                                    />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:layout_marginTop="8dp"
+                                    android:background="@color/gray5" />
 
                                 <LinearLayout
                                     android:id="@+id/ll"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    >
+                                    android:orientation="horizontal">
 
                                     <TextView
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_vertical"
 
+                                        android:layout_weight="1"
                                         android:gravity="center_vertical"
                                         android:text="@string/addition"
                                         android:textColor="@color/black"
                                         android:textSize="13sp"
-                                        android:layout_weight="1"
 
                                         />
 
@@ -219,9 +234,9 @@ android:layout_weight="1"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
+                                        android:text="@string/no_data_to_show"
                                         android:textColor="@color/black"
                                         android:textSize="16sp"
-                                        android:text="@string/no_data_to_show"
                                         android:visibility="gone" />
                                 </FrameLayout>
 
@@ -304,7 +319,7 @@ android:layout_weight="1"
                             app:contentPadding="10dp">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
-                               android:id="@+id/cons"
+                                android:id="@+id/cons"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
 
@@ -319,7 +334,6 @@ android:layout_weight="1"
                                     app:layout_constraintTop_toTopOf="parent">
 
 
-
                                     <ImageView
                                         android:id="@+id/imgDecrease"
                                         android:layout_width="28dp"
@@ -329,6 +343,7 @@ android:layout_weight="1"
                                         android:src="@drawable/ic_minus"
 
                                         />
+
                                     <TextView
                                         android:id="@+id/tvCounter"
                                         android:layout_width="wrap_content"
@@ -445,10 +460,9 @@ android:layout_weight="1"
                         android:layout_marginEnd="5dp"
                         android:clickable="false"
                         android:longClickable="false"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="13sp"
                         android:text="@{model.title}"
-                        />
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="13sp" />
                 </LinearLayout>
 
 
